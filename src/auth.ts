@@ -1,42 +1,52 @@
-import NextAuth, { type NextAuthConfig } from "next-auth";
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { prisma } from "@/lib/db";
+import bcrypt from "bcryptjs";
+import { loginSchema } from "@/lib/validations/auth";
+import authConfig from "@/auth.config";
 
-/**
- * Phase 1 stub — providers and Prisma adapter wired in Phase 3 (Auth).
- * The `authorized` callback already enforces admin route protection so
- * middleware.ts can compile and run from day one.
- */
-export const authConfig = {
-  pages: {
-    signIn: "/login",
-    error: "/login",
-  },
-  providers: [],
-  session: { strategy: "jwt" },
-  callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isAdminRoute = nextUrl.pathname.startsWith("/admin");
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
+  providers: [
+    Credentials({
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        // 1. Zod validation — reject malformed input before touching the DB
+        const parsed = loginSchema.safeParse(credentials);
+        if (!parsed.success) return null;
 
-      if (isAdminRoute) {
-        return isLoggedIn;
-      }
+        const { email, password } = parsed.data;
 
-      return true;
-    },
-    jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        // role will be populated in Phase 3
-      }
-      return token;
-    },
-    session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = token.id as string;
-      }
-      return session;
-    },
-  },
-} satisfies NextAuthConfig;
+        // 2. Fetch user — select only fields we need (principle of least privilege)
+        const user = await prisma.user.findUnique({
+          where: { email },
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+            password: true,
+            role: true,
+          },
+        });
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+        if (!user?.password) return null;
+
+        // 3. Constant-time bcrypt compare (prevents timing attacks)
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) return null;
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          role: user.role,
+        };
+      },
+    }),
+  ],
+});

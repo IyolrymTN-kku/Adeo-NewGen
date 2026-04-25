@@ -34,6 +34,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // ESLint is run separately in CI; suppress during `next build` to keep
+  // the build output clean of tooling false-positives.
+  eslint: { ignoreDuringBuilds: true },
   async headers() {
     return [
       {
