@@ -8,19 +8,30 @@ import { RateLimiterMemory, RateLimiterRes } from "rate-limiter-flexible";
  */
 const loginLimiter = new RateLimiterMemory({
   points: 5,
-  duration: 15 * 60,     // 15 minutes window
-  blockDuration: 15 * 60, // block for 15 minutes once exhausted
+  duration: 15 * 60,
+  blockDuration: 15 * 60,
+});
+
+/**
+ * Contact form rate limiter: 3 submissions per hour per IP.
+ * Defends the public contact form against spam and abuse.
+ */
+const contactLimiter = new RateLimiterMemory({
+  points: 3,
+  duration: 60 * 60,
+  blockDuration: 60 * 60,
 });
 
 export type RateLimitResult =
   | { success: true; remainingPoints: number }
   | { success: false; retryAfterSeconds: number };
 
-export async function consumeLoginAttempt(
+async function consume(
+  limiter: RateLimiterMemory,
   ip: string
 ): Promise<RateLimitResult> {
   try {
-    const result = await loginLimiter.consume(ip);
+    const result = await limiter.consume(ip);
     return { success: true, remainingPoints: result.remainingPoints };
   } catch (err) {
     if (err instanceof RateLimiterRes) {
@@ -33,6 +44,14 @@ export async function consumeLoginAttempt(
   }
 }
 
+export function consumeLoginAttempt(ip: string): Promise<RateLimitResult> {
+  return consume(loginLimiter, ip);
+}
+
 export async function resetLoginAttempts(ip: string): Promise<void> {
   await loginLimiter.delete(ip);
+}
+
+export function consumeContactAttempt(ip: string): Promise<RateLimitResult> {
+  return consume(contactLimiter, ip);
 }
