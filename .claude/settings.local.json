@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(npx create-next-app@latest adeo-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(cp -r adeo-temp/. .)",
+      "Bash(rm -rf adeo-temp)",
+      "Bash(npx tsc *)",
+      "Bash(SKIP_ENV_VALIDATION=true timeout 20 npm run dev)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(npx prisma *)",
+      "Bash(pg_ctl --version)",
+      "Bash(psql --version)",
+      "Bash(docker --version)"
+    ]
+  }
+}

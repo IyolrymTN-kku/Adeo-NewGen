@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Partner, PartnerCategory } from "@prisma/client";
+import { StaggerContainer, StaggerItem } from "@/components/animations";
 
 const CATEGORY_LABELS: Record<PartnerCategory, string> = {
   NETWORK: "Network",
@@ -56,13 +57,17 @@ export function PartnerGrid({ partners }: PartnerGridProps) {
                 {list.length} partners
               </span>
             </div>
-            <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            <StaggerContainer
+              as="ul"
+              staggerChildren={0.05}
+              className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
+            >
               {list.map((partner) => (
-                <li key={partner.id}>
+                <StaggerItem key={partner.id} as="li" y={16}>
                   <PartnerLogo partner={partner} />
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </StaggerContainer>
           </div>
         );
       })}

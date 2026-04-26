@@ -46,7 +46,7 @@ export function CTASection({
                 href={secondaryCta.href}
                 size="lg"
                 variant="outline"
-                className="border-white/20 bg-transparent text-white hover:border-white hover:bg-white/5 hover:text-white"
+                className="border-white/20 bg-transparent hover:border-white hover:bg-white/5 hover:text-white"
               >
                 {secondaryCta.label}
               </ButtonLink>

@@ -1,6 +1,7 @@
 import type { Service, ServiceCategory } from "@prisma/client";
 import { Card } from "@/components/ui/Card";
 import { categoryLabel, isCloudCategory } from "@/lib/services";
+import { StaggerContainer, StaggerItem } from "@/components/animations";
 
 const CATEGORY_ICONS: Record<ServiceCategory, React.ReactNode> = {
   SOFTWARE_DEV: (
@@ -49,7 +50,7 @@ export function ServiceGrid({ services, columns = 3 }: ServiceGridProps) {
   }
 
   return (
-    <div
+    <StaggerContainer
       className={
         columns === 2
           ? "grid gap-6 sm:grid-cols-2"
@@ -57,9 +58,11 @@ export function ServiceGrid({ services, columns = 3 }: ServiceGridProps) {
       }
     >
       {services.map((service) => (
-        <ServiceCard key={service.id} service={service} />
+        <StaggerItem key={service.id} className="h-full">
+          <ServiceCard service={service} />
+        </StaggerItem>
       ))}
-    </div>
+    </StaggerContainer>
   );
 }
 

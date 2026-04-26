@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
+import { FadeInOnLoad } from "@/components/animations";
 
 type HeroProps = {
   eyebrow?: string;
@@ -49,11 +50,13 @@ export function Hero({
       <Container className="relative">
         <div className="grid items-center gap-16 py-24 lg:grid-cols-12 lg:py-32">
           <div className="lg:col-span-7">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#0066ff]" />
-              {eyebrow}
-            </p>
-            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+            <FadeInOnLoad y={8} delay={0.05}>
+              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#0066ff]" />
+                {eyebrow}
+              </p>
+            </FadeInOnLoad>
+            <FadeInOnLoad as="h1" y={16} delay={0.15} duration={0.7} className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
               {title}
               {highlight && (
                 <>
@@ -61,11 +64,11 @@ export function Hero({
                   <span className="text-[#3385ff]">{highlight}</span>
                 </>
               )}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+            </FadeInOnLoad>
+            <FadeInOnLoad as="p" y={16} delay={0.3} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
               {description}
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            </FadeInOnLoad>
+            <FadeInOnLoad y={16} delay={0.45} className="mt-10 flex flex-wrap gap-4">
               <ButtonLink href={primaryCta.href} size="lg">
                 {primaryCta.label}
                 <svg
@@ -85,15 +88,20 @@ export function Hero({
                 href={secondaryCta.href}
                 size="lg"
                 variant="outline"
-                className="border-white/20 bg-transparent text-white hover:border-white hover:bg-white/5 hover:text-white"
+                className="border-white/20 bg-transparent hover:border-white hover:bg-white/5 hover:text-white"
               >
                 {secondaryCta.label}
               </ButtonLink>
-            </div>
+            </FadeInOnLoad>
           </div>
 
           {/* Visual panel */}
-          <div className="hidden lg:col-span-5 lg:block">
+          <FadeInOnLoad
+            y={24}
+            delay={0.4}
+            duration={0.8}
+            className="hidden lg:col-span-5 lg:block"
+          >
             <div className="relative">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
                 <div className="grid grid-cols-2 gap-3">
@@ -125,7 +133,7 @@ export function Hero({
                 className="absolute -inset-x-8 -bottom-6 h-12 rounded-full bg-[#0066ff]/30 blur-2xl"
               />
             </div>
-          </div>
+          </FadeInOnLoad>
         </div>
       </Container>
     </section>
