@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   keywords: ["IT Solutions", "Cloud Services", "Software Development", "Network", "Cloud Migration", "ADEO"],
   authors: [{ name: "ADEO Solution" }],
   robots: { index: true, follow: true },
+
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
-import { Logo } from "@/components/sections/Logo";
+import { Logo } from "@/components/sections/logo-nobg";
+
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
