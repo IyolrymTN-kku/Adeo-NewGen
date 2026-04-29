@@ -31,26 +31,17 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0066ff]">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="h-6 w-6 text-white"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <span className="text-xl font-bold tracking-tight text-white">
-            ADEO Solution
-          </span>
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E9ECF0]">
+          <img
+            src="https://www.adeo.co.th/assets/global/images/logo_header.png"
+            alt="ADEO Solution"
+            className="h-7 w-auto object-contain"
+          />
         </div>
+        <span className="text-lg font-bold text-white">
+          ADEO Solution
+        </span>
+      </div>
 
         {/* Tagline */}
         <div className="relative z-10 space-y-6">

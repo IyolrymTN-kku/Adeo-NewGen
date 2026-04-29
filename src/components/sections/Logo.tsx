@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { path } from "framer-motion/m";
 
 type LogoProps = {
   invert?: boolean;
@@ -11,23 +12,14 @@ export function Logo({ invert = false, className }: LogoProps) {
       <div
         className={cn(
           "flex h-9 w-9 items-center justify-center rounded-xl",
-          invert ? "bg-[#0066ff]" : "bg-[#0a1628]"
+          invert ? "bg-[#EAEDF1]" : "bg-[#F5F7F9]"
         )}
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          className="h-5 w-5 text-white"
-          aria-hidden="true"
-        >
-          <path
-            d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+      <img
+      src="https://www.adeo.co.th/assets/global/images/logo_header.png"
+      alt="ADEO Solution"
+      className="h-9 w-auto object-contain"
+    />
       </div>
       <span
         className={cn(
