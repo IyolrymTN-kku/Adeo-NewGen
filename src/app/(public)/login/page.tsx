@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LoginForm from "./LoginForm";
+import { Logo } from "@/components/sections/Logo";
 
 export const metadata: Metadata = {
   title: "Admin Login",
@@ -31,25 +32,7 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0066ff]">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="h-6 w-6 text-white"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <span className="text-xl font-bold tracking-tight text-white">
-            ADEO Solution
-          </span>
+          <Logo invert />
         </div>
 
         {/* Tagline */}
