@@ -154,3 +154,25 @@ model ContactSubmission {
   @@index([createdAt(sort: Desc)])
   @@map("contact_submissions")
 }
+
+model companySettings {
+  id              Int      @id @default(1)
+  companyName     String   @default("ADEO Solution")
+  logoUrl         String?
+  faviconUrl      String?
+  email           String?
+  phone           String?
+  address         String?
+  website         String?
+  facebook        String?
+  linkedin        String?
+  instagram       String?
+  tiktok          String?
+  line            String?
+  taxId           String?
+  metaTitle       String?
+  metaDescription String?
+  updatedAt       DateTime @updatedAt
+
+  @@map("company_settings")
+}
