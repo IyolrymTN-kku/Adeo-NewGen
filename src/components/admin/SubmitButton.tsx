@@ -20,11 +20,16 @@ export function SubmitButton({
   className,
 }: SubmitButtonProps) {
   const { pending } = useFormStatus();
+
   return (
     <button
       type="submit"
       disabled={pending}
-      className={cn(buttonClasses(variant, size), className)}
+      className={cn(
+        buttonClasses(variant, size),
+        "transition-colors disabled:cursor-not-allowed disabled:opacity-60",
+        className
+      )}
     >
       {pending ? (
         <>
@@ -54,6 +59,7 @@ function Spinner() {
         stroke="currentColor"
         strokeWidth="4"
       />
+
       <path
         className="opacity-75"
         fill="currentColor"

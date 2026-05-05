@@ -79,7 +79,7 @@ function ServiceCard({
   return (
     <Card hover className="flex h-full flex-col">
       <div className="mb-5 flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-[#0066ff]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
           <svg
             viewBox="0 0 24 24"
             fill="none"

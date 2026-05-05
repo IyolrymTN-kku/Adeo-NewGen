@@ -29,25 +29,27 @@ export function SectionHeader({
         <p
           className={cn(
             "mb-3 text-xs font-semibold uppercase tracking-[0.2em]",
-            invert ? "text-[#3385ff]" : "text-[#0066ff]"
+            "text-primary"
           )}
         >
           {eyebrow}
         </p>
       )}
+
       <h2
         className={cn(
           "text-3xl font-bold tracking-tight sm:text-4xl",
-          invert ? "text-white" : "text-slate-900"
+          invert ? "text-white" : "text-foreground"
         )}
       >
         {title}
       </h2>
+
       {subtitle && (
         <p
           className={cn(
             "mt-4 text-base leading-relaxed sm:text-lg",
-            invert ? "text-slate-300" : "text-slate-600"
+            invert ? "text-slate-300" : "text-foreground/70"
           )}
         >
           {subtitle}

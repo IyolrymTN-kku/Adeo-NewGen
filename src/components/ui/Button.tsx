@@ -1,21 +1,28 @@
 import Link from "next/link";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "outline" | "ghost";
+type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066ff] disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[#0066ff] text-white shadow-sm hover:bg-[#0052cc] active:bg-[#003d99]",
+    "bg-primary text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 active:bg-primary/80",
+
   secondary:
-    "bg-[#0a1628] text-white shadow-sm hover:bg-[#112a55] active:bg-[#0d2040]",
+    "bg-[hsl(var(--hero-bg,222_47%_10%))] text-white shadow-sm hover:bg-primary active:bg-primary/90",
+
   outline:
-    "border border-slate-300 bg-white text-slate-900 hover:border-[#0066ff] hover:text-[#0066ff]",
+    "border border-slate-300 bg-white text-slate-900 hover:border-primary hover:bg-primary/5 hover:text-primary",
+
   ghost:
-    "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+    "text-slate-700 hover:bg-primary/10 hover:text-primary",
+
+  danger:
+    "bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800",
 };
 
 const sizes: Record<Size, string> = {
@@ -35,11 +42,11 @@ export function buttonClasses(
 type ButtonProps = {
   variant?: Variant;
   size?: Size;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button({
-  variant,
-  size,
+  variant = "primary",
+  size = "md",
   className,
   children,
   ...rest
@@ -57,18 +64,19 @@ type ButtonLinkProps = {
   size?: Size;
   external?: boolean;
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function ButtonLink({
   href,
-  variant,
-  size,
+  variant = "primary",
+  size = "md",
   external,
   className,
   children,
 }: ButtonLinkProps) {
   const classes = buttonClasses(variant, size, className);
+
   if (external) {
     return (
       <a
@@ -81,6 +89,7 @@ export function ButtonLink({
       </a>
     );
   }
+
   return (
     <Link href={href} className={classes}>
       {children}

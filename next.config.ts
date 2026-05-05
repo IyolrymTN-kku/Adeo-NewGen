@@ -8,8 +8,13 @@ const cspHeader = [
   "img-src 'self' data: blob: https:",
   "media-src 'none'",
   "connect-src 'self'",
-  "frame-src 'none'",
-  "frame-ancestors 'none'",
+
+  // อนุญาตให้หน้า admin iframe ไฟล์ HTML จาก origin เดียวกันได้
+  "frame-src 'self'",
+
+  // อนุญาตให้หน้าของเว็บเราเองถูกฝังใน iframe จากเว็บเดียวกันได้
+  "frame-ancestors 'self'",
+
   "form-action 'self'",
   "base-uri 'self'",
   "object-src 'none'",
@@ -18,7 +23,10 @@ const cspHeader = [
 
 const securityHeaders = [
   { key: "Content-Security-Policy", value: cspHeader },
-  { key: "X-Frame-Options", value: "DENY" },
+
+  // เปลี่ยนจาก DENY เป็น SAMEORIGIN เพื่อให้ iframe ภายในเว็บเดียวกันทำงาน
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
@@ -34,9 +42,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // ESLint is run separately in CI; suppress during `next build` to keep
-  // the build output clean of tooling false-positives.
+
   eslint: { ignoreDuringBuilds: true },
+
   async headers() {
     return [
       {
@@ -45,6 +53,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
   images: {
     remotePatterns: [],
   },

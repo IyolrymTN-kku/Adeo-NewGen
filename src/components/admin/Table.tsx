@@ -10,12 +10,12 @@ export function Table({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm",
+        "overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-colors",
         className
       )}
     >
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-slate-200 text-sm">
+        <table className="min-w-full divide-y divide-border text-sm">
           {children}
         </table>
       </div>
@@ -24,7 +24,7 @@ export function Table({
 }
 
 export function THead({ children }: { children: React.ReactNode }) {
-  return <thead className="bg-slate-50">{children}</thead>;
+  return <thead className="bg-primary/5">{children}</thead>;
 }
 
 export function TH({
@@ -38,7 +38,7 @@ export function TH({
     <th
       scope="col"
       className={cn(
-        "px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-600",
+        "px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground/60",
         className
       )}
     >
@@ -48,9 +48,7 @@ export function TH({
 }
 
 export function TBody({ children }: { children: React.ReactNode }) {
-  return (
-    <tbody className="divide-y divide-slate-100 bg-white">{children}</tbody>
-  );
+  return <tbody className="divide-y divide-border bg-card">{children}</tbody>;
 }
 
 export function TR({
@@ -61,7 +59,7 @@ export function TR({
   className?: string;
 }) {
   return (
-    <tr className={cn("transition hover:bg-slate-50/60", className)}>
+    <tr className={cn("transition-colors hover:bg-primary/5", className)}>
       {children}
     </tr>
   );
@@ -75,7 +73,12 @@ export function TD({
   className?: string;
 }) {
   return (
-    <td className={cn("px-4 py-3 align-middle text-slate-700", className)}>
+    <td
+      className={cn(
+        "px-4 py-3 align-middle text-card-foreground/80",
+        className
+      )}
+    >
       {children}
     </td>
   );

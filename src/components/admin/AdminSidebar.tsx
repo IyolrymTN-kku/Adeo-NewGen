@@ -79,6 +79,7 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
       {NAV.map((item) => {
         const active = isActive(item);
         const showBadge = item.href === "/admin/inbox" && newSubmissions > 0;
+
         return (
           <Link
             key={item.href}
@@ -87,8 +88,8 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition",
               active
-                ? "bg-[#0066ff] text-white shadow-sm"
-                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                ? "[background:var(--admin-gradient)] text-[var(--admin-gradient-foreground)] shadow-lg shadow-black/20"
+                : "text-[var(--admin-sidebar-foreground)] opacity-80 hover:bg-white/10 hover:opacity-100"
             )}
           >
             <svg
@@ -103,12 +104,16 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
             >
               {item.icon}
             </svg>
+
             <span className="flex-1">{item.label}</span>
+
             {showBadge && (
               <span
                 className={cn(
                   "inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full px-1.5 text-[10px] font-bold",
-                  active ? "bg-white text-[#0066ff]" : "bg-[#0066ff] text-white"
+                  active
+                    ? "bg-[var(--admin-gradient-foreground)] text-[var(--admin-primary)]"
+                    : "[background:var(--admin-gradient)] text-[var(--admin-gradient-foreground)]"
                 )}
               >
                 {newSubmissions > 99 ? "99+" : newSubmissions}
@@ -125,34 +130,40 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
       <div className="px-5 pb-6 pt-5">
         <Link
           href="/admin"
-          className="inline-flex"
+          className="inline-flex text-[var(--admin-sidebar-foreground)]"
           onClick={() => setMobileOpen(false)}
         >
-          <Logo invert />
+          <Logo />
         </Link>
-        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
+
+        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--admin-sidebar-foreground)] opacity-80">
           Admin Portal
         </p>
       </div>
 
       <div className="flex-1 overflow-y-auto px-3">{NavList}</div>
 
-      {/* User card */}
-      <div className="m-3 rounded-xl border border-white/10 bg-white/5 p-4">
+      <div className="m-3 rounded-xl border border-[color-mix(in_srgb,var(--admin-sidebar-foreground)_18%,transparent)] bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_10%,transparent)] p-4 backdrop-blur">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0066ff]/20 text-sm font-semibold text-[#3385ff]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_14%,transparent)] text-sm font-semibold text-[var(--admin-sidebar-foreground)]">
             {(user.name ?? user.email ?? "A").charAt(0).toUpperCase()}
           </div>
+
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-semibold text-white">
+            <p className="truncate text-sm font-semibold text-[var(--admin-sidebar-foreground)]">
               {user.name ?? "Admin"}
             </p>
-            <p className="truncate text-xs text-slate-400">{user.email}</p>
+
+            <p className="truncate text-xs text-[var(--admin-sidebar-foreground)] opacity-70">
+              {user.email}
+            </p>
           </div>
-          <span className="rounded-full bg-[#0066ff]/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#3385ff]">
+
+          <span className="rounded-full bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_14%,transparent)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--admin-sidebar-foreground)]">
             {user.role}
           </span>
         </div>
+
         <div className="mt-3">
           <LogoutButton />
         </div>
@@ -162,17 +173,17 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
 
   return (
     <>
-      {/* Mobile top bar */}
-      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
+      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-card px-4 text-card-foreground lg:hidden">
         <Link href="/admin">
           <Logo />
         </Link>
+
         <button
           type="button"
           aria-label="Toggle admin menu"
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-foreground"
         >
           <svg
             viewBox="0 0 24 24"
@@ -193,22 +204,21 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
         </button>
       </div>
 
-      {/* Mobile drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
           <button
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
-            className="absolute inset-0 bg-slate-900/50"
+            className="absolute inset-0 bg-black/50"
           />
-          <aside className="absolute inset-y-0 left-0 w-72 bg-[#0a1628] text-white shadow-xl">
+
+          <aside className="absolute inset-y-0 left-0 w-72 [background:var(--admin-gradient-dark)] text-[var(--admin-sidebar-foreground)] shadow-xl">
             {SidebarContent}
           </aside>
         </div>
       )}
 
-      {/* Desktop sidebar */}
-      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-white/5 lg:bg-[#0a1628] lg:text-white">
+      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-white/10 [background:var(--admin-gradient-dark)] text-[var(--admin-sidebar-foreground)]">
         {SidebarContent}
       </aside>
     </>

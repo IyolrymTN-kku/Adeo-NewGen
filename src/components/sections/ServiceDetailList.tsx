@@ -26,7 +26,7 @@ export function ServiceDetailList({ services }: ServiceDetailListProps) {
           <Card key={service.id} className="p-8 sm:p-10">
             <div className="grid gap-8 lg:grid-cols-12">
               <div className="lg:col-span-5">
-                <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0066ff]">
+                <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
                   {categoryLabel(service.category)}
                 </span>
                 <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900">
@@ -49,7 +49,7 @@ export function ServiceDetailList({ services }: ServiceDetailListProps) {
                       <svg
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        className="mt-0.5 h-4 w-4 shrink-0 text-[#0066ff]"
+                        className="mt-0.5 h-4 w-4 shrink-0 text-primary"
                         aria-hidden="true"
                       >
                         <path

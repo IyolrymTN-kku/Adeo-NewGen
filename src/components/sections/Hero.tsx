@@ -20,20 +20,20 @@ export function Hero({
   secondaryCta = { href: "/solutions", label: "Explore Solutions" },
 }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[#0a1628] text-white">
+    <section className="relative overflow-hidden bg-[hsl(var(--hero-bg,222_47%_10%))] text-white">
       {/* Decorative gradients */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 -right-40 h-[640px] w-[640px] rounded-full opacity-30"
         style={{
-          background: "radial-gradient(circle, #0066ff 0%, transparent 65%)",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.75) 0%, transparent 65%)",
         }}
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-48 -left-32 h-[520px] w-[520px] rounded-full opacity-20"
         style={{
-          background: "radial-gradient(circle, #0066ff 0%, transparent 65%)",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.75) 0%, transparent 65%)",
         }}
       />
       {/* Subtle grid */}
@@ -51,8 +51,8 @@ export function Hero({
         <div className="grid items-center gap-16 py-24 lg:grid-cols-12 lg:py-32">
           <div className="lg:col-span-7">
             <FadeInOnLoad y={8} delay={0.05}>
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#0066ff]" />
+              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 {eyebrow}
               </p>
             </FadeInOnLoad>
@@ -61,7 +61,7 @@ export function Hero({
               {highlight && (
                 <>
                   {" "}
-                  <span className="text-[#3385ff]">{highlight}</span>
+                  <span className="text-primary">{highlight}</span>
                 </>
               )}
             </FadeInOnLoad>
@@ -115,9 +115,9 @@ export function Hero({
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="rounded-xl border border-white/10 bg-[#0d2040]/60 p-4"
+                      className="rounded-xl border border-white/10 bg-white/[0.05] p-4"
                     >
-                      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
+                      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
                         <ServiceIcon name={item.icon} />
                       </div>
                       <p className="text-sm font-semibold text-white">
@@ -130,7 +130,7 @@ export function Hero({
               </div>
               <div
                 aria-hidden="true"
-                className="absolute -inset-x-8 -bottom-6 h-12 rounded-full bg-[#0066ff]/30 blur-2xl"
+                className="absolute -inset-x-8 -bottom-6 h-12 rounded-full bg-primary/30 blur-2xl"
               />
             </div>
           </FadeInOnLoad>

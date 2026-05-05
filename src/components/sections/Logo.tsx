@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { path } from "framer-motion/m";
 
 type LogoProps = {
   invert?: boolean;
@@ -8,27 +7,32 @@ type LogoProps = {
 
 export function Logo({ invert = false, className }: LogoProps) {
   return (
-    <div className={cn("flex items-center gap-2.5", className)}>
+    <a
+      href="/"
+      className={cn(
+        "flex items-center gap-2.5 text-current transition hover:opacity-90",
+        className
+      )}
+      aria-label="Reload ADEO Solution home page"
+    >
       <div
         className={cn(
           "flex h-9 w-9 items-center justify-center rounded-xl",
-          invert ? "bg-[#EAEDF1]" : "bg-[#F5F7F9]"
+          invert
+            ? "border border-white/30 bg-white"
+            : "border border-slate-200 bg-white shadow-sm"
         )}
       >
-      <img
-      src="https://www.adeo.co.th/assets/global/images/logo_header.png"
-      alt="ADEO Solution"
-      className="h-9 w-auto object-contain"
-    />
+        <img
+          src="https://www.adeo.co.th/assets/global/images/logo_header.png"
+          alt="ADEO Solution"
+          className="h-9 w-auto object-contain"
+        />
       </div>
-      <span
-        className={cn(
-          "text-lg font-bold tracking-tight",
-          invert ? "text-white" : "text-slate-900"
-        )}
-      >
+
+      <span className="text-lg font-bold tracking-tight text-current">
         ADEO Solution
       </span>
-    </div>
+    </a>
   );
 }

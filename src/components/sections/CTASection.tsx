@@ -17,18 +17,18 @@ export function CTASection({
   secondaryCta,
 }: CTASectionProps) {
   return (
-    <section className="relative overflow-hidden bg-[#0a1628] py-20 text-white">
+    <section className="relative overflow-hidden bg-[hsl(var(--hero-bg,222_47%_10%))] py-20 text-white">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
           background:
-            "radial-gradient(circle at 30% 50%, #0066ff 0%, transparent 55%)",
+            "radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.75) 0%, transparent 55%)",
         }}
       />
       <Container className="relative">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#3385ff]">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             {eyebrow}
           </p>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">

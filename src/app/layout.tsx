@@ -13,14 +13,20 @@ export const metadata: Metadata = {
     default: "ADEO Solution | Enterprise IT & Cloud Services",
     template: "%s | ADEO Solution",
   },
-  description: "ADEO Solution delivers enterprise-grade IT Solutions and Cloud Services...",
-  keywords: ["IT Solutions", "Cloud Services", "Software Development", "Network", "Cloud Migration", "ADEO"],
+  description:
+    "ADEO Solution delivers enterprise-grade IT Solutions and Cloud Services — from software development and IT support to cloud migration and network infrastructure.",
+  keywords: [
+    "IT Solutions",
+    "Cloud Services",
+    "Software Development",
+    "Network",
+    "Cloud Migration",
+    "ADEO",
+  ],
   authors: [{ name: "ADEO Solution" }],
   robots: { index: true, follow: true },
   icons: {
     icon: "https://www.adeo.co.th/assets/global/images/logo_header.png",
-    shortcut: "https://www.adeo.co.th/assets/global/images/logo_header.png",
-    apple: "https://www.adeo.co.th/assets/global/images/logo_header.png",
   },
 };
 
@@ -30,8 +36,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-slate-900">
+    <html
+      lang="en"
+      className={`${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
       </body>
     </html>

@@ -17,7 +17,7 @@ export function LogoutButton() {
       <button
         type="submit"
         disabled={isPending}
-        className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-transparent px-3 py-2 text-xs font-semibold text-slate-300 transition hover:border-white/30 hover:bg-white/5 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex w-full items-center justify-center gap-2 rounded-lg border border-[color-mix(in_srgb,var(--admin-sidebar-foreground)_18%,transparent)] bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_6%,transparent)] px-3 py-2 text-xs font-semibold text-[var(--admin-sidebar-foreground)] transition hover:bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_12%,transparent)] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <svg
           viewBox="0 0 24 24"
@@ -31,6 +31,7 @@ export function LogoutButton() {
         >
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
         </svg>
+
         {isPending ? "Signing out…" : "Sign out"}
       </button>
     </form>

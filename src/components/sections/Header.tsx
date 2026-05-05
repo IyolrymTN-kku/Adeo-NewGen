@@ -59,7 +59,7 @@ export function Header() {
                 className={cn(
                   "text-sm font-medium transition",
                   isActive(link.href)
-                    ? "text-[#0066ff]"
+                    ? "text-primary"
                     : "text-slate-700 hover:text-slate-900"
                 )}
               >
@@ -112,7 +112,7 @@ export function Header() {
                   className={cn(
                     "rounded-lg px-3 py-2 text-base font-medium transition",
                     isActive(link.href)
-                      ? "bg-blue-50 text-[#0066ff]"
+                      ? "bg-primary/10 text-primary"
                       : "text-slate-700 hover:bg-slate-100"
                   )}
                 >

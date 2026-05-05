@@ -57,19 +57,21 @@ export default function ContactPage() {
         description="Whether you're scoping a new project, evaluating cloud options, or need an experienced IT partner — drop us a note and our team will get back to you within one business day."
       />
 
-      <section className="py-20">
+      <section className="bg-background py-20 text-foreground">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
             {/* Form */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-                <h2 className="text-xl font-semibold text-slate-900">
+              <div className="rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm sm:p-8">
+                <h2 className="text-xl font-semibold text-foreground">
                   Send us a message
                 </h2>
-                <p className="mt-1 text-sm text-slate-500">
+
+                <p className="mt-1 text-sm text-foreground/60">
                   Fields marked with <span className="text-red-500">*</span>{" "}
                   are required.
                 </p>
+
                 <div className="mt-6">
                   <ContactForm />
                 </div>
@@ -78,8 +80,11 @@ export default function ContactPage() {
 
             {/* Details */}
             <aside className="lg:col-span-5">
-              <div className="rounded-2xl bg-[#0a1628] p-8 text-white">
-                <h2 className="text-lg font-semibold">Get in touch directly</h2>
+              <div className="rounded-2xl bg-[hsl(var(--hero-bg,222_47%_10%))] p-8 text-white shadow-sm">
+                <h2 className="text-lg font-semibold">
+                  Get in touch directly
+                </h2>
+
                 <p className="mt-2 text-sm text-slate-300">
                   Prefer email or phone? Here's how to reach us.
                 </p>
@@ -87,7 +92,7 @@ export default function ContactPage() {
                 <ul className="mt-8 space-y-6">
                   {CONTACT_DETAILS.map((item) => (
                     <li key={item.label} className="flex items-start gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
                         <svg
                           viewBox="0 0 24 24"
                           fill="none"
@@ -101,14 +106,16 @@ export default function ContactPage() {
                           {item.icon}
                         </svg>
                       </span>
+
                       <div>
                         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
                           {item.label}
                         </p>
+
                         {item.href ? (
                           <a
                             href={item.href}
-                            className="mt-1 block text-sm text-white hover:text-[#3385ff]"
+                            className="mt-1 block text-sm text-white transition hover:text-primary"
                           >
                             {item.value}
                           </a>
