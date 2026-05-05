@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
-import { Logo } from "@/components/sections/logo-nobg";
-
+import { Logo } from "@/components/sections/Logo";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -16,12 +15,14 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Header() {
+// เพิ่ม prop
+export function Header({ companyName = "ADEO Solution" }: { companyName?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -46,8 +47,8 @@ export function Header() {
     >
       <Container>
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" aria-label="ADEO Solution home">
-            <Logo />
+          <Link href="/" aria-label={`${companyName} home`}>
+            <Logo companyName={companyName} />
           </Link>
 
           {/* Desktop nav */}

@@ -23,12 +23,12 @@ export async function Footer() {
   const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
 
   return (
-    <footer className="mt-auto bg-[#0a1628] text-slate-300">
+    <footer className="mt-t-sauto bg-[#0a1628] texlate-300">
       <Container>
         <div className="grid gap-12 py-16 lg:grid-cols-12">
           {/* Brand column */}
           <div className="lg:col-span-5">
-            <Logo invert />
+            <Logo invert companyName={settings?.companyName ?? "ADEO Solution"} />
            <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
               {settings?.description ?? "Enterprise IT Solutions and Cloud Services — secure, scalable, and built for the future of your business."}
           </p>
@@ -70,12 +70,12 @@ export async function Footer() {
                   )}
                   {settings.linkedin && (
                     <a href={settings.linkedin} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 hover:text-[#3385ff] transition">
+                      className="flex items-center gap-2 hover:text-[#3385ff] transition min-w-0">
                       <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 shrink-0">
                         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
                         <circle cx="4" cy="4" r="2" />
                       </svg>
-                      <span>{settings.linkedin.replace(/.*linkedin\.com\/company\//, "")}</span>
+                      <span className="truncate">{settings.linkedin.replace(/.*linkedin\.com\/(company\/|in\/)?/, "").replace(/\/$/, "")}</span>
                     </a>
                   )}
                   {settings.instagram && (
