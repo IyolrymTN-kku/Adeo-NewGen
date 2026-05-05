@@ -154,3 +154,8 @@ model ContactSubmission {
   @@index([createdAt(sort: Desc)])
   @@map("contact_submissions")
 }
+
+model SiteSettings {
+  id       String @id @default("singleton")
+  siteName String
+}

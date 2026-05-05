@@ -16,6 +16,9 @@ export default async function AdminLayout({
   const newSubmissions = await prisma.contactSubmission.count({
     where: { status: "NEW" },
   });
+  const settings = await prisma.siteSettings.findUnique({
+    where: { id: "singleton" },
+  });
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -26,6 +29,7 @@ export default async function AdminLayout({
           role: session.user.role,
         }}
         newSubmissions={newSubmissions}
+        siteName={settings?.siteName}
       />
       <div className="lg:pl-64">
         <main className="min-h-[calc(100vh-3.5rem)] lg:min-h-screen">

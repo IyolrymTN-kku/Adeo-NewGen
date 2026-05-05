@@ -4,9 +4,11 @@ import Image from "next/image";
 type LogoProps = {
   invert?: boolean;
   className?: string;
+  showText?: boolean;
+  siteName?: string;
 };
 
-export function Logo({ invert = false, className }: LogoProps) {
+export function Logo({ invert = false, className, showText = true, siteName }: LogoProps) {
   return (
     <div className={cn("flex items-center gap-2.5", className)}>
       <div
@@ -22,14 +24,17 @@ export function Logo({ invert = false, className }: LogoProps) {
           height={28}
         />
       </div>
-      <span
-        className={cn(
-          "text-lg font-bold tracking-tight",
-          invert ? "text-white" : "text-slate-900"
-        )}
-      >
-        ADEO Solution
-      </span>
+
+      {showText && (
+        <span
+          className={cn(
+            "text-lg font-bold tracking-tight",
+            invert ? "text-white" : "text-slate-900"
+          )}
+        >
+          {siteName ?? "ADEO Solution"}
+        </span>
+      )}
     </div>
   );
 }

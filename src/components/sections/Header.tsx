@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
-import { Logo } from "@/components/sections/logo-nobg";
+import { Logo } from "@/components/sections/Logo";
 
 
 const NAV_LINKS = [
@@ -16,7 +16,7 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Header() {
+export function Header({ siteName }: { siteName?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -46,8 +46,8 @@ export function Header() {
     >
       <Container>
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" aria-label="ADEO Solution home">
-            <Logo />
+          <Link href="/" aria-label="Home">
+            <Logo siteName={siteName} />
           </Link>
 
           {/* Desktop nav */}
