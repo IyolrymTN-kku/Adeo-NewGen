@@ -8,6 +8,7 @@ import { z } from "zod";
 
 const schema = z.object({
   companyName:     z.string().min(1, "กรุณากรอกชื่อบริษัท").max(100),
+  description:     z.string().max(500).optional().or(z.literal("")),
   email:           z.string().email("อีเมลไม่ถูกต้อง").optional().or(z.literal("")),
   phone:           z.string().max(30).optional().or(z.literal("")),
   address:         z.string().max(200).optional().or(z.literal("")),
@@ -15,11 +16,9 @@ const schema = z.object({
   facebook:        z.string().url("URL ไม่ถูกต้อง").optional().or(z.literal("")),
   linkedin:        z.string().url("URL ไม่ถูกต้อง").optional().or(z.literal("")),
   instagram:       z.string().url("URL ไม่ถูกต้อง").optional().or(z.literal("")),
-  tiktok: z.string().url("URL ไม่ถูกต้อง").optional().or(z.literal("")),
-  line:   z.string().max(50).optional().or(z.literal("")),
-  taxId:  z.string().max(20).optional().or(z.literal("")),
-  metaTitle:       z.string().max(70).optional().or(z.literal("")),
-  metaDescription: z.string().max(160).optional().or(z.literal("")),
+  tiktok:          z.string().url("URL ไม่ถูกต้อง").optional().or(z.literal("")),
+  line:            z.string().max(50).optional().or(z.literal("")),
+  taxId:           z.string().max(20).optional().or(z.literal("")),
 });
 
 export async function updateCorporation(formData: FormData) {
@@ -27,6 +26,7 @@ export async function updateCorporation(formData: FormData) {
 
   const raw = {
     companyName:     formData.get("companyName"),
+    description:     formData.get("description"),
     email:           formData.get("email"),
     phone:           formData.get("phone"),
     address:         formData.get("address"),
@@ -34,11 +34,9 @@ export async function updateCorporation(formData: FormData) {
     facebook:        formData.get("facebook"),
     linkedin:        formData.get("linkedin"),
     instagram:       formData.get("instagram"),
-    tiktok: formData.get("tiktok"),
-    line:   formData.get("line"),
-    taxId:  formData.get("taxId"),
-    metaTitle:       formData.get("metaTitle"),
-    metaDescription: formData.get("metaDescription"),
+    tiktok:          formData.get("tiktok"),
+    line:            formData.get("line"),
+    taxId:           formData.get("taxId"),
   };
 
   const parsed = schema.safeParse(raw);
@@ -57,6 +55,7 @@ export async function updateCorporation(formData: FormData) {
 
   const data = {
     companyName:     parsed.data.companyName,
+    description:     parsed.data.description || null,
     email:           parsed.data.email           || null,
     phone:           parsed.data.phone           || null,
     address:         parsed.data.address         || null,
@@ -64,11 +63,9 @@ export async function updateCorporation(formData: FormData) {
     facebook:        parsed.data.facebook        || null,
     linkedin:        parsed.data.linkedin        || null,
     instagram:       parsed.data.instagram       || null,
-    tiktok: parsed.data.tiktok || null,
-    line:   parsed.data.line   || null,
-    taxId:  parsed.data.taxId  || null,
-    metaTitle:       parsed.data.metaTitle       || null,
-    metaDescription: parsed.data.metaDescription || null,
+    tiktok:          parsed.data.tiktok          || null,
+    line:            parsed.data.line            || null,
+    taxId:           parsed.data.taxId           || null,
     ...(logoUrl    && { logoUrl }),
     ...(faviconUrl && { faviconUrl }),
   };

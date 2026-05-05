@@ -158,6 +158,7 @@ model ContactSubmission {
 model companySettings {
   id              Int      @id @default(1)
   companyName     String   @default("ADEO Solution")
+  description     String?
   logoUrl         String?
   faviconUrl      String?
   email           String?
@@ -170,8 +171,6 @@ model companySettings {
   tiktok          String?
   line            String?
   taxId           String?
-  metaTitle       String?
-  metaDescription String?
   updatedAt       DateTime @updatedAt
 
   @@map("company_settings")

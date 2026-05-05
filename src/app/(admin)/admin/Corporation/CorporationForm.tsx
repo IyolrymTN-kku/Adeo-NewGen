@@ -48,9 +48,19 @@ export function CorporationForm({ settings }: { settings: companySettings | null
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl space-y-8">
-      <Section title="ข้อมูลบริษัท">
+      <Section title="Company information">
         <Field label="ชื่อบริษัท *">
           <input name="companyName" defaultValue={settings?.companyName ?? "ADEO Solution"} className={inputCls} required />
+        </Field>
+        <Field label="คำอธิบายบริษัท" hint="แนะนำไม่เกิน 200 ตัวอักษร">
+          <textarea
+            name="description"
+            defaultValue={settings?.description ?? ""}
+            className={inputCls}
+            rows={3}
+            placeholder="Enterprise IT Solutions and Cloud Services..."
+            maxLength={500}
+          />
         </Field>
         <Field label="เลขที่ผู้เสียภาษี">
           <input name="taxId" defaultValue={settings?.taxId ?? ""} className={inputCls} placeholder="0000000000000" maxLength={20} />
@@ -69,7 +79,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
         </Field>
       </Section>
 
-      <Section title="โลโก้ & Favicon">
+      <Section title="Logo & Favicon">
         <Field label="โลโก้บริษัท" hint="แนะนำ PNG/SVG แนวนอน ขนาด 200×60px">
           {logoPreview && (
             <div className="relative h-16 w-40 overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-2">
@@ -94,7 +104,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
         </Field>
       </Section>
 
-      <Section title="โซเชียลมีเดีย">
+      <Section title="Social Media">
         <Field label="Facebook">
           <input name="facebook" defaultValue={settings?.facebook ?? ""} className={inputCls} placeholder="https://facebook.com/yourpage" />
         </Field>
@@ -112,15 +122,6 @@ export function CorporationForm({ settings }: { settings: companySettings | null
         </Field>
       </Section>
 
-      <Section title="SEO">
-        <Field label="Meta Title" hint="แนะนำไม่เกิน 60 ตัวอักษร">
-          <input name="metaTitle" defaultValue={settings?.metaTitle ?? ""} className={inputCls} placeholder="ADEO Solution | Enterprise IT & Cloud Services" maxLength={70} />
-        </Field>
-        <Field label="Meta Description" hint="แนะนำไม่เกิน 160 ตัวอักษร">
-          <textarea name="metaDescription" defaultValue={settings?.metaDescription ?? ""} className={inputCls} rows={3} placeholder="กรอกคำอธิบายเว็บไซต์..." maxLength={160} />
-        </Field>
-      </Section>
-
       {message && (
         <p className={`text-sm font-medium ${message.type === "success" ? "text-green-600" : "text-red-600"}`}>
           {message.type === "success" ? "✅" : "❌"} {message.text}
@@ -129,7 +130,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
 
       <button type="submit" disabled={loading}
         className="rounded-lg bg-[#0066ff] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0052cc] disabled:opacity-60">
-        {loading ? "กำลังบันทึก..." : "บันทึกการเปลี่ยนแปลง"}
+        {loading ? "Saving...." : "save"}
       </button>
     </form>
   );
