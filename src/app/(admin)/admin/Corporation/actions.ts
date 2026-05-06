@@ -78,5 +78,8 @@ export async function updateCorporation(formData: FormData) {
 
   revalidatePath("/admin/corporation");
   revalidatePath("/");
+  revalidatePath("/solutions");
+  revalidatePath("/cloud");
+  revalidatePath("/contact");
   return { success: true };
 }

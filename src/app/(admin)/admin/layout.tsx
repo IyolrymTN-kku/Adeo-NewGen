@@ -25,6 +25,7 @@ export default async function AdminLayout({
         }}
         newSubmissions={newSubmissions}
         companyName={settings?.companyName ?? "ADEO Solution"}
+        logoUrl={settings?.logoUrl}
       />
       <div className="lg:pl-64">
         <main className="min-h-[calc(100vh-3.5rem)] lg:min-h-screen">

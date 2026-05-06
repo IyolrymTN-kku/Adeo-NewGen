@@ -15,8 +15,7 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
-// เพิ่ม prop
-export function Header({ companyName = "ADEO Solution" }: { companyName?: string }) {
+export function Header({ companyName = "ADEO Solution", logoUrl }: { companyName?: string; logoUrl?: string | null }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -48,7 +47,7 @@ export function Header({ companyName = "ADEO Solution" }: { companyName?: string
       <Container>
         <div className="flex h-16 items-center justify-between">
           <Link href="/" aria-label={`${companyName} home`}>
-            <Logo companyName={companyName} />
+            <Logo companyName={companyName} logoUrl={logoUrl} />
           </Link>
 
           {/* Desktop nav */}

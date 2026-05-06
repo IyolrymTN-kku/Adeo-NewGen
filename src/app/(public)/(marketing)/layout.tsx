@@ -12,7 +12,7 @@ export default async function MarketingLayout({
 
   return (
     <>
-      <Header companyName={companyName} />
+      <Header companyName={companyName} logoUrl={settings?.logoUrl} />
       <main className="flex-1">{children}</main>
       <Footer />
     </>

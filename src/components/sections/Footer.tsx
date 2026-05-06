@@ -28,7 +28,7 @@ export async function Footer() {
         <div className="grid gap-12 py-16 lg:grid-cols-12">
           {/* Brand column */}
           <div className="lg:col-span-5">
-            <Logo invert companyName={settings?.companyName ?? "ADEO Solution"} />
+            <Logo invert companyName={settings?.companyName ?? "ADEO Solution"} logoUrl={settings?.logoUrl} />
            <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
               {settings?.description ?? "Enterprise IT Solutions and Cloud Services — secure, scalable, and built for the future of your business."}
           </p>

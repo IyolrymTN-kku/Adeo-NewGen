@@ -3,11 +3,18 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
   const name = settings?.companyName ?? "ADEO Solution";
+  const faviconUrl = settings?.faviconUrl
+    ? settings.faviconUrl.startsWith("/")
+      ? settings.faviconUrl
+      : `/${settings.faviconUrl}`
+    : "/favicon.svg";
 
   return {
     title: {
@@ -18,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: ["IT Solutions", "Cloud Services", "Software Development", "Network", "Cloud Migration", name],
     authors: [{ name }],
     robots: { index: true, follow: true },
-    icons: { icon: "/favicon.svg" },
+    icons: { icon: faviconUrl },
   };
 }
 
