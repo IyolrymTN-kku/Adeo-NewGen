@@ -78,9 +78,16 @@ const NAV: NavItem[] = [
 type AdminSidebarProps = {
   user: { name?: string | null; email?: string | null; role: string };
   newSubmissions: number;
+  companyName?: string;
+  logoUrl?: string | null;
 };
 
-export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
+export function AdminSidebar({
+  user,
+  newSubmissions,
+  companyName = "ADEO Solution",
+  logoUrl,
+}: AdminSidebarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -141,7 +148,7 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
           className="inline-flex"
           onClick={() => setMobileOpen(false)}
         >
-          <Logo invert />
+          <Logo invert companyName={companyName} logoUrl={logoUrl} />
         </Link>
         <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
           Admin Portal
@@ -178,7 +185,7 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
       {/* Mobile top bar */}
       <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
         <Link href="/admin">
-          <Logo />
+          <Logo invert companyName={companyName} logoUrl={logoUrl} />
         </Link>
         <button
           type="button"

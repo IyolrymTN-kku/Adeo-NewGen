@@ -40,10 +40,12 @@ export function CorporationForm({ settings }: { settings: companySettings | null
     setMessage(null);
     const result = await updateCorporation(new FormData(e.currentTarget));
     setLoading(false);
-    setMessage(result.error
-      ? { type: "error",   text: result.error }
-      : { type: "success", text: "บันทึกข้อมูลเรียบร้อยแล้ว" }
-    );
+    if (result.error) {
+      setMessage({ type: "error", text: result.error });
+    } else {
+      setMessage({ type: "success", text: "Information saved successfully" });
+      setTimeout(() => window.location.reload(), 1000);
+    }
   }
 
   return (

@@ -3,6 +3,8 @@ import { requireAdminPage } from "@/lib/auth/require-admin";
 import { PageHeader, PageBody } from "@/components/admin/PageHeader";
 import { CorporationForm } from "./CorporationForm";
 
+export const revalidate = 0;
+
 export default async function CorporationPage() {
   await requireAdminPage("/admin/corporation");
 
