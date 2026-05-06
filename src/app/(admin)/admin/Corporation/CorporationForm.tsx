@@ -43,7 +43,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
     if (result.error) {
       setMessage({ type: "error", text: result.error });
     } else {
-      setMessage({ type: "success", text: "บันทึกข้อมูลเรียบร้อยแล้ว" });
+      setMessage({ type: "success", text: "Information saved successfully" });
       setTimeout(() => window.location.reload(), 1000);
     }
   }
