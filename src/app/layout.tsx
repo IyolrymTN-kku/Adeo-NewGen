@@ -10,11 +10,6 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
   const name = settings?.companyName ?? "ADEO Solution";
-  const faviconUrl = settings?.faviconUrl
-    ? settings.faviconUrl.startsWith("/")
-      ? settings.faviconUrl
-      : `/${settings.faviconUrl}`
-    : "/favicon.svg";
 
   return {
     title: {
@@ -25,13 +20,19 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: ["IT Solutions", "Cloud Services", "Software Development", "Network", "Cloud Migration", name],
     authors: [{ name }],
     robots: { index: true, follow: true },
-    icons: { icon: faviconUrl },
   };
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const faviconUrl = settings?.faviconUrl ?? "/favicon.svg";
+  const timestamp = settings?.updatedAt ? new Date(settings.updatedAt).getTime() : Date.now();
+
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <head>
+        <link rel="icon" href={`${faviconUrl}?v=${timestamp}`} />
+      </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900">
         {children}
       </body>
