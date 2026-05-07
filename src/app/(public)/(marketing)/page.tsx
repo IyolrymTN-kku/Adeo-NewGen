@@ -11,6 +11,9 @@ import { CTASection } from "@/components/sections/CTASection";
 export const revalidate = 60;
 
 export default async function HomePage() {
+  const settings = await prisma.siteSettings.findUnique({
+    where: { id: "singleton" },
+  });
   const [services, partners] = await Promise.all([
     prisma.service.findMany({
       where: { isActive: true },
@@ -40,7 +43,7 @@ export default async function HomePage() {
     <>
       <Hero
         eyebrow="Enterprise IT & Cloud"
-        title="Powering the digital backbone of"
+        title={`Powering ${settings?.siteName ?? "Our Company"}`}
         highlight="modern enterprises."
         description="From custom software and managed IT to cloud-native architectures, ADEO Solution delivers secure, scalable infrastructure built for the way your business actually runs."
         primaryCta={{ href: "/contact", label: "Talk to an Expert" }}

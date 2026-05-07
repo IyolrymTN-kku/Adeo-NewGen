@@ -1,6 +1,6 @@
+import { prisma } from "@/lib/db";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
-import { prisma } from "@/lib/db";
 
 export default async function MarketingLayout({
   children,
@@ -14,7 +14,7 @@ export default async function MarketingLayout({
     <>
       <Header companyName={companyName} logoUrl={settings?.logoUrl} />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer siteName={settings?.siteName} />
     </>
   );
 }

@@ -175,3 +175,8 @@ model companySettings {
 
   @@map("company_settings")
 }
+
+model SiteSettings {
+  id       String @id @default("singleton")
+  siteName String
+}

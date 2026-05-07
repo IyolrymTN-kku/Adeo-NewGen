@@ -10,12 +10,12 @@ const FOOTER_NAV = {
     { href: "/cloud",     label: "Cloud Services" },
   ],
   Company: [
-    { href: "/",        label: "About" },
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ],
   Legal: [
-    { href: "/", label: "Privacy" },
-    { href: "/", label: "Terms" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/terms", label: "Terms" },
   ],
 };
 
@@ -26,6 +26,7 @@ export async function Footer() {
     <footer className="mt-t-sauto bg-[#0a1628] texlate-300">
       <Container>
         <div className="grid gap-12 py-16 lg:grid-cols-12">
+          
           {/* Brand column */}
           <div className="lg:col-span-5">
             <Logo invert companyName={settings?.companyName ?? "ADEO Solution"} logoUrl={settings?.logoUrl} />

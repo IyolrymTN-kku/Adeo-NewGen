@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/db";
 import type { Metadata } from "next";
 import LoginForm from "./LoginForm";
 import { Logo } from "@/components/sections/Logo";
@@ -7,7 +8,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const settings = await prisma.siteSettings.findUnique({
+    where: { id: "singleton" },
+  });
+
   return (
     <div className="flex min-h-screen">
       {/* ── Brand panel (left) ─────────────────────────────────────────────── */}
@@ -32,7 +37,7 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
-          <Logo invert />
+          <Logo invert siteName={settings?.siteName} />
         </div>
 
         {/* Tagline */}
@@ -89,7 +94,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <span className="text-lg font-bold text-slate-900">
-              ADEO Solution
+              {settings?.siteName ?? "ADEO Solution"}
             </span>
           </div>
 
@@ -110,7 +115,7 @@ export default function LoginPage() {
 
           {/* Footer */}
           <p className="mt-8 text-center text-xs text-slate-400">
-            © {new Date().getFullYear()} ADEO Solution. All rights reserved.
+            © {new Date().getFullYear()} {settings?.siteName ?? "ADEO Solution"}.
           </p>
         </div>
       </div>

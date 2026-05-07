@@ -2,12 +2,9 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "./ContactForm";
+import { generateSEOMetadata } from "@/lib/seo/generate";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Get in touch with ADEO Solution to discuss your enterprise IT or cloud project. We typically reply within one business day.",
-};
+export const metadata = generateSEOMetadata("/contact");
 
 const CONTACT_DETAILS = [
   {
