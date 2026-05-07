@@ -60,25 +60,34 @@ const NAV: NavItem[] = [
       </>
     ),
   },
-  {
-    href: "/admin/settings",
-    label: "Settings",
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.4 15a1.7 1.7 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1v.2a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-.4-1 1.7 1.7 0 0 0-1-.6 1.7 1.7 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1-.4h-.2a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1-.4 1.7 1.7 0 0 0 .6-1 1.7 1.7 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6c.26-.3.4-.68.4-1V3.4a2 2 0 1 1 4 0v.2c0 .38.14.74.4 1 .26.3.64.48 1 .6.64.18 1.34-.02 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06c-.3.48-.5 1.18-.33 1.82.12.36.3.74.6 1 .26.26.62.4 1 .4h.2a2 2 0 1 1 0 4h-.2c-.38 0-.74.14-1 .4-.3.26-.48.64-.6 1z" />
-      </>
-    ),
-  },
+    {
+  href: "/admin/Corporation",
+  label: "Corporation",
+  icon: (
+    <>
+      <path d="M3 21h18" />
+      <path d="M5 21V7l8-4 8 4v14" />
+      <path d="M9 21v-4h6v4" />
+      <rect x="9" y="10" width="2" height="2" />
+      <rect x="13" y="10" width="2" height="2" />
+    </>
+  ),
+},
 ];
 
 type AdminSidebarProps = {
   user: { name?: string | null; email?: string | null; role: string };
   newSubmissions: number;
-  siteName?: string;
+  companyName?: string;
+  logoUrl?: string | null;
 };
 
-export function AdminSidebar({ user, newSubmissions, siteName }: AdminSidebarProps) {
+export function AdminSidebar({
+  user,
+  newSubmissions,
+  companyName = "ADEO Solution",
+  logoUrl,
+}: AdminSidebarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -139,7 +148,7 @@ export function AdminSidebar({ user, newSubmissions, siteName }: AdminSidebarPro
           className="inline-flex"
           onClick={() => setMobileOpen(false)}
         >
-          <Logo invert siteName={siteName} />
+          <Logo invert companyName={companyName} logoUrl={logoUrl} />
         </Link>
         <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
           Admin Portal
@@ -176,7 +185,7 @@ export function AdminSidebar({ user, newSubmissions, siteName }: AdminSidebarPro
       {/* Mobile top bar */}
       <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
         <Link href="/admin">
-          <Logo />
+          <Logo invert companyName={companyName} logoUrl={logoUrl} />
         </Link>
         <button
           type="button"

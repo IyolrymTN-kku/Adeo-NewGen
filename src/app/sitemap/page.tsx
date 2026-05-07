@@ -5,12 +5,12 @@ import { auth } from "@/auth";
 import { Footer } from "@/components/sections/Footer";
 
 export default async function SitemapPage() {
-  const settings = await prisma.siteSettings.findUnique({
-    where: { id: "singleton" },
-    select: { siteName: true },
+  const settings = await prisma.companySettings.findUnique({
+    where: { id: 1 },
+    select: { companyName: true },
   });
 
-  const siteName = settings?.siteName ?? "ADEO Solution";
+  const companyName = settings?.companyName ?? "ADEO Solution";
 
   const { services, cloudServices } = await getSitemapData();
 
@@ -29,7 +29,7 @@ export default async function SitemapPage() {
                 </p>
 
                 <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight">
-                {siteName}
+                {companyName}
                 <span className="text-blue-400"> Sitemap</span>
                 </h1>
 
@@ -114,7 +114,7 @@ export default async function SitemapPage() {
         <div className="mt-16 text-center text-xs text-slate-400">
           
         </div>
-      <Footer siteName={settings?.siteName} />
+      <Footer companyName={settings?.companyName} />
     </main>
   );
 }

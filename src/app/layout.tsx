@@ -1,103 +1,41 @@
+import { prisma } from "@/lib/db";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { prisma } from "@/lib/db";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+export const dynamic = "force-dynamic";
 
-async function getSiteName() {
-  const settings = await prisma.siteSettings.findUnique({
-    where: { id: "singleton" },
-    select: { siteName: true },
-  });
-
-  return settings?.siteName ?? "ADEO Solution";
-}
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteName = await getSiteName();
+  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const name = settings?.companyName ?? "ADEO Solution";
 
   return {
-    metadataBase: new URL(
-      process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-    ),
-
     title: {
-      default: `${siteName} | Enterprise IT & Cloud Services`,
-      template: `%s | ${siteName}`,
+      default: `${name} | Enterprise IT & Cloud Services`,
+      template: `%s | ${name}`,
     },
-
-    description: `${siteName} delivers enterprise IT Solutions, Cloud Services, Software Development, and Cybersecurity for modern businesses.`,
-
-    keywords: [
-      "IT Solutions",
-      "Cloud Services",
-      "Software Development",
-      "Cybersecurity",
-      "Cloud Migration",
-      "Network Infrastructure",
-      "ADEO",
-    ],
-
-    authors: [{ name: siteName }],
-
-    creator: siteName,
-
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-      },
-    },
-
-    openGraph: {
-      title: `${siteName} | IT & Cloud Services`,
-      description:
-        "Enterprise IT Solutions, Cloud Infrastructure, and Digital Transformation Services.",
-      url: "/",
-      siteName,
-      type: "website",
-      images: [
-        {
-          url: "/og-image.jpg", //image on website
-          width: 1200,
-          height: 630,
-          alt: siteName,
-        },
-      ],
-    },
-
-    twitter: {
-      card: "summary_large_image",
-      title: `${siteName}`,
-      description:
-        "Enterprise IT & Cloud Services for modern businesses",
-      images: ["/og-image.jpg"],
-    },
-
-    icons: {
-      icon: "/favicon.svg",
-    },
+    description: settings?.description ?? "ADEO Solution delivers enterprise-grade IT Solutions and Cloud Services.",
+    keywords: ["IT Solutions", "Cloud Services", "Software Development", "Network", "Cloud Migration", name],
+    authors: [{ name }],
+    robots: { index: true, follow: true },
   };
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const faviconUrl = settings?.faviconUrl ?? "/favicon.svg";
+  const timestamp = settings?.updatedAt ? new Date(settings.updatedAt).getTime() : Date.now();
+
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <head>
+        <link rel="icon" href={`${faviconUrl}?v=${timestamp}`} />
+      </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900">
         {children}
       </body>
     </html>
   );
-  }
+}

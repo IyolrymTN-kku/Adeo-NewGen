@@ -10,6 +10,8 @@ const ALLOWED_MIME = new Set([
   "image/png",
   "image/webp",
   "image/svg+xml",
+  "image/x-icon",
+  "image/vnd.microsoft.icon",
 ]);
 
 const EXT_BY_MIME: Record<string, string> = {
@@ -17,6 +19,8 @@ const EXT_BY_MIME: Record<string, string> = {
   "image/png": ".png",
   "image/webp": ".webp",
   "image/svg+xml": ".svg",
+  "image/x-icon": ".ico",
+  "image/vnd.microsoft.icon": ".ico",
 };
 
 export class UploadError extends Error {
