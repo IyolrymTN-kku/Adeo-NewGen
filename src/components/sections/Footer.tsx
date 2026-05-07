@@ -8,23 +8,24 @@ const FOOTER_NAV = {
     { href: "/cloud", label: "Cloud Services" },
   ],
   Company: [
-    { href: "/", label: "About" },
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ],
   Legal: [
-    { href: "/", label: "Privacy" },
-    { href: "/", label: "Terms" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/terms", label: "Terms" },
   ],
 };
 
-export function Footer() {
+export function Footer({ siteName }: { siteName?: string }) {
   return (
     <footer className="mt-auto bg-[#0a1628] text-slate-300">
       <Container>
         <div className="grid gap-12 py-16 lg:grid-cols-12">
+          
           {/* Brand column */}
           <div className="lg:col-span-5">
-            <Logo invert />
+            <Logo invert siteName={siteName} />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
               Enterprise IT Solutions and Cloud Services — secure, scalable,
               and built for the future of your business.
@@ -71,7 +72,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-3 border-t border-white/10 py-6 text-xs text-slate-500 sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} ADEO Solution. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {siteName ?? "ADEO Solution"}. All rights reserved.</p>
           <p>Bangkok, Thailand</p>
         </div>
       </Container>
