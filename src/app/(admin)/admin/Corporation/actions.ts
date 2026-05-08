@@ -50,13 +50,24 @@ export async function updateCorporation(formData: FormData) {
   let logoUrl:    string | undefined;
   let faviconUrl: string | undefined;
 
-  if (logoFile    && logoFile.size    > 0) logoUrl    = await saveUploadedImage(logoFile);
-  if (faviconFile && faviconFile.size > 0) faviconUrl = await saveUploadedImage(faviconFile);
+  if (logoFile && logoFile.size > 0) {
+    if (logoFile.type !== "image/png") {
+      return { error: "โลโก้ต้องเป็นไฟล์ PNG เท่านั้น" };
+    }
+    logoUrl = await saveUploadedImage(logoFile);
+  }
+
+  if (faviconFile && faviconFile.size > 0) {
+    if (faviconFile.type !== "image/png") {
+      return { error: "Favicon ต้องเป็นไฟล์ PNG เท่านั้น" };
+    }
+    faviconUrl = await saveUploadedImage(faviconFile);
+  }
 
   const data = {
     companyName:     parsed.data.companyName,
     description:     parsed.data.description || null,
-    email:           parsed.data.email           || null,
+    email:           parsed.data.email ? parsed.data.email.trim().toLowerCase() : null,
     phone:           parsed.data.phone           || null,
     address:         parsed.data.address         || null,
     website:         parsed.data.website         || null,
