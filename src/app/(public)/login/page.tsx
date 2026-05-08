@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage() {
-  const settings = await prisma.siteSettings.findUnique({
-    where: { id: "singleton" },
+  const settings = await prisma.companySettings.findUnique({
+    where: { id: 1 },
   });
 
   return (
@@ -37,7 +37,7 @@ export default async function LoginPage() {
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
-          <Logo invert siteName={settings?.siteName} />
+          <Logo invert companyName={settings?.companyName} />
         </div>
 
         {/* Tagline */}
@@ -94,7 +94,7 @@ export default async function LoginPage() {
               </svg>
             </div>
             <span className="text-lg font-bold text-slate-900">
-              {settings?.siteName ?? "ADEO Solution"}
+              {settings?.companyName ?? "ADEO Solution"}
             </span>
           </div>
 
@@ -115,7 +115,7 @@ export default async function LoginPage() {
 
           {/* Footer */}
           <p className="mt-8 text-center text-xs text-slate-400">
-            © {new Date().getFullYear()} {settings?.siteName ?? "ADEO Solution"}.
+            © {new Date().getFullYear()} {settings?.companyName ?? "ADEO Solution"}.
           </p>
         </div>
       </div>

@@ -24,7 +24,10 @@ export function ServiceDetailList({ services }: ServiceDetailListProps) {
         const features = parseFeatures(service.features);
         return (
           <Card key={service.id} className="p-8 sm:p-10">
-            <div className="grid gap-8 lg:grid-cols-12">
+            <div
+              id={service.slug}
+              className="scroll-mt-28 rounded-2xl"
+            >
               <div className="lg:col-span-5">
                 <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0066ff]">
                   {categoryLabel(service.category)}

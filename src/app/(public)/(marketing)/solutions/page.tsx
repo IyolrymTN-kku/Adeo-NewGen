@@ -25,6 +25,7 @@ export default async function SolutionsPage() {
       description: true,
       category: true,
       features: true,
+      slug: true,
     },
   });
 
