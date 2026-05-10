@@ -15,7 +15,7 @@ export const SEO_MAP = {
         "Get in touch with ADEO Solution to discuss your enterprise IT or cloud project. We typically reply within one business day.",
     },
 
-  "/services": {
+  "/solutions": {
     title: "IT Solutions",
     description: "Enterprise IT services and development",
   },

@@ -61,18 +61,29 @@ const NAV: NavItem[] = [
     ),
   },
     {
-  href: "/admin/Corporation",
-  label: "Corporation",
-  icon: (
-    <>
-      <path d="M3 21h18" />
-      <path d="M5 21V7l8-4 8 4v14" />
-      <path d="M9 21v-4h6v4" />
-      <rect x="9" y="10" width="2" height="2" />
-      <rect x="13" y="10" width="2" height="2" />
-    </>
-  ),
-},
+      href: "/admin/Corporation",
+      label: "Corporation",
+      icon: (
+        <>
+          <path d="M3 21h18" />
+          <path d="M5 21V7l8-4 8 4v14" />
+          <path d="M9 21v-4h6v4" />
+          <rect x="9" y="10" width="2" height="2" />
+          <rect x="13" y="10" width="2" height="2" />
+        </>
+      ),
+    },
+    {
+      href: "/admin/seo-media",
+      label: "SEO Media",
+      icon: (
+        <>
+          <path d="M4 4h16v16H4z" />
+          <path d="M4 9h16" />
+          <path d="M9 13h6" />
+        </>
+      ),
+    },
 ];
 
 type AdminSidebarProps = {
