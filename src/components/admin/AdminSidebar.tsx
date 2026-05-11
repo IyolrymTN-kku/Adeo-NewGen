@@ -60,14 +60,46 @@ const NAV: NavItem[] = [
       </>
     ),
   },
+  {
+    href: "/admin/settings",
+    label: "Settings",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.7 1.7 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1v.2a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-.4-1 1.7 1.7 0 0 0-1-.6 1.7 1.7 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1-.4h-.2a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1-.4 1.7 1.7 0 0 0 .6-1 1.7 1.7 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6c.26-.3.4-.68.4-1V3.4a2 2 0 1 1 4 0v.2c0 .38.14.74.4 1 .26.3.64.48 1 .6.64.18 1.34-.02 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06c-.3.48-.5 1.18-.33 1.82.12.36.3.74.6 1 .26.26.62.4 1 .4h.2a2 2 0 1 1 0 4h-.2c-.38 0-.74.14-1 .4-.3.26-.48.64-.6 1z" />
+      </>
+    ),
+  },
+  {
+    href: "/admin/changepalettes",
+    label: "Change Palette",
+    icon: (
+      <>
+        <path d="M12 22a10 10 0 1 1 10-10 3.5 3.5 0 0 1-3.5 3.5h-1.1a1.4 1.4 0 0 0-1.12 2.24l.22.3A2.5 2.5 0 0 1 14.5 22H12Z" />
+        <circle cx="7.5" cy="10.5" r="1" />
+        <circle cx="10.5" cy="7.5" r="1" />
+        <circle cx="14.5" cy="7.5" r="1" />
+        <circle cx="16.5" cy="11" r="1" />
+      </>
+    ),
+  },
 ];
 
 type AdminSidebarProps = {
-  user: { name?: string | null; email?: string | null; role: string };
+  user: {
+    name?: string | null;
+    email?: string | null;
+    role: string;
+  };
   newSubmissions: number;
+  siteName?: string;
 };
 
-export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
+export function AdminSidebar({
+  user,
+  newSubmissions,
+  siteName,
+}: AdminSidebarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -80,23 +112,25 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
         const active = isActive(item);
         const showBadge = item.href === "/admin/inbox" && newSubmissions > 0;
 
+        const className = cn(
+          "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition",
+          active
+            ? "[background:var(--admin-gradient)] text-[var(--admin-gradient-foreground)] shadow-lg shadow-black/20"
+            : "text-[var(--admin-sidebar-foreground)] opacity-80 hover:bg-white/10 hover:opacity-100"
+        );
+
         return (
           <Link
             key={item.href}
             href={item.href}
             onClick={() => setMobileOpen(false)}
-            className={cn(
-              "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition",
-              active
-                ? "[background:var(--admin-gradient)] text-[var(--admin-gradient-foreground)] shadow-lg shadow-black/20"
-                : "text-[var(--admin-sidebar-foreground)] opacity-80 hover:bg-white/10 hover:opacity-100"
-            )}
+            className={className}
           >
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth={1.75}
+              strokeWidth={1.85}
               strokeLinecap="round"
               strokeLinejoin="round"
               className="h-5 w-5 shrink-0"
@@ -105,15 +139,15 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
               {item.icon}
             </svg>
 
-            <span className="flex-1">{item.label}</span>
+            <span className="flex-1 text-left">{item.label}</span>
 
             {showBadge && (
               <span
                 className={cn(
                   "inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full px-1.5 text-[10px] font-bold",
                   active
-                    ? "bg-[var(--admin-gradient-foreground)] text-[var(--admin-primary)]"
-                    : "[background:var(--admin-gradient)] text-[var(--admin-gradient-foreground)]"
+                    ? "bg-white/25 text-current"
+                    : "bg-[var(--admin-primary)] text-[var(--admin-primary-foreground)]"
                 )}
               >
                 {newSubmissions > 99 ? "99+" : newSubmissions}
@@ -126,24 +160,23 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
   );
 
   const SidebarContent = (
-    <div className="flex h-full flex-col">
-      <div className="px-5 pb-6 pt-5">
-        <Link
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="shrink-0 px-5 pb-6 pt-5">
+        <Logo
+          invert
           href="/admin"
+          siteName={siteName}
           className="inline-flex text-[var(--admin-sidebar-foreground)]"
-          onClick={() => setMobileOpen(false)}
-        >
-          <Logo />
-        </Link>
+        />
 
-        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--admin-sidebar-foreground)] opacity-80">
+        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--admin-sidebar-foreground)] opacity-90">
           Admin Portal
         </p>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-3">{NavList}</div>
+      <div className="min-h-0 flex-1 overflow-y-auto px-3">{NavList}</div>
 
-      <div className="m-3 rounded-xl border border-[color-mix(in_srgb,var(--admin-sidebar-foreground)_18%,transparent)] bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_10%,transparent)] p-4 backdrop-blur">
+      <div className="m-3 shrink-0 rounded-xl border border-[color-mix(in_srgb,var(--admin-sidebar-foreground)_18%,transparent)] bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_10%,transparent)] p-4 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_14%,transparent)] text-sm font-semibold text-[var(--admin-sidebar-foreground)]">
             {(user.name ?? user.email ?? "A").charAt(0).toUpperCase()}
@@ -173,17 +206,15 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
 
   return (
     <>
-      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-card px-4 text-card-foreground lg:hidden">
-        <Link href="/admin">
-          <Logo />
-        </Link>
+      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
+        <Logo href="/admin" siteName={siteName} />
 
         <button
           type="button"
           aria-label="Toggle admin menu"
           aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-foreground"
+          onClick={() => setMobileOpen((value) => !value)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100"
         >
           <svg
             viewBox="0 0 24 24"
@@ -207,9 +238,10 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
       {mobileOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
           <button
+            type="button"
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-slate-900/50"
           />
 
           <aside className="absolute inset-y-0 left-0 w-72 [background:var(--admin-gradient-dark)] text-[var(--admin-sidebar-foreground)] shadow-xl">
@@ -218,7 +250,7 @@ export function AdminSidebar({ user, newSubmissions }: AdminSidebarProps) {
         </div>
       )}
 
-      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-white/10 [background:var(--admin-gradient-dark)] text-[var(--admin-sidebar-foreground)]">
+      <aside className="hidden lg:fixed lg:left-0 lg:top-0 lg:z-30 lg:flex lg:h-dvh lg:w-64 lg:flex-col lg:overflow-hidden lg:border-r lg:border-white/10 [background:var(--admin-gradient-dark)] text-[var(--admin-sidebar-foreground)]">
         {SidebarContent}
       </aside>
     </>

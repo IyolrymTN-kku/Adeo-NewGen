@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title> new palette — Admin Theme Studio</title>
+<title>NEW PALETTE — Admin Theme Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -565,7 +565,7 @@ button,input{font-family:inherit}.app{max-width:1540px;margin:auto;padding:18px}
 }
 
 .adeo-title {
-  font-size: clamp(2rem, 3.6vw, 3.15rem) !important;
+  font-size: clamp(2.35rem, 4.4vw, 4rem) !important;
   letter-spacing: -.07em !important;
   text-shadow: 0 16px 42px rgba(79,140,255,.16);
 }
@@ -673,8 +673,8 @@ input {
 
 .adeo-title {
   font-family: var(--display);
-  font-size: clamp(1.75rem, 2.3vw, 2.45rem);
-  line-height: 1.04;
+  font-size: clamp(2.15rem, 3.1vw, 3.25rem);
+  line-height: 1.02;
   font-weight: 900;
   letter-spacing: -0.035em;
   word-spacing: 0.04em;
@@ -756,12 +756,413 @@ input {
   }
 }
 
+
+
+/* ===== PALETTE USAGE DETAILS ===== */
+.palette-usage-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.usage-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface2);
+  padding: 10px;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.usage-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(129, 140, 248, .34);
+  background: var(--surface3);
+}
+
+.usage-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.usage-swatch {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+}
+
+.usage-title {
+  color: var(--text);
+  font-size: .68rem;
+  font-weight: 800;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.usage-hex {
+  margin-top: 1px;
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .02em;
+}
+
+.usage-preview {
+  margin-top: 9px;
+  min-height: 34px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 8px;
+  font-size: .66rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+}
+
+.usage-desc {
+  margin-top: 8px;
+  color: var(--text2);
+  font-size: .63rem;
+  line-height: 1.35;
+}
+
+.usage-var {
+  display: inline-flex;
+  margin-top: 7px;
+  max-width: 100%;
+  border-radius: 999px;
+  background: rgba(129,140,248,.10);
+  border: 1px solid rgba(129,140,248,.18);
+  color: var(--accent2);
+  padding: 3px 7px;
+  font-family: var(--mono);
+  font-size: .55rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.usage-text-detail {
+  margin-top: 8px;
+  display: grid;
+  gap: 5px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
+.usage-text-label {
+  color: var(--text3);
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.usage-text-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.045);
+  color: var(--text);
+  padding: 4px 7px;
+  font-size: .58rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.usage-text-swatch {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04);
+}
+
+.usage-text-note {
+  color: var(--text3);
+  font-size: .56rem;
+  line-height: 1.35;
+}
+
+.usage-foreground-var {
+  margin-top: 4px;
+  color: var(--cyan);
+  background: rgba(34,211,238,.08);
+  border-color: rgba(34,211,238,.16);
+}
+
+@media (max-width: 1200px) {
+  .palette-usage-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .palette-usage-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* =========================================================
+   FINAL READABILITY PASS
+   อ่านง่ายขึ้น + พอดีกับพื้นที่ของการ์ดรายละเอียดสี
+========================================================= */
+:root {
+  --font: 'Noto Sans Thai', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --display: 'Inter', 'Noto Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html {
+  font-size: 15.5px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+body,
+button,
+input {
+  font-family: var(--font) !important;
+  line-height: 1.55;
+}
+
+.adeo-title {
+  font-family: var(--display) !important;
+  font-size: clamp(2.15rem, 3.45vw, 3.6rem) !important;
+  line-height: .98 !important;
+  letter-spacing: -0.045em !important;
+}
+
+.adeo-subtitle {
+  font-family: var(--font) !important;
+  font-size: .78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .22em !important;
+  line-height: 1.45 !important;
+}
+
+.adeo-command-title span,
+.adeo-section-title span:first-child {
+  font-family: var(--display) !important;
+  font-size: .76rem !important;
+  line-height: 1.25 !important;
+  letter-spacing: .12em !important;
+}
+
+.adeo-section-title small {
+  font-size: .66rem !important;
+  line-height: 1.2 !important;
+  max-width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adeo-command-input {
+  font-size: .95rem !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+}
+
+.btn {
+  font-size: .84rem !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+}
+
+.prompt-tag,
+.prompt-tag-custom,
+.harm-btn,
+.lib-name,
+.info-label,
+.info-value,
+.slider-label,
+.slider-val {
+  line-height: 1.35 !important;
+}
+
+/* usage detail cards */
+.palette-usage-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+
+.usage-card {
+  min-width: 0 !important;
+  padding: 13px !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.024)),
+    var(--surface2) !important;
+}
+
+.usage-top {
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+.usage-heading {
+  min-width: 0;
+}
+
+.usage-swatch {
+  width: 34px !important;
+  height: 34px !important;
+  flex: 0 0 34px !important;
+  border-radius: 12px !important;
+}
+
+.usage-title {
+  font-family: var(--display) !important;
+  color: var(--text) !important;
+  font-size: .78rem !important;
+  font-weight: 850 !important;
+  line-height: 1.22 !important;
+  letter-spacing: -0.01em !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.usage-hex {
+  margin-top: 3px !important;
+  color: var(--text3) !important;
+  font-size: .64rem !important;
+  line-height: 1.25 !important;
+}
+
+.usage-preview {
+  margin-top: 11px !important;
+  min-height: 42px !important;
+  padding: 9px 10px !important;
+  border-radius: 14px !important;
+  font-size: .78rem !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+}
+
+.usage-desc {
+  margin-top: 10px !important;
+  color: var(--text2) !important;
+  font-size: .73rem !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0 !important;
+}
+
+.usage-text-detail {
+  margin-top: 10px !important;
+  padding-top: 10px !important;
+  gap: 8px !important;
+}
+
+.usage-text-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.usage-text-label {
+  color: var(--text3) !important;
+  font-size: .66rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .05em !important;
+  white-space: nowrap;
+}
+
+.usage-text-chip {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  padding: 5px 8px !important;
+  border-radius: 999px !important;
+  font-size: .68rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+.usage-text-chip code {
+  font-family: var(--mono);
+  font-size: .62rem;
+  opacity: .78;
+}
+
+.usage-text-swatch {
+  width: 14px !important;
+  height: 14px !important;
+  flex: 0 0 14px !important;
+}
+
+.usage-text-note {
+  color: var(--text2) !important;
+  font-size: .69rem !important;
+  line-height: 1.5 !important;
+}
+
+.usage-vars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.usage-var {
+  margin-top: 0 !important;
+  max-width: 100% !important;
+  padding: 4px 8px !important;
+  font-size: .62rem !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0 !important;
+}
+
+.usage-foreground-var {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 1200px) {
+  .palette-usage-grid {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html { font-size: 15px; }
+  .palette-usage-grid { grid-template-columns: 1fr !important; }
+  .usage-card { padding: 12px !important; }
+  .usage-text-row { align-items: flex-start; flex-direction: column; }
+  .adeo-title { font-size: 1.8rem !important; }
+}
+
 </style>
 </head>
 <body>
 <div class="app" id="app"></div>
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()"><div class="modal" id="modalContent"></div></div>
-<div class="share-toast" id="shareToast">คัดลอกลิงก์ ADEO Palette แล้ว</div>
+<div class="share-toast" id="shareToast">คัดลอกลิงก์ Palette แล้ว</div>
 <script>
 const C={
   hslToRgb(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l);const f=n=>{const k=(n+h/30)%12;return l-a*Math.max(Math.min(k-3,9-k,1),-1)};return[Math.round(f(0)*255),Math.round(f(8)*255),Math.round(f(4)*255)]},
@@ -778,24 +1179,76 @@ function rng(a,b){return a+Math.random()*(b-a)}function clamp(v,lo,hi){return Ma
 const colorKW={'ชมพู':{h:[330,350],s:[50,85],l:[55,75]},pink:{h:[330,350],s:[50,85],l:[55,75]},'แดง':{h:[0,15],s:[65,90],l:[40,55]},red:{h:[0,15],s:[65,90],l:[40,55]},'ส้ม':{h:[20,38],s:[70,95],l:[50,65]},orange:{h:[20,38],s:[70,95],l:[50,65]},'เขียว':{h:[110,145],s:[40,75],l:[40,60]},green:{h:[110,145],s:[40,75],l:[40,60]},'ฟ้า':{h:[190,210],s:[60,85],l:[55,72]},blue:{h:[215,240],s:[55,85],l:[40,58]},'น้ำเงิน':{h:[215,240],s:[55,85],l:[40,58]},'ม่วง':{h:[265,290],s:[50,80],l:[45,62]},purple:{h:[265,290],s:[50,80],l:[45,62]},'ทอง':{h:[40,50],s:[70,90],l:[50,60]},gold:{h:[40,50],s:[70,90],l:[50,60]},'เทา':{h:[0,360],s:[0,10],l:[40,60]},gray:{h:[0,360],s:[0,10],l:[40,60]},'พีช':{h:[15,30],s:[60,85],l:[70,82]},peach:{h:[15,30],s:[60,85],l:[70,82]},'คอรัล':{h:[5,18],s:[65,85],l:[58,70]},coral:{h:[5,18],s:[65,85],l:[58,70]}};
 const moodKW={'ละมุน':{s:[-25,-15],l:[10,20]},'อ่อน':{s:[-20,-10],l:[12,22]},soft:{s:[-25,-15],l:[10,20]},pastel:{s:[-25,-10],l:[15,25]},'เข้ม':{s:[5,15],l:[-20,-12]},dark:{s:[5,15],l:[-20,-12]},'สดใส':{s:[20,35],l:[0,10]},vibrant:{s:[20,35],l:[0,8]},'ธรรมชาติ':{s:[-30,-15],l:[-5,5]},natural:{s:[-30,-15],l:[-5,5]},'หรูหรา':{s:[5,15],l:[-15,-5]},luxury:{s:[5,15],l:[-15,-5]},'เรียบหรู':{s:[-15,-5],l:[-5,8]},'วินเทจ':{s:[-35,-20],l:[-5,8]}};
 function generateFromPrompt(text){text=text.toLowerCase().trim();if(!text)return null;let bH,bS,bL,sM=0,lM=0,found=false;for(const[kw,c]of Object.entries(colorKW)){if(text.includes(kw)){bH=rng(c.h[0],c.h[1]);bS=rng(c.s[0],c.s[1]);bL=rng(c.l[0],c.l[1]);found=true;break}}for(const[kw,c]of Object.entries(moodKW)){if(text.includes(kw)){sM+=rng(c.s[0],c.s[1]);lM+=rng(c.l[0],c.l[1])}}if(!found){bH=Math.random()*360;bS=50+Math.random()*30;bL=45+Math.random()*20}bS=clamp(bS+sM,8,100);bL=clamp(bL+lM,8,92);const pal=[],hs=[0,30,-30,58,-58];for(let i=0;i<5;i++)pal.push(C.hslToHex(Math.round((bH+hs[i]+360)%360),Math.round(clamp(bS+rng(-12,12),8,100)),Math.round(clamp(bL+rng(-10,10),10,90))));return{h:Math.round(bH),s:Math.round(bS),l:Math.round(bL),palette:pal}}
-let S={h:220,s:72,l:54,harmony:'analogous',locked:[false,false,false,false,false],palette:[]};
+const DEFAULT_ADMIN_THEME={primary:'#0066FF',secondary:'#0A1628',accent:'#3385FF',muted:'#EFF6FF',success:'#22C55E'};
+let S={h:216,s:100,l:50,harmony:'analogous',locked:[false,false,false,false,false],customPalette:true,palette:[DEFAULT_ADMIN_THEME.primary,DEFAULT_ADMIN_THEME.secondary,DEFAULT_ADMIN_THEME.accent,DEFAULT_ADMIN_THEME.muted,DEFAULT_ADMIN_THEME.success]};
+function setDefaultAdminPalette(){const[h,s,l]=C.hexToHsl(DEFAULT_ADMIN_THEME.primary);S.h=h;S.s=s;S.l=l;S.harmony='analogous';S.locked=[false,false,false,false,false];S.customPalette=true;S.palette=[DEFAULT_ADMIN_THEME.primary,DEFAULT_ADMIN_THEME.secondary,DEFAULT_ADMIN_THEME.accent,DEFAULT_ADMIN_THEME.muted,DEFAULT_ADMIN_THEME.success]}
 function getHex(){return C.hslToHex(S.h,S.s,S.l)}
-function getPalette(){const offs=harmonies[S.harmony](S.h);let cols=[C.hslToHex(S.h,S.s,S.l)];if(S.harmony==='monochromatic'){[20,40,-15,-30].forEach(d=>cols.push(C.hslToHex(S.h,clamp(S.s+d*.5,10,100),clamp(S.l+d,10,90))))}else{offs.forEach(oh=>cols.push(C.hslToHex(oh,S.s,S.l)));while(cols.length<5){const i=cols.length;cols.push(C.hslToHex((S.h+i*47)%360,Math.max(20,S.s-15),Math.min(85,S.l+10)))}}if(S.palette.length===5)cols=cols.map((c,i)=>S.locked[i]?S.palette[i]:c);S.palette=cols.slice(0,5);return S.palette}
-const presets=[{name:'ADEO Blue',colors:['#2563eb','#1e40af','#60a5fa','#eff6ff','#22c55e']},{name:'Ocean',colors:['#0B2545','#13315C','#134074','#8DA9C4','#EEF4ED']},{name:'Berry',colors:['#2D0032','#5C0067','#A31ACB','#F075AA','#FFB3C6']},{name:'Forest',colors:['#1B4332','#2D6A4F','#40916C','#52B788','#95D5B2']},{name:'Neon',colors:['#FF006E','#FB5607','#FFBE0B','#3A86FF','#8338EC']},{name:'Pastel',colors:['#FFD6E0','#FFEFCF','#C1FFC1','#C1E1FF','#E8D5FF']},{name:'Earth',colors:['#582F0E','#7F4F24','#936639','#A68A64','#B6AD90']},{name:'Cyber',colors:['#0D0221','#0F084B','#26408B','#A6CFD5','#C2E7D9']}];
+function getPalette(){if(S.customPalette&&S.palette.length===5)return S.palette;const offs=harmonies[S.harmony](S.h);let cols=[C.hslToHex(S.h,S.s,S.l)];if(S.harmony==='monochromatic'){[20,40,-15,-30].forEach(d=>cols.push(C.hslToHex(S.h,clamp(S.s+d*.5,10,100),clamp(S.l+d,10,90))))}else{offs.forEach(oh=>cols.push(C.hslToHex(oh,S.s,S.l)));while(cols.length<5){const i=cols.length;cols.push(C.hslToHex((S.h+i*47)%360,Math.max(20,S.s-15),Math.min(85,S.l+10)))}}if(S.palette.length===5)cols=cols.map((c,i)=>S.locked[i]?S.palette[i]:c);S.palette=cols.slice(0,5);return S.palette}
+const presets=[{name:'ADEO Blue',colors:['#0066FF','#0A1628','#3385FF','#EFF6FF','#22C55E']},{name:'Ocean',colors:['#0B2545','#13315C','#134074','#8DA9C4','#EEF4ED']},{name:'Berry',colors:['#2D0032','#5C0067','#A31ACB','#F075AA','#FFB3C6']},{name:'Forest',colors:['#1B4332','#2D6A4F','#40916C','#52B788','#95D5B2']},{name:'Neon',colors:['#FF006E','#FB5607','#FFBE0B','#3A86FF','#8338EC']},{name:'Pastel',colors:['#FFD6E0','#FFEFCF','#C1FFC1','#C1E1FF','#E8D5FF']},{name:'Earth',colors:['#582F0E','#7F4F24','#936639','#A68A64','#B6AD90']},{name:'Cyber',colors:['#0D0221','#0F084B','#26408B','#A6CFD5','#C2E7D9']}];
 const quickPrompts=['น้ำเงิน ลึก','ม่วง เรียบหรู','เขียว ธรรมชาติ','ฟ้า สดชื่น','แดง จัดจ้าน','พีช หวาน','ทอง หรูหรา','พาสเทล นุ่ม'];
+const paletteUsageMap=[
+  {title:'Color 1 · Primary',label:'ปุ่มหลัก',css:'--admin-primary',fgCss:'--admin-primary-foreground',textTarget:'ตัวหนังสือบนปุ่มหลัก / active menu',desc:'ใช้กับปุ่มหลัก, active menu, เส้นเน้น และ highlight สำคัญ'},
+  {title:'Color 2 · Sidebar',label:'Sidebar',css:'--admin-secondary',fgCss:'--admin-sidebar-foreground',textTarget:'ตัวหนังสือใน sidebar / Admin Portal / user card',desc:'ใช้กับพื้นหลัง sidebar, navigation และพื้นที่หลักของเมนู'},
+  {title:'Color 3 · Accent',label:'Accent',css:'--admin-accent',fgCss:'--admin-accent-foreground',textTarget:'ตัวหนังสือบน accent state / icon highlight',desc:'ใช้กับ icon, focus ring, hover state และจุดตกแต่ง'},
+  {title:'Color 4 · Muted',label:'Soft BG',css:'--admin-muted',fgCss:'--admin-muted-foreground',textTarget:'ตัวหนังสือบนพื้นหลังอ่อน / card tint',desc:'ใช้กับพื้นหลังอ่อน, card tint, border และพื้นที่พักสายตา'},
+  {title:'Color 5 · Success',label:'Success',css:'--admin-success',fgCss:'--admin-success-foreground',textTarget:'ตัวหนังสือบน badge success / success message',desc:'ใช้กับ badge สถานะ, success message และ action เชิงบวก'}
+];
+function getReadableTextColor(hex){return C.luminance(...C.hexToRgb(hex))>.45?'#0F172A':'#FFFFFF'}
+function getReadableTextLabel(hex){return getReadableTextColor(hex)==='#0F172A'?'สีดำ':'สีขาว'}
+function buildPaletteUsageHTML(palette){
+  return palette.map((c,i)=>{
+    const u=paletteUsageMap[i]||paletteUsageMap[0];
+    const t=getReadableTextColor(c);
+    const textName=getReadableTextLabel(c);
+    return `<div class="usage-card" onclick="clip('${c}',this)">
+      <div class="usage-top">
+        <span class="usage-swatch" style="background:${c}"></span>
+        <div class="usage-heading">
+          <div class="usage-title">${u.title}</div>
+          <div class="usage-hex">พื้นหลัง ${c.toUpperCase()}</div>
+        </div>
+      </div>
+
+      <div class="usage-preview" style="background:${c};color:${t}">
+        <span>${u.label}</span>
+      </div>
+
+      <p class="usage-desc">${u.desc}</p>
+
+      <div class="usage-text-detail">
+        <div class="usage-text-row">
+          <span class="usage-text-label">ตัวหนังสือ</span>
+          <span class="usage-text-chip">
+            <span class="usage-text-swatch" style="background:${t}"></span>
+            ${textName} <code>${t}</code>
+          </span>
+        </div>
+        <p class="usage-text-note">หลัง Save: ${u.textTarget}</p>
+      </div>
+
+      <div class="usage-vars">
+        <span class="usage-var">${u.css}</span>
+        <span class="usage-var usage-foreground-var">${u.fgCss}</span>
+      </div>
+
+      <div class="toast">Copied!</div>
+    </div>`
+  }).join('')
+}
+
 function getFavs(){try{return JSON.parse(localStorage.getItem('adeo_palette_favs')||'[]')}catch{return[]}}function saveFavs(a){localStorage.setItem('adeo_palette_favs',JSON.stringify(a))}function addFav(n,p,h){const f=getFavs();f.unshift({id:Date.now(),name:n,palette:[...p],harmony:h,created:new Date().toISOString()});saveFavs(f)}function removeFav(id){saveFavs(getFavs().filter(f=>f.id!==id))}function renameFav(id,n){const f=getFavs();const x=f.find(i=>i.id===id);if(x)x.name=n;saveFavs(f)}
-function buildShareURL(){const d={h:S.h,s:S.s,l:S.l,m:S.harmony,p:S.palette.map(c=>c.replace('#',''))};return location.origin+location.pathname+'#p='+btoa(JSON.stringify(d))}function loadFromURL(){try{const h=location.hash;if(!h.startsWith('#p='))return false;const d=JSON.parse(atob(h.slice(3)));S.h=d.h;S.s=d.s;S.l=d.l;S.harmony=d.m||'analogous';S.palette=d.p.map(c=>'#'+c);return true}catch{return false}}function shareToLine(){window.open('https://line.me/R/share?text='+encodeURIComponent('🎨 ADEO NEW PALETTE\n'+S.palette.join(' ')+'\n'+buildShareURL()),'_blank')}function shareToFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(buildShareURL())+'&quote='+encodeURIComponent('🎨 ADEO NEW PALETTE: '+S.palette.join(' ')),'_blank','width=600,height=400')}function copyShareLink(){navigator.clipboard.writeText(buildShareURL()).then(()=>{const t=document.getElementById('shareToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)})}
+function buildShareURL(){const d={h:S.h,s:S.s,l:S.l,m:S.harmony,p:S.palette.map(c=>c.replace('#',''))};return location.origin+location.pathname+'#p='+btoa(JSON.stringify(d))}function loadFromURL(){try{const h=location.hash;if(!h.startsWith('#p='))return false;const d=JSON.parse(atob(h.slice(3)));S.h=d.h;S.s=d.s;S.l=d.l;S.harmony=d.m||'analogous';S.palette=d.p.map(c=>'#'+c);S.customPalette=true;return true}catch{return false}}function shareToLine(){window.open('https://line.me/R/share?text='+encodeURIComponent('🎨 NEW PALETTE\n'+S.palette.join(' ')+'\n'+buildShareURL()),'_blank')}function shareToFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(buildShareURL())+'&quote='+encodeURIComponent('🎨 NEW PALETTE: '+S.palette.join(' ')),'_blank','width=600,height=400')}function copyShareLink(){navigator.clipboard.writeText(buildShareURL()).then(()=>{const t=document.getElementById('shareToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)})}
 function clip(text,el){navigator.clipboard.writeText(text).then(()=>{const t=el?.querySelector('.toast');if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),700)}})}
-function openSaveModal(){document.getElementById('modalContent').innerHTML=`<h2 class="modal-title-row"><span class="modal-title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg></span><span>Save ADEO Palette</span></h2><p>ตั้งชื่อ palette เพื่อเก็บไว้ใช้ภายหลัง</p><input class="modal-input" id="favNameInput" placeholder="เช่น ADEO Blue, Admin Fresh..." autofocus><div class="modal-palette">${S.palette.map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="modal-btns"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="confirmSave()">Save</button></div>`;document.getElementById('modal').classList.add('open');setTimeout(()=>document.getElementById('favNameInput')?.focus(),200)}
+function openSaveModal(){document.getElementById('modalContent').innerHTML=`<h2 class="modal-title-row"><span class="modal-title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg></span><span>Save Palette</span></h2><p>ตั้งชื่อ palette เพื่อเก็บไว้ใช้ภายหลัง</p><input class="modal-input" id="favNameInput" placeholder="เช่น ADEO Blue, Admin Fresh..." autofocus><div class="modal-palette">${S.palette.map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="modal-btns"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="confirmSave()">Save</button></div>`;document.getElementById('modal').classList.add('open');setTimeout(()=>document.getElementById('favNameInput')?.focus(),200)}
 function openRenameModal(id,cn){document.getElementById('modalContent').innerHTML=`<h2>✏️ Rename</h2><p>แก้ไขชื่อ Palette</p><input class="modal-input" id="renameInput" value="${cn}"><div class="modal-btns"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="confirmRename(${id})">Save</button></div>`;document.getElementById('modal').classList.add('open')}
-function closeModal(){document.getElementById('modal').classList.remove('open')}function confirmSave(){const n=document.getElementById('favNameInput')?.value.trim()||'ADEO Palette '+Date.now()%10000;addFav(n,S.palette,S.harmony);closeModal();render()}function confirmRename(id){const n=document.getElementById('renameInput')?.value.trim();if(n){renameFav(id,n);closeModal();render()}}
-let isDark=true;function initTheme(){const saved=localStorage.getItem('adeo_palette_theme');if(saved==='light'){isDark=false;document.documentElement.setAttribute('data-theme','light')}}function toggleTheme(){isDark=!isDark;document.documentElement.setAttribute('data-theme',isDark?'':'light');localStorage.setItem('adeo_palette_theme',isDark?'dark':'light')}function goHome(){S={h:220,s:72,l:54,harmony:'analogous',locked:[false,false,false,false,false],palette:[]};history.replaceState(null,'',location.pathname);render();window.scrollTo({top:0,behavior:'smooth'})}
+function closeModal(){document.getElementById('modal').classList.remove('open')}function confirmSave(){const n=document.getElementById('favNameInput')?.value.trim()||'Palette '+Date.now()%10000;addFav(n,S.palette,S.harmony);closeModal();render()}function confirmRename(id){const n=document.getElementById('renameInput')?.value.trim();if(n){renameFav(id,n);closeModal();render()}}
+let isDark=true;function initTheme(){const saved=localStorage.getItem('adeo_palette_theme');if(saved==='light'){isDark=false;document.documentElement.setAttribute('data-theme','light')}}function toggleTheme(){isDark=!isDark;document.documentElement.setAttribute('data-theme',isDark?'':'light');localStorage.setItem('adeo_palette_theme',isDark?'dark':'light')}function goHome(){setDefaultAdminPalette();history.replaceState(null,'',location.pathname);render();window.scrollTo({top:0,behavior:'smooth'})}
 function getCustomTags(){try{return JSON.parse(localStorage.getItem('adeo_palette_tags')||'[]')}catch{return[]}}function saveCustomTags(a){localStorage.setItem('adeo_palette_tags',JSON.stringify(a))}function addCustomTag(text){const tags=getCustomTags(),clean=text.trim();if(!clean||tags.includes(clean)||quickPrompts.includes(clean))return;tags.unshift(clean);if(tags.length>20)tags.pop();saveCustomTags(tags)}function removeCustomTag(text){saveCustomTags(getCustomTags().filter(t=>t!==text));render()}
-function setHarmony(m){S.harmony=m;render()}function toggleLock(i){S.locked[i]=!S.locked[i];render()}function randomize(){S.h=Math.floor(Math.random()*360);S.s=40+Math.floor(Math.random()*50);S.l=35+Math.floor(Math.random()*35);render()}function loadPreset(c){const[h,s,l]=C.hexToHsl(c[0]);S.h=h;S.s=s;S.l=l;S.locked=[false,false,false,false,false];S.palette=[...c].slice(0,5);render()}function loadFav(id){const f=getFavs().find(x=>x.id===id);if(!f)return;const[h,s,l]=C.hexToHsl(f.palette[0]);S.h=h;S.s=s;S.l=l;S.locked=[false,false,false,false,false];S.palette=[...f.palette].slice(0,5);if(f.harmony&&harmonies[f.harmony])S.harmony=f.harmony;render()}function deleteFav(id){removeFav(id);render()}function setHex(v){try{if(!v.startsWith('#'))v='#'+v;const[h,s,l]=C.hexToHsl(v);S.h=h;S.s=s;S.l=l;render()}catch{}}function runPrompt(){const inp=document.getElementById('promptInput');if(!inp)return;const t=inp.value.trim();if(!t)return;const r=generateFromPrompt(t);if(r){S.h=r.h;S.s=r.s;S.l=r.l;S.locked=[false,false,false,false,false];S.palette=[...r.palette];addCustomTag(t);render();setTimeout(()=>{const e=document.getElementById('promptInput');if(e)e.value=t},10)}}function useQuickPrompt(t){const r=generateFromPrompt(t);if(r){S.h=r.h;S.s=r.s;S.l=r.l;S.locked=[false,false,false,false,false];S.palette=[...r.palette];render();setTimeout(()=>{const e=document.getElementById('promptInput');if(e)e.value=t},10)}}
-function liveUpdate(){const pal=getPalette(),hex=getHex(),rgb=C.hexToRgb(hex),shades=C.shades(S.h,S.s,S.l),cW=C.contrast(hex,'#FFFFFF').toFixed(2),cB=C.contrast(hex,'#000000').toFixed(2);const el=id=>document.getElementById(id);if(el('hVal'))el('hVal').textContent=S.h+'°';if(el('sVal'))el('sVal').textContent=S.s+'%';if(el('lVal'))el('lVal').textContent=S.l+'%';if(el('sSlider'))el('sSlider').style.background=`linear-gradient(90deg,${C.hslToHex(S.h,0,S.l)},${C.hslToHex(S.h,100,S.l)})`;if(el('lSlider'))el('lSlider').style.background=`linear-gradient(90deg,${C.hslToHex(S.h,S.s,5)},${C.hslToHex(S.h,S.s,50)},${C.hslToHex(S.h,S.s,95)})`;if(el('wcenter'))el('wcenter').style.background=hex;if(el('swatchPrev'))el('swatchPrev').style.background=hex;if(el('hexInput')&&document.activeElement!==el('hexInput'))el('hexInput').value=hex.toUpperCase();positionCursor();pal.forEach((c,i)=>{const e=el('ps'+i);if(e){const lt=C.isLight(c);e.style.background=c;e.className='pal-swatch '+(lt?'light':'dark');const label=e.querySelector('.sw-label');if(label)label.textContent=c.toUpperCase()}});if(el('infoHex'))el('infoHex').textContent=hex.toUpperCase();if(el('infoRgb'))el('infoRgb').textContent=rgb.join(', ');if(el('infoHsl'))el('infoHsl').textContent=`${S.h}, ${S.s}%, ${S.l}%`;if(el('shadesGrid'))el('shadesGrid').innerHTML=shades.map(sh=>`<div class="shade-cell" style="background:${sh}" onclick="clip('${sh}',this)"><span class="shade-tip">${sh.toUpperCase()}</span><div class="toast" style="font-size:.5rem">✓</div></div>`).join('');if(el('crW'))el('crW').innerHTML=`<div class="c-ratio" style="color:${hex}">${cW}</div><div class="c-label">vs White</div><span class="c-badge ${cW>=4.5?'c-pass':'c-fail'}">${cW>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cW>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cW>=7?'AAA ✓':'AAA ✗'}</span>`;if(el('crB'))el('crB').innerHTML=`<div class="c-ratio" style="color:${hex}">${cB}</div><div class="c-label">vs Black</div><span class="c-badge ${cB>=4.5?'c-pass':'c-fail'}">${cB>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cB>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cB>=7?'AAA ✓':'AAA ✗'}</span>`;if(el('cpW'))el('cpW').style.background=hex;if(el('cpB'))el('cpB').style.background=hex;if(el('uiPreview'))el('uiPreview').innerHTML=pal.map((c,i)=>{const t=C.isLight(c)?'#111':'#fff',sub=C.isLight(c)?'rgba(0,0,0,.45)':'rgba(255,255,255,.55)';return`<div style="background:${c};border-radius:16px;padding:16px;color:${t}"><div style="width:28px;height:28px;border-radius:50%;background:${t};opacity:.12;margin-bottom:10px"></div><div style="font-size:.82rem;font-weight:700">Color ${i+1}</div><div style="font-size:.65rem;color:${sub};margin-top:2px;font-family:var(--mono)">${c.toUpperCase()}</div></div>`}).join('');if(el('shareUrl'))el('shareUrl').textContent=buildShareURL();drawWheel();sendPaletteToAdmin()}
-function onSlide(prop,val){S[prop]=parseInt(val);liveUpdate()}function showExport(t){const e=document.getElementById('exportOut');e.style.display='block';e.querySelector('code').textContent=t;navigator.clipboard.writeText(t)}function exportCSS(){const n=['primary','secondary','accent','muted','success'];showExport(`:root {\n${S.palette.map((c,i)=>`  --admin-${n[i]}: ${c};`).join('\n')}\n}`)}function exportTailwind(){const n=['primary','secondary','accent','muted','success'];showExport(`colors: {\n${S.palette.map((c,i)=>`  '${n[i]}': '${c}',`).join('\n')}\n}`)}function exportJSON(){showExport(JSON.stringify({palette:S.palette,harmony:S.harmony,base:{h:S.h,s:S.s,l:S.l}},null,2))}function exportSCSS(){const n=['primary','secondary','accent','muted','success'];showExport(S.palette.map((c,i)=>`$admin-${n[i]}: ${c};`).join('\n'))}
-function getWheelSize(){const cv=document.getElementById('wheel');if(!cv)return{cx:118,cy:118,r:116,size:236};const w=cv.offsetWidth;return{cx:w/2,cy:w/2,r:w/2-2,size:w}}function drawWheel(){const cv=document.getElementById('wheel');if(!cv)return;const w=cv.offsetWidth;cv.width=w;cv.height=w;const ctx=cv.getContext('2d'),cx=w/2,cy=w/2,r=w/2-2;ctx.clearRect(0,0,w,w);for(let a=0;a<360;a++){ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,(a-1)*Math.PI/180,(a+1)*Math.PI/180);ctx.closePath();const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,C.hslToHex(a,10,S.l));g.addColorStop(1,C.hslToHex(a,100,S.l));ctx.fillStyle=g;ctx.fill()}}function positionCursor(){const cur=document.getElementById('cursor');if(!cur)return;const{cx,cy,r}=getWheelSize();const a=S.h*Math.PI/180,d=S.s/100*r;cur.style.left=(cx+Math.cos(a)*d)+'px';cur.style.top=(cy+Math.sin(a)*d)+'px';cur.style.boxShadow=`0 0 10px ${getHex()}`}function initWheel(){const cv=document.getElementById('wheel');if(!cv)return;const handler=e=>{const{cx,cy,r}=getWheelSize();const rect=cv.getBoundingClientRect();const ex=e.clientX??e.touches?.[0]?.clientX??0,ey=e.clientY??e.touches?.[0]?.clientY??0;const x=ex-rect.left-cx,y=ey-rect.top-cy;let a=Math.atan2(y,x)*180/Math.PI;if(a<0)a+=360;S.h=Math.round(a);S.s=Math.round(clamp(Math.sqrt(x*x+y*y)/r,0,1)*100);if(document.getElementById('hSlider'))document.getElementById('hSlider').value=S.h;if(document.getElementById('sSlider'))document.getElementById('sSlider').value=S.s;liveUpdate()};cv.onmousedown=e=>{e.preventDefault();handler(e);const up=()=>{document.removeEventListener('mousemove',handler);document.removeEventListener('mouseup',up)};document.addEventListener('mousemove',handler);document.addEventListener('mouseup',up)};cv.ontouchstart=e=>{e.preventDefault();handler(e);const up=()=>{document.removeEventListener('touchmove',handler);document.removeEventListener('touchend',up)};document.addEventListener('touchmove',handler,{passive:false});document.addEventListener('touchend',up)}}
-function render(){const pal=getPalette(),hex=getHex(),rgb=C.hexToRgb(hex),shades=C.shades(S.h,S.s,S.l),cW=C.contrast(hex,'#FFFFFF').toFixed(2),cB=C.contrast(hex,'#000000').toFixed(2),favs=getFavs();const quickTags=quickPrompts.map(q=>`<span class="prompt-tag" onclick="useQuickPrompt('${q}')">${q}</span>`).join('');const customTags=getCustomTags().map(t=>`<span class="prompt-tag-custom"><span onclick="useQuickPrompt('${t.replace(/'/g,"\\'")}')">${t}</span><span class="tag-x" onclick="event.stopPropagation();removeCustomTag('${t.replace(/'/g,"\\'")}')">✕</span></span>`).join('');const paletteSwatches=pal.map((c,i)=>{const lt=C.isLight(c);return`<div class="pal-swatch ${lt?'light':'dark'}" id="ps${i}" style="background:${c}" onclick="clip('${c}',this)"><button class="lock-btn ${S.locked[i]?'locked':''}" onclick="event.stopPropagation();toggleLock(${i})"><svg viewBox="0 0 24 24">${S.locked[i]?'<path d="M12 2C9.24 2 7 4.24 7 7v3H6c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2h-1V7c0-2.76-2.24-5-5-5zm3 10H9v-3c0-1.66 1.34-3 3-3s3 1.34 3 3v3z"/>':'<path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h2c0-1.66 1.34-3 3-3s3 1.34 3 3v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/>'}</svg></button><span class="sw-label">${c.toUpperCase()}</span><div class="toast">Copied!</div></div>`}).join('');const presetCards=presets.map(p=>`<div class="lib-item" onclick="loadPreset(${JSON.stringify(p.colors).replace(/"/g,'&quot;')})"><div class="lib-colors">${p.colors.map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="lib-name">${p.name}</div></div>`).join('');const favContent=favs.length===0?`<div class="fav-empty">ยังไม่มี Palette ที่บันทึก<br><span style="font-size:.65rem;color:var(--text3)">กด Save Palette เพื่อเพิ่ม</span></div>`:`<div class="fav-list">${favs.map((f,idx)=>`<div class="fav-item" style="animation-delay:${idx*.04}s" onclick="loadFav(${f.id})"><div class="fav-colors">${f.palette.map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="fav-info"><div class="fav-name">${f.name}</div><div class="fav-meta">${f.harmony||'—'} · ${new Date(f.created).toLocaleDateString('th-TH',{day:'numeric',month:'short'})}</div></div><div class="fav-actions"><div class="fav-act" onclick="event.stopPropagation();openRenameModal(${f.id},'${f.name.replace(/'/g,"\\'")}')"></div><div class="fav-act del" onclick="event.stopPropagation();deleteFav(${f.id})"></div></div></div>`).join('')}</div>`;
+function setHarmony(m){S.harmony=m;S.customPalette=false;render()}function toggleLock(i){S.locked[i]=!S.locked[i];render()}function randomize(){S.h=Math.floor(Math.random()*360);S.s=40+Math.floor(Math.random()*50);S.l=35+Math.floor(Math.random()*35);S.customPalette=false;render()}function loadPreset(c){const[h,s,l]=C.hexToHsl(c[0]);S.h=h;S.s=s;S.l=l;S.locked=[false,false,false,false,false];S.customPalette=true;S.palette=[...c].slice(0,5);render()}function loadFav(id){const f=getFavs().find(x=>x.id===id);if(!f)return;const[h,s,l]=C.hexToHsl(f.palette[0]);S.h=h;S.s=s;S.l=l;S.locked=[false,false,false,false,false];S.customPalette=true;S.palette=[...f.palette].slice(0,5);if(f.harmony&&harmonies[f.harmony])S.harmony=f.harmony;render()}function deleteFav(id){removeFav(id);render()}function setHex(v){try{if(!v.startsWith('#'))v='#'+v;const[h,s,l]=C.hexToHsl(v);S.h=h;S.s=s;S.l=l;S.customPalette=false;render()}catch{}}function runPrompt(){const inp=document.getElementById('promptInput');if(!inp)return;const t=inp.value.trim();if(!t)return;const r=generateFromPrompt(t);if(r){S.h=r.h;S.s=r.s;S.l=r.l;S.locked=[false,false,false,false,false];S.customPalette=true;S.palette=[...r.palette];addCustomTag(t);render();setTimeout(()=>{const e=document.getElementById('promptInput');if(e)e.value=t},10)}}function useQuickPrompt(t){const r=generateFromPrompt(t);if(r){S.h=r.h;S.s=r.s;S.l=r.l;S.locked=[false,false,false,false,false];S.customPalette=true;S.palette=[...r.palette];render();setTimeout(()=>{const e=document.getElementById('promptInput');if(e)e.value=t},10)}}
+function liveUpdate(){const pal=getPalette(),hex=getHex(),rgb=C.hexToRgb(hex),shades=C.shades(S.h,S.s,S.l),cW=C.contrast(hex,'#FFFFFF').toFixed(2),cB=C.contrast(hex,'#000000').toFixed(2);const el=id=>document.getElementById(id);if(el('hVal'))el('hVal').textContent=S.h+'°';if(el('sVal'))el('sVal').textContent=S.s+'%';if(el('lVal'))el('lVal').textContent=S.l+'%';if(el('sSlider'))el('sSlider').style.background=`linear-gradient(90deg,${C.hslToHex(S.h,0,S.l)},${C.hslToHex(S.h,100,S.l)})`;if(el('lSlider'))el('lSlider').style.background=`linear-gradient(90deg,${C.hslToHex(S.h,S.s,5)},${C.hslToHex(S.h,S.s,50)},${C.hslToHex(S.h,S.s,95)})`;if(el('wcenter'))el('wcenter').style.background=hex;if(el('swatchPrev'))el('swatchPrev').style.background=hex;if(el('hexInput')&&document.activeElement!==el('hexInput'))el('hexInput').value=hex.toUpperCase();positionCursor();pal.forEach((c,i)=>{const e=el('ps'+i);if(e){const lt=C.isLight(c);e.style.background=c;e.className='pal-swatch '+(lt?'light':'dark');const label=e.querySelector('.sw-label');if(label)label.textContent=c.toUpperCase()}});if(el('paletteUsageGrid'))el('paletteUsageGrid').innerHTML=buildPaletteUsageHTML(pal);if(el('infoHex'))el('infoHex').textContent=hex.toUpperCase();if(el('infoRgb'))el('infoRgb').textContent=rgb.join(', ');if(el('infoHsl'))el('infoHsl').textContent=`${S.h}, ${S.s}%, ${S.l}%`;if(el('shadesGrid'))el('shadesGrid').innerHTML=shades.map(sh=>`<div class="shade-cell" style="background:${sh}" onclick="clip('${sh}',this)"><span class="shade-tip">${sh.toUpperCase()}</span><div class="toast" style="font-size:.5rem">✓</div></div>`).join('');if(el('crW'))el('crW').innerHTML=`<div class="c-ratio" style="color:${hex}">${cW}</div><div class="c-label">vs White</div><span class="c-badge ${cW>=4.5?'c-pass':'c-fail'}">${cW>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cW>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cW>=7?'AAA ✓':'AAA ✗'}</span>`;if(el('crB'))el('crB').innerHTML=`<div class="c-ratio" style="color:${hex}">${cB}</div><div class="c-label">vs Black</div><span class="c-badge ${cB>=4.5?'c-pass':'c-fail'}">${cB>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cB>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cB>=7?'AAA ✓':'AAA ✗'}</span>`;if(el('cpW'))el('cpW').style.background=hex;if(el('cpB'))el('cpB').style.background=hex;if(el('uiPreview'))el('uiPreview').innerHTML=pal.map((c,i)=>{const t=C.isLight(c)?'#111':'#fff',sub=C.isLight(c)?'rgba(0,0,0,.45)':'rgba(255,255,255,.55)';return`<div style="background:${c};border-radius:16px;padding:16px;color:${t}"><div style="width:28px;height:28px;border-radius:50%;background:${t};opacity:.12;margin-bottom:10px"></div><div style="font-size:.82rem;font-weight:700">Color ${i+1}</div><div style="font-size:.65rem;color:${sub};margin-top:2px;font-family:var(--mono)">${c.toUpperCase()}</div></div>`}).join('');if(el('shareUrl'))el('shareUrl').textContent=buildShareURL();drawWheel();sendPaletteToAdmin()}
+function onSlide(prop,val){S[prop]=parseInt(val);S.customPalette=false;liveUpdate()}function showExport(t){const e=document.getElementById('exportOut');e.style.display='block';e.querySelector('code').textContent=t;navigator.clipboard.writeText(t)}function exportCSS(){const n=['primary','secondary','accent','muted','success'];showExport(`:root {\n${S.palette.map((c,i)=>`  --admin-${n[i]}: ${c};`).join('\n')}\n}`)}function exportTailwind(){const n=['primary','secondary','accent','muted','success'];showExport(`colors: {\n${S.palette.map((c,i)=>`  '${n[i]}': '${c}',`).join('\n')}\n}`)}function exportJSON(){showExport(JSON.stringify({palette:S.palette,harmony:S.harmony,base:{h:S.h,s:S.s,l:S.l}},null,2))}function exportSCSS(){const n=['primary','secondary','accent','muted','success'];showExport(S.palette.map((c,i)=>`$admin-${n[i]}: ${c};`).join('\n'))}
+function getWheelSize(){const cv=document.getElementById('wheel');if(!cv)return{cx:118,cy:118,r:116,size:236};const w=cv.offsetWidth;return{cx:w/2,cy:w/2,r:w/2-2,size:w}}function drawWheel(){const cv=document.getElementById('wheel');if(!cv)return;const w=cv.offsetWidth;cv.width=w;cv.height=w;const ctx=cv.getContext('2d'),cx=w/2,cy=w/2,r=w/2-2;ctx.clearRect(0,0,w,w);for(let a=0;a<360;a++){ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,(a-1)*Math.PI/180,(a+1)*Math.PI/180);ctx.closePath();const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,C.hslToHex(a,10,S.l));g.addColorStop(1,C.hslToHex(a,100,S.l));ctx.fillStyle=g;ctx.fill()}}function positionCursor(){const cur=document.getElementById('cursor');if(!cur)return;const{cx,cy,r}=getWheelSize();const a=S.h*Math.PI/180,d=S.s/100*r;cur.style.left=(cx+Math.cos(a)*d)+'px';cur.style.top=(cy+Math.sin(a)*d)+'px';cur.style.boxShadow=`0 0 10px ${getHex()}`}function initWheel(){const cv=document.getElementById('wheel');if(!cv)return;const handler=e=>{const{cx,cy,r}=getWheelSize();const rect=cv.getBoundingClientRect();const ex=e.clientX??e.touches?.[0]?.clientX??0,ey=e.clientY??e.touches?.[0]?.clientY??0;const x=ex-rect.left-cx,y=ey-rect.top-cy;let a=Math.atan2(y,x)*180/Math.PI;if(a<0)a+=360;S.h=Math.round(a);S.s=Math.round(clamp(Math.sqrt(x*x+y*y)/r,0,1)*100);S.customPalette=false;if(document.getElementById('hSlider'))document.getElementById('hSlider').value=S.h;if(document.getElementById('sSlider'))document.getElementById('sSlider').value=S.s;liveUpdate()};cv.onmousedown=e=>{e.preventDefault();handler(e);const up=()=>{document.removeEventListener('mousemove',handler);document.removeEventListener('mouseup',up)};document.addEventListener('mousemove',handler);document.addEventListener('mouseup',up)};cv.ontouchstart=e=>{e.preventDefault();handler(e);const up=()=>{document.removeEventListener('touchmove',handler);document.removeEventListener('touchend',up)};document.addEventListener('touchmove',handler,{passive:false});document.addEventListener('touchend',up)}}
+function render(){const pal=getPalette(),hex=getHex(),rgb=C.hexToRgb(hex),shades=C.shades(S.h,S.s,S.l),cW=C.contrast(hex,'#FFFFFF').toFixed(2),cB=C.contrast(hex,'#000000').toFixed(2),favs=getFavs();const quickTags=quickPrompts.map(q=>`<span class="prompt-tag" onclick="useQuickPrompt('${q}')">${q}</span>`).join('');const customTags=getCustomTags().map(t=>`<span class="prompt-tag-custom"><span onclick="useQuickPrompt('${t.replace(/'/g,"\\'")}')">${t}</span><span class="tag-x" onclick="event.stopPropagation();removeCustomTag('${t.replace(/'/g,"\\'")}')">✕</span></span>`).join('');const paletteSwatches=pal.map((c,i)=>{const lt=C.isLight(c);return`<div class="pal-swatch ${lt?'light':'dark'}" id="ps${i}" style="background:${c}" onclick="clip('${c}',this)"><button class="lock-btn ${S.locked[i]?'locked':''}" onclick="event.stopPropagation();toggleLock(${i})"><svg viewBox="0 0 24 24">${S.locked[i]?'<path d="M12 2C9.24 2 7 4.24 7 7v3H6c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2h-1V7c0-2.76-2.24-5-5-5zm3 10H9v-3c0-1.66 1.34-3 3-3s3 1.34 3 3v3z"/>':'<path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h2c0-1.66 1.34-3 3-3s3 1.34 3 3v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/>'}</svg></button><span class="sw-label">${c.toUpperCase()}</span><div class="toast">Copied!</div></div>`}).join('');const paletteUsageCards=buildPaletteUsageHTML(pal);const presetCards=presets.map(p=>`<div class="lib-item" onclick="loadPreset(${JSON.stringify(p.colors).replace(/"/g,'&quot;')})"><div class="lib-colors">${p.colors.map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="lib-name">${p.name}</div></div>`).join('');const favContent=favs.length===0?`<div class="fav-empty">ยังไม่มี Palette ที่บันทึก<br><span style="font-size:.65rem;color:var(--text3)">กด Save Palette เพื่อเพิ่ม</span></div>`:`<div class="fav-list">${favs.map((f,idx)=>`<div class="fav-item" style="animation-delay:${idx*.04}s" onclick="loadFav(${f.id})"><div class="fav-colors">${f.palette.map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="fav-info"><div class="fav-name">${f.name}</div><div class="fav-meta">${f.harmony||'—'} · ${new Date(f.created).toLocaleDateString('th-TH',{day:'numeric',month:'short'})}</div></div><div class="fav-actions"><div class="fav-act" onclick="event.stopPropagation();openRenameModal(${f.id},'${f.name.replace(/'/g,"\\'")}')"></div><div class="fav-act del" onclick="event.stopPropagation();deleteFav(${f.id})"></div></div></div>`).join('')}</div>`;
   document.getElementById('app').innerHTML=`<div class="adeo-shell"><div class="adeo-hero">
   <section class="adeo-hero-panel adeo-brand">
     <div class="adeo-logo-row" onclick="goHome()" style="cursor:pointer">
@@ -808,7 +1261,7 @@ function render(){const pal=getPalette(),hex=getHex(),rgb=C.hexToRgb(hex),shades
         </svg>
       </div>
       <div>
-        <div class="adeo-title">ADEO NEW PALETTE</div>
+        <div class="adeo-title">NEW PALETTE</div>
         <div class="adeo-subtitle">Admin Theme Generator</div>
       </div>
     </div>
@@ -897,10 +1350,54 @@ function render(){const pal=getPalette(),hex=getHex(),rgb=C.hexToRgb(hex),shades
       </button>
     </div>
   </section>
-</div><div class="adeo-grid"><div class="adeo-stack"><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-purple"></span> Color Control</span><small>HSL</small></div><div class="adeo-wheel-area"><div class="wheel-wrap"><canvas class="color-wheel" id="wheel"></canvas><div class="wheel-cursor" id="cursor"></div><div class="wheel-center" id="wcenter" style="background:${hex}"></div></div></div><div class="adeo-slider-box"><div class="slider-row"><span class="slider-label">H</span><input type="range" id="hSlider" min="0" max="359" value="${S.h}" oninput="onSlide('h',this.value)"><span class="slider-val" id="hVal">${S.h}°</span></div><div class="slider-row"><span class="slider-label">S</span><input type="range" id="sSlider" min="0" max="100" value="${S.s}" oninput="onSlide('s',this.value)"><span class="slider-val" id="sVal">${S.s}%</span></div><div class="slider-row"><span class="slider-label">L</span><input type="range" id="lSlider" min="5" max="95" value="${S.l}" oninput="onSlide('l',this.value)"><span class="slider-val" id="lVal">${S.l}%</span></div></div><div class="hex-row adeo-hex"><div class="swatch-prev" id="swatchPrev" style="background:${hex}"></div><input class="hex-input" id="hexInput" value="${hex.toUpperCase()}" maxlength="7" onchange="setHex(this.value)"></div></div></section><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-cyan"></span> Harmony</span><small>${S.harmony}</small></div><div class="harmony-grid">${Object.keys(harmonies).map(k=>`<button class="harm-btn ${S.harmony===k?'active':''}" onclick="setHarmony('${k}')">${k.replace('-',' ')}</button>`).join('')}</div></div></section><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-green"></span> Color Values</span><small>Copy</small></div><div class="adeo-info-list"><div class="info-card" onclick="clip('${hex}',this)"><div class="info-label">HEX</div><div class="info-value" id="infoHex">${hex.toUpperCase()}</div><div class="toast">Copied!</div></div><div class="info-card" onclick="clip('rgb(${rgb.join(',')})',this)"><div class="info-label">RGB</div><div class="info-value" id="infoRgb">${rgb.join(', ')}</div><div class="toast">Copied!</div></div><div class="info-card" onclick="clip('hsl(${S.h},${S.s}%,${S.l}%)',this)"><div class="info-label">HSL</div><div class="info-value" id="infoHsl">${S.h}, ${S.s}%, ${S.l}%</div><div class="toast">Copied!</div></div></div></div></section></div><div class="adeo-stack"><section class="adeo-card adeo-palette-main anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-purple"></span> Generated Palette</span><small>${pal.map(c=>c.toUpperCase()).join(' · ')}</small></div><div class="palette-strip">${paletteSwatches}</div></div></section><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-orange"></span> Admin Preview</span><small>Before Save</small></div><div class="adeo-preview-layout"><div class="adeo-admin-preview"><div class="adeo-preview-top"><span class="adeo-dot-mini" style="background:${pal[0]}"></span><span class="adeo-dot-mini" style="background:${pal[1]}"></span><span class="adeo-dot-mini" style="background:${pal[2]}"></span></div><div class="adeo-preview-body"><div class="adeo-preview-side" style="background:${pal[1]}"><div class="adeo-preview-nav" style="background:${pal[0]}"></div><div class="adeo-preview-nav" style="background:rgba(255,255,255,.16)"></div><div class="adeo-preview-nav" style="background:rgba(255,255,255,.16)"></div></div><div class="adeo-preview-main"><div class="adeo-preview-card"><strong>Dashboard Card</strong><div class="adeo-preview-line" style="width:78%"></div><div class="adeo-preview-line" style="width:55%"></div><div class="adeo-preview-button" style="background:${pal[0]}"></div></div></div></div></div><div id="uiPreview" class="ui-preview-grid">${pal.map((c,i)=>{const t=C.isLight(c)?'#111':'#fff',sub=C.isLight(c)?'rgba(0,0,0,.45)':'rgba(255,255,255,.55)';return`<div style="background:${c};border-radius:16px;padding:16px;color:${t}"><div style="width:28px;height:28px;border-radius:50%;background:${t};opacity:.12;margin-bottom:10px"></div><div style="font-size:.82rem;font-weight:700">Color ${i+1}</div><div style="font-size:.65rem;color:${sub};margin-top:2px;font-family:var(--mono)">${c.toUpperCase()}</div></div>`}).join('')}</div></div></div></section></div><div class="adeo-stack"><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-orange"></span> Presets</span><small>${presets.length}</small></div><div class="lib-grid">${presetCards}</div></div></section><section class="adeo-card adeo-contrast-side anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-green"></span> Contrast Checker</span><small>WCAG</small></div><div class="contrast-side-grid"><div class="contrast-row contrast-row-top"><div class="c-card" id="crW"><div class="c-ratio" style="color:${hex}">${cW}</div><div class="c-label">vs White</div><span class="c-badge ${cW>=4.5?'c-pass':'c-fail'}">${cW>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cW>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cW>=7?'AAA ✓':'AAA ✗'}</span></div><div class="c-card" id="crB"><div class="c-ratio" style="color:${hex}">${cB}</div><div class="c-label">vs Black</div><span class="c-badge ${cB>=4.5?'c-pass':'c-fail'}">${cB>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cB>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cB>=7?'AAA ✓':'AAA ✗'}</span></div></div><div class="contrast-row contrast-row-bottom"><div class="c-preview" id="cpW" style="background:${hex}"><h3 style="color:#fff">White Text</h3><p style="color:rgba(255,255,255,.8);font-size:.75rem">ทดสอบตัวอักษรสีขาวบนพื้นสี</p></div><div class="c-preview" id="cpB" style="background:${hex}"><h3 style="color:#000">Black Text</h3><p style="color:rgba(0,0,0,.7);font-size:.75rem">ทดสอบตัวอักษรสีดำบนพื้นสี</p></div></div></div></div></section><section class="adeo-card adeo-shades anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-cyan"></span> Shades & Tints</span><small>${shades.length} steps</small></div><div class="shades-grid" id="shadesGrid">${shades.map(sh=>`<div class="shade-cell" style="background:${sh}" onclick="clip('${sh}',this)"><span class="shade-tip">${sh.toUpperCase()}</span><div class="toast" style="font-size:.5rem">✓</div></div>`).join('')}</div></div></section></div></div></div>`;drawWheel();initWheel();positionCursor();liveUpdate()}
+</div><div class="adeo-grid"><div class="adeo-stack"><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-purple"></span> Color Control</span><small>HSL</small></div><div class="adeo-wheel-area"><div class="wheel-wrap"><canvas class="color-wheel" id="wheel"></canvas><div class="wheel-cursor" id="cursor"></div><div class="wheel-center" id="wcenter" style="background:${hex}"></div></div></div><div class="adeo-slider-box"><div class="slider-row"><span class="slider-label">H</span><input type="range" id="hSlider" min="0" max="359" value="${S.h}" oninput="onSlide('h',this.value)"><span class="slider-val" id="hVal">${S.h}°</span></div><div class="slider-row"><span class="slider-label">S</span><input type="range" id="sSlider" min="0" max="100" value="${S.s}" oninput="onSlide('s',this.value)"><span class="slider-val" id="sVal">${S.s}%</span></div><div class="slider-row"><span class="slider-label">L</span><input type="range" id="lSlider" min="5" max="95" value="${S.l}" oninput="onSlide('l',this.value)"><span class="slider-val" id="lVal">${S.l}%</span></div></div><div class="hex-row adeo-hex"><div class="swatch-prev" id="swatchPrev" style="background:${hex}"></div><input class="hex-input" id="hexInput" value="${hex.toUpperCase()}" maxlength="7" onchange="setHex(this.value)"></div></div></section><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-cyan"></span> Harmony</span><small>${S.harmony}</small></div><div class="harmony-grid">${Object.keys(harmonies).map(k=>`<button class="harm-btn ${S.harmony===k?'active':''}" onclick="setHarmony('${k}')">${k.replace('-',' ')}</button>`).join('')}</div></div></section><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-green"></span> Color Values</span><small>Copy</small></div><div class="adeo-info-list"><div class="info-card" onclick="clip('${hex}',this)"><div class="info-label">HEX</div><div class="info-value" id="infoHex">${hex.toUpperCase()}</div><div class="toast">Copied!</div></div><div class="info-card" onclick="clip('rgb(${rgb.join(',')})',this)"><div class="info-label">RGB</div><div class="info-value" id="infoRgb">${rgb.join(', ')}</div><div class="toast">Copied!</div></div><div class="info-card" onclick="clip('hsl(${S.h},${S.s}%,${S.l}%)',this)"><div class="info-label">HSL</div><div class="info-value" id="infoHsl">${S.h}, ${S.s}%, ${S.l}%</div><div class="toast">Copied!</div></div></div></div></section></div><div class="adeo-stack"><section class="adeo-card adeo-palette-main anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-purple"></span> Generated Palette</span><small>${pal.map(c=>c.toUpperCase()).join(' · ')}</small></div><div class="palette-strip">${paletteSwatches}</div><div class="palette-usage-grid" id="paletteUsageGrid">${paletteUsageCards}</div></div></section></div><div class="adeo-stack"><section class="adeo-card anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-orange"></span> Presets</span><small>${presets.length}</small></div><div class="lib-grid">${presetCards}</div></div></section><section class="adeo-card adeo-contrast-side anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-green"></span> Contrast Checker</span><small>WCAG</small></div><div class="contrast-side-grid"><div class="contrast-row contrast-row-top"><div class="c-card" id="crW"><div class="c-ratio" style="color:${hex}">${cW}</div><div class="c-label">vs White</div><span class="c-badge ${cW>=4.5?'c-pass':'c-fail'}">${cW>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cW>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cW>=7?'AAA ✓':'AAA ✗'}</span></div><div class="c-card" id="crB"><div class="c-ratio" style="color:${hex}">${cB}</div><div class="c-label">vs Black</div><span class="c-badge ${cB>=4.5?'c-pass':'c-fail'}">${cB>=4.5?'AA ✓':'AA ✗'}</span><span class="c-badge ${cB>=7?'c-pass':'c-fail'}" style="margin-left:3px">${cB>=7?'AAA ✓':'AAA ✗'}</span></div></div><div class="contrast-row contrast-row-bottom"><div class="c-preview" id="cpW" style="background:${hex}"><h3 style="color:#fff">White Text</h3><p style="color:rgba(255,255,255,.8);font-size:.75rem">ทดสอบตัวอักษรสีขาวบนพื้นสี</p></div><div class="c-preview" id="cpB" style="background:${hex}"><h3 style="color:#000">Black Text</h3><p style="color:rgba(0,0,0,.7);font-size:.75rem">ทดสอบตัวอักษรสีดำบนพื้นสี</p></div></div></div></div></section><section class="adeo-card adeo-shades anim-in"><div class="adeo-card-inner"><div class="adeo-section-title"><span><span class="dot dot-cyan"></span> Shades & Tints</span><small>${shades.length} steps</small></div><div class="shades-grid" id="shadesGrid">${shades.map(sh=>`<div class="shade-cell" style="background:${sh}" onclick="clip('${sh}',this)"><span class="shade-tip">${sh.toUpperCase()}</span><div class="toast" style="font-size:.5rem">✓</div></div>`).join('')}</div></div></section></div></div></div>`;drawWheel();initWheel();positionCursor();liveUpdate()}
 let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{drawWheel();positionCursor()},100)});
 function sendPaletteToAdmin(){try{const palette=S.palette&&S.palette.length===5?S.palette:getPalette();window.parent.postMessage({type:'ADEO_THEME_PALETTE_UPDATE',palette,base:{h:S.h,s:S.s,l:S.l,harmony:S.harmony}},window.location.origin)}catch(e){}}
-initTheme();loadFromURL();render();
+
+function loadSavedAdminTheme(){
+  try{
+    const savedTheme=localStorage.getItem("adeo-admin-theme");
+    if(!savedTheme)return false;
+
+    const theme=JSON.parse(savedTheme);
+
+    if(!theme||!theme.primary||!theme.secondary||!theme.accent||!theme.muted||!theme.success){
+      return false;
+    }
+
+    const palette=[
+      theme.primary,
+      theme.secondary,
+      theme.accent,
+      theme.muted,
+      theme.success
+    ];
+
+    const [h,s,l]=C.hexToHsl(theme.primary);
+
+    S.h=h;
+    S.s=s;
+    S.l=l;
+    S.harmony="analogous";
+    S.locked=[false,false,false,false,false];
+    S.customPalette=true;
+    S.palette=palette;
+
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+
+initTheme();
+const loadedFromURL=loadFromURL();
+if(!loadedFromURL){
+  const loadedSavedTheme=loadSavedAdminTheme();
+  if(!loadedSavedTheme){
+    setDefaultAdminPalette();
+  }
+}
+render();
 </script>
 </body>
 </html>

@@ -6,54 +6,80 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const brandBg = "var(--admin-secondary, #0A1628)";
+const brandText = "var(--admin-secondary-foreground, #FFFFFF)";
+const brandMutedText =
+  "color-mix(in srgb, var(--admin-secondary-foreground, #FFFFFF) 68%, transparent)";
+const brandAccent = "var(--admin-primary, #0066FF)";
+
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen">
       {/* ── Brand panel (left) ─────────────────────────────────────────────── */}
-      <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-[#0a1628] p-12 lg:flex">
+      <div
+        className="relative hidden w-1/2 flex-col justify-between overflow-hidden p-12 lg:flex"
+        style={{
+          backgroundColor: brandBg,
+          color: brandText,
+        }}
+      >
         {/* Decorative radial glow */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full opacity-20"
+          className="pointer-events-none absolute -right-32 -top-32 h-[480px] w-[480px] rounded-full opacity-20"
           style={{
-            background:
-              "radial-gradient(circle, #0066ff 0%, transparent 70%)",
+            background: `radial-gradient(circle, ${brandAccent} 0%, transparent 70%)`,
           }}
         />
+
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-40 -left-20 h-[360px] w-[360px] rounded-full opacity-10"
           style={{
-            background:
-              "radial-gradient(circle, #0066ff 0%, transparent 70%)",
+            background: `radial-gradient(circle, ${brandAccent} 0%, transparent 70%)`,
           }}
         />
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E9ECF0]">
-          <img
-            src="https://www.adeo.co.th/assets/global/images/logo_header.png"
-            alt="ADEO Solution"
-            className="h-7 w-auto object-contain"
-          />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E9ECF0]">
+            <img
+              src="https://www.adeo.co.th/assets/global/images/logo_header.png"
+              alt="ADEO Solution"
+              className="h-7 w-auto object-contain"
+            />
+          </div>
+
+          <span
+            className="text-lg font-bold"
+            style={{ color: brandText }}
+          >
+            ADEO Solution
+          </span>
         </div>
-        <span className="text-lg font-bold text-white">
-          ADEO Solution
-        </span>
-      </div>
 
         {/* Tagline */}
         <div className="relative z-10 space-y-6">
-          <div className="h-px w-12 bg-[#0066ff]" />
-          <h1 className="text-4xl font-bold leading-tight tracking-tight text-white">
+          <div
+            className="h-px w-12"
+            style={{ backgroundColor: brandAccent }}
+          />
+
+          <h1
+            className="text-4xl font-bold leading-tight tracking-tight"
+            style={{ color: brandText }}
+          >
             Powering the
             <br />
             digital backbone
             <br />
             of your business.
           </h1>
-          <p className="max-w-xs text-sm leading-relaxed text-slate-400">
+
+          <p
+            className="max-w-xs text-sm leading-relaxed"
+            style={{ color: brandMutedText }}
+          >
             Enterprise IT Solutions &amp; Cloud Services — secure, scalable,
             and built for the future.
           </p>
@@ -68,8 +94,17 @@ export default function LoginPage() {
             "Network Infrastructure",
           ].map((item) => (
             <div key={item} className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-[#0066ff]" />
-              <span className="text-xs text-slate-400">{item}</span>
+              <div
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ backgroundColor: brandAccent }}
+              />
+
+              <span
+                className="text-xs"
+                style={{ color: brandMutedText }}
+              >
+                {item}
+              </span>
             </div>
           ))}
         </div>
@@ -96,6 +131,7 @@ export default function LoginPage() {
                 />
               </svg>
             </div>
+
             <span className="text-lg font-bold text-slate-900">
               ADEO Solution
             </span>
@@ -106,6 +142,7 @@ export default function LoginPage() {
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
               Admin Portal
             </h2>
+
             <p className="mt-1.5 text-sm text-slate-500">
               Sign in to manage services, partners, and content.
             </p>

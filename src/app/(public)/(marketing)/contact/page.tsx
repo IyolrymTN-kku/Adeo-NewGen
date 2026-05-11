@@ -48,6 +48,27 @@ const CONTACT_DETAILS = [
   },
 ];
 
+const contactPanelBackground =
+  "var(--site-cta-bg, hsl(var(--hero-bg, 222 47% 10%)))";
+
+const contactPanelText =
+  "var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%)))";
+
+const contactPanelMutedText =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 68%, transparent)";
+
+const contactPanelSubtleText =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 56%, transparent)";
+
+const contactPanelBorder =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 14%, transparent)";
+
+const contactPanelSoftBackground =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 7%, transparent)";
+
+const contactIconBackground =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 12%, transparent)";
+
 export default function ContactPage() {
   return (
     <>
@@ -80,19 +101,37 @@ export default function ContactPage() {
 
             {/* Details */}
             <aside className="lg:col-span-5">
-              <div className="rounded-2xl bg-[hsl(var(--hero-bg,222_47%_10%))] p-8 text-white shadow-sm">
-                <h2 className="text-lg font-semibold">
+              <div
+                className="rounded-2xl p-8 shadow-sm"
+                style={{
+                  backgroundColor: contactPanelBackground,
+                  color: contactPanelText,
+                }}
+              >
+                <h2
+                  className="text-lg font-semibold"
+                  style={{ color: contactPanelText }}
+                >
                   Get in touch directly
                 </h2>
 
-                <p className="mt-2 text-sm text-slate-300">
+                <p
+                  className="mt-2 text-sm"
+                  style={{ color: contactPanelMutedText }}
+                >
                   Prefer email or phone? Here's how to reach us.
                 </p>
 
                 <ul className="mt-8 space-y-6">
                   {CONTACT_DETAILS.map((item) => (
                     <li key={item.label} className="flex items-start gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                      <span
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                        style={{
+                          backgroundColor: contactIconBackground,
+                          color: contactPanelText,
+                        }}
+                      >
                         <svg
                           viewBox="0 0 24 24"
                           fill="none"
@@ -108,19 +147,26 @@ export default function ContactPage() {
                       </span>
 
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                        <p
+                          className="text-xs font-semibold uppercase tracking-[0.18em]"
+                          style={{ color: contactPanelSubtleText }}
+                        >
                           {item.label}
                         </p>
 
                         {item.href ? (
                           <a
                             href={item.href}
-                            className="mt-1 block text-sm text-white transition hover:text-primary"
+                            className="mt-1 block text-sm font-medium transition hover:opacity-80"
+                            style={{ color: contactPanelText }}
                           >
                             {item.value}
                           </a>
                         ) : (
-                          <p className="mt-1 text-sm text-white">
+                          <p
+                            className="mt-1 text-sm font-medium"
+                            style={{ color: contactPanelText }}
+                          >
                             {item.value}
                           </p>
                         )}
@@ -129,7 +175,14 @@ export default function ContactPage() {
                   ))}
                 </ul>
 
-                <div className="mt-10 rounded-xl border border-white/10 bg-white/5 p-5 text-sm leading-relaxed text-slate-300">
+                <div
+                  className="mt-10 rounded-xl border p-5 text-sm leading-relaxed"
+                  style={{
+                    borderColor: contactPanelBorder,
+                    backgroundColor: contactPanelSoftBackground,
+                    color: contactPanelMutedText,
+                  }}
+                >
                   <p>
                     For sales enquiries please include your project scope and
                     timeline. For existing clients, our 24/7 support hotline is

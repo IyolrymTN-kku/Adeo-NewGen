@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
+import { mix, palette } from "@/lib/palette-helper";
 
 const STATS = [
   { value: "15+", label: "Years of expertise" },
@@ -10,7 +11,13 @@ const STATS = [
 
 export function StatsBar() {
   return (
-    <section className="border-y border-slate-200 bg-slate-50">
+    <section
+      className="border-y"
+      style={{
+        borderColor: mix(palette.section.accent, 16, "#e2e8f0"),
+        backgroundColor: mix(palette.section.accent, 6, "white"),
+      }}
+    >
       <Container>
         <StaggerContainer
           as="dl"
@@ -23,9 +30,15 @@ export function StatsBar() {
               y={16}
               className="text-center lg:text-left"
             >
-              <dt className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+              <dt
+                className="text-3xl font-bold tracking-tight sm:text-4xl"
+                style={{
+                  color: palette.section.accent,
+                }}
+              >
                 {stat.value}
               </dt>
+
               <dd className="mt-1 text-sm text-slate-600">{stat.label}</dd>
             </StaggerItem>
           ))}

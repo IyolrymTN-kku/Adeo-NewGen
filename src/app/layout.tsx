@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import { AdminThemeInitScript } from "@/components/admin/AdminThemeInitScript";
+import { AdminThemeSync } from "@/components/admin/AdminThemeSync";
 import "./globals.css";
 
 const inter = Inter({
@@ -42,7 +45,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
+        <AdminThemeInitScript />
+        <AdminThemeSync />
+
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

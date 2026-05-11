@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { ButtonLink } from "@/components/ui/Button";
 import { FadeInOnLoad } from "@/components/animations";
+import { ctaSectionStyle, mix, palette } from "@/lib/palette-helper";
 
 type HeroProps = {
   eyebrow?: string;
@@ -20,29 +21,31 @@ export function Hero({
   secondaryCta = { href: "/solutions", label: "Explore Solutions" },
 }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[hsl(var(--hero-bg,222_47%_10%))] text-white">
-      {/* Decorative gradients */}
+    <section className="relative overflow-hidden" style={ctaSectionStyle()}>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 -right-40 h-[640px] w-[640px] rounded-full opacity-30"
         style={{
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.75) 0%, transparent 65%)",
+          background:
+            "radial-gradient(circle, var(--admin-primary, #0066FF) 0%, transparent 65%)",
         }}
       />
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-48 -left-32 h-[520px] w-[520px] rounded-full opacity-20"
         style={{
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.75) 0%, transparent 65%)",
+          background:
+            "radial-gradient(circle, var(--admin-primary, #0066FF) 0%, transparent 65%)",
         }}
       />
-      {/* Subtle grid */}
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+            "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -51,25 +54,64 @@ export function Hero({
         <div className="grid items-center gap-16 py-24 lg:grid-cols-12 lg:py-32">
           <div className="lg:col-span-7">
             <FadeInOnLoad y={8} delay={0.05}>
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              <p
+                className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"
+                style={{
+                  borderColor: mix(palette.cta.text, 10),
+                  backgroundColor: mix(palette.cta.text, 5),
+                  color: palette.admin.primary,
+                }}
+              >
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ backgroundColor: palette.admin.primary }}
+                />
                 {eyebrow}
               </p>
             </FadeInOnLoad>
-            <FadeInOnLoad as="h1" y={16} delay={0.15} duration={0.7} className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+
+            <FadeInOnLoad
+              as="h1"
+              y={16}
+              delay={0.15}
+              duration={0.7}
+              className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
+              style={{ color: palette.cta.text }}
+            >
               {title}
               {highlight && (
                 <>
                   {" "}
-                  <span className="text-primary">{highlight}</span>
+                  <span style={{ color: palette.admin.primary }}>
+                    {highlight}
+                  </span>
                 </>
               )}
             </FadeInOnLoad>
-            <FadeInOnLoad as="p" y={16} delay={0.3} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+
+            <FadeInOnLoad
+              as="p"
+              y={16}
+              delay={0.3}
+              className="mt-6 max-w-xl text-lg leading-relaxed"
+              style={{ color: mix(palette.cta.text, 76) }}
+            >
               {description}
             </FadeInOnLoad>
-            <FadeInOnLoad y={16} delay={0.45} className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href={primaryCta.href} size="lg">
+
+            <FadeInOnLoad
+              y={16}
+              delay={0.45}
+              className="mt-10 flex flex-wrap gap-4"
+            >
+              <Link
+                href={primaryCta.href}
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-sm transition hover:opacity-90"
+                style={{
+                  backgroundColor: palette.admin.primary,
+                  color: palette.admin.primaryText,
+                }}
+              >
                 {primaryCta.label}
                 <svg
                   viewBox="0 0 20 20"
@@ -83,19 +125,22 @@ export function Hero({
                     clipRule="evenodd"
                   />
                 </svg>
-              </ButtonLink>
-              <ButtonLink
+              </Link>
+
+              <Link
                 href={secondaryCta.href}
-                size="lg"
-                variant="outline"
-                className="border-white/20 bg-transparent hover:border-white hover:bg-white/5 hover:text-white"
+                className="inline-flex items-center justify-center rounded-xl border px-6 py-3 text-sm font-bold transition hover:opacity-90"
+                style={{
+                  borderColor: mix(palette.cta.text, 20),
+                  backgroundColor: "transparent",
+                  color: palette.cta.text,
+                }}
               >
                 {secondaryCta.label}
-              </ButtonLink>
+              </Link>
             </FadeInOnLoad>
           </div>
 
-          {/* Visual panel */}
           <FadeInOnLoad
             y={24}
             delay={0.4}
@@ -103,7 +148,13 @@ export function Hero({
             className="hidden lg:col-span-5 lg:block"
           >
             <div className="relative">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
+              <div
+                className="rounded-2xl border p-6 backdrop-blur"
+                style={{
+                  borderColor: mix(palette.cta.text, 10),
+                  backgroundColor: mix(palette.cta.text, 3),
+                }}
+              >
                 <div className="grid grid-cols-2 gap-3">
                   {[
                     { label: "Software Dev", icon: "code" },
@@ -115,22 +166,46 @@ export function Hero({
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="rounded-xl border border-white/10 bg-white/[0.05] p-4"
+                      className="rounded-xl border p-4"
+                      style={{
+                        borderColor: mix(palette.cta.text, 10),
+                        backgroundColor: mix(palette.cta.text, 5),
+                      }}
                     >
-                      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                      <div
+                        className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg"
+                        style={{
+                          backgroundColor: mix(palette.admin.primary, 15),
+                          color: palette.admin.primary,
+                        }}
+                      >
                         <ServiceIcon name={item.icon} />
                       </div>
-                      <p className="text-sm font-semibold text-white">
+
+                      <p
+                        className="text-sm font-semibold"
+                        style={{ color: palette.cta.text }}
+                      >
                         {item.label}
                       </p>
-                      <p className="text-xs text-slate-400">Enterprise grade</p>
+
+                      <p
+                        className="text-xs"
+                        style={{ color: mix(palette.cta.text, 70) }}
+                      >
+                        Enterprise grade
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
+
               <div
                 aria-hidden="true"
-                className="absolute -inset-x-8 -bottom-6 h-12 rounded-full bg-primary/30 blur-2xl"
+                className="absolute -inset-x-8 -bottom-6 h-12 rounded-full blur-2xl"
+                style={{
+                  backgroundColor: mix(palette.admin.primary, 30),
+                }}
               />
             </div>
           </FadeInOnLoad>
@@ -151,6 +226,7 @@ function ServiceIcon({ name }: { name: string }) {
     className: "h-5 w-5",
     "aria-hidden": true,
   };
+
   switch (name) {
     case "code":
       return (
@@ -158,12 +234,14 @@ function ServiceIcon({ name }: { name: string }) {
           <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
         </svg>
       );
+
     case "cloud":
       return (
         <svg {...common}>
           <path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.78A6 6 0 0 0 5 13a4 4 0 0 0 .5 8h12Z" />
         </svg>
       );
+
     case "network":
       return (
         <svg {...common}>
@@ -173,24 +251,28 @@ function ServiceIcon({ name }: { name: string }) {
           <rect x="14" y="14" width="7" height="7" rx="1" />
         </svg>
       );
+
     case "shield":
       return (
         <svg {...common}>
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
         </svg>
       );
+
     case "swap":
       return (
         <svg {...common}>
           <path d="M7 16V4m0 0L3 8m4-4 4 4M17 8v12m0 0 4-4m-4 4-4-4" />
         </svg>
       );
+
     case "support":
       return (
         <svg {...common}>
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
       );
+
     default:
       return null;
   }
