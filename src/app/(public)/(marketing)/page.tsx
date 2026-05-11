@@ -7,13 +7,13 @@ import { StatsBar } from "@/components/sections/StatsBar";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { PartnerGrid } from "@/components/sections/PartnerGrid";
 import { CTASection } from "@/components/sections/CTASection";
+import { getTranslations } from "next-intl/server";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const settings = await prisma.siteSettings.findUnique({
-    where: { id: "singleton" },
-  });
+  const t = await getTranslations("home");
+
   const [services, partners] = await Promise.all([
     prisma.service.findMany({
       where: { isActive: true },
@@ -42,57 +42,51 @@ export default async function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="Enterprise IT & Cloud"
-        title={`Powering ${settings?.siteName ?? "Our Company"}`}
-        highlight="modern enterprises."
-        description="From custom software and managed IT to cloud-native architectures, ADEO Solution delivers secure, scalable infrastructure built for the way your business actually runs."
-        primaryCta={{ href: "/contact", label: "Talk to an Expert" }}
-        secondaryCta={{ href: "/solutions", label: "Explore Solutions" }}
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        highlight={t("highlight")}
+        description={t("description")}
+        primaryCta={{ href: "/contact", label: t("primaryCta") }}
+        secondaryCta={{ href: "/solutions", label: t("secondaryCta") }}
       />
-
       <StatsBar />
-
-      {/* Services overview */}
       <section className="py-24">
         <Container>
           <SectionHeader
-            eyebrow="What we do"
-            title="Two pillars. One trusted partner."
-            subtitle="We bring together the operational rigor of enterprise IT with the velocity of cloud-native engineering — so you don't have to choose."
+            eyebrow={t("servicesEyebrow")}
+            title={t("servicesTitle")}
+            subtitle={t("servicesSubtitle")}
           />
           <div className="mt-14">
             <ServiceGrid services={services} />
           </div>
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <ButtonLink href="/solutions" variant="outline">
-              IT Solutions
+              {t("itSolutions")}
             </ButtonLink>
             <ButtonLink href="/cloud" variant="outline">
-              Cloud Services
+              {t("cloudServices")}
             </ButtonLink>
           </div>
         </Container>
       </section>
-
-      {/* Partners */}
       <section className="border-t border-slate-200 bg-slate-50 py-24">
         <Container>
           <SectionHeader
-            eyebrow="Trusted technology partners"
-            title="Built on enterprise-grade platforms"
-            subtitle="We architect with the technologies your IT, security, and compliance teams already trust."
+            eyebrow={t("partnersEyebrow")}
+            title={t("partnersTitle")}
+            subtitle={t("partnersSubtitle")}
           />
           <div className="mt-14">
             <PartnerGrid partners={partners} />
           </div>
         </Container>
       </section>
-
       <CTASection
-        title="Ready to modernise your IT?"
-        description="Let's scope a roadmap that meets your timelines, your budget, and your compliance reality. No fluff — just a working plan."
-        primaryCta={{ href: "/contact", label: "Start a Conversation" }}
-        secondaryCta={{ href: "/solutions", label: "See Our Capabilities" }}
+        title={t("ctaTitle")}
+        description={t("ctaDescription")}
+        primaryCta={{ href: "/contact", label: t("ctaPrimary") }}
+        secondaryCta={{ href: "/solutions", label: t("ctaSecondary") }}
       />
     </>
   );

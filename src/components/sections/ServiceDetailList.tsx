@@ -38,7 +38,7 @@ export function ServiceDetailList({ services }: ServiceDetailListProps) {
               </div>
               <div className="lg:col-span-7">
                 <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  What's included
+                  What&apos;s included
                 </h4>
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {features.map((feature) => (

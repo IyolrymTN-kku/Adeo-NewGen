@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "home": "Home",
+    "solutions": "IT Solutions",
+    "cloud": "Cloud Services",
+    "contact": "Contact",
+    "getQuote": "Get a Quote"
+  },
+  "home": {
+    "eyebrow": "Enterprise IT & Cloud",
+    "title": "Powering Our Company",
+    "highlight": "modern enterprises.",
+    "description": "From custom software and managed IT to cloud-native architectures, delivers secure, scalable infrastructure built for the way your business actually runs.",
+    "primaryCta": "Talk to an Expert",
+    "secondaryCta": "Explore Solutions",
+    "servicesEyebrow": "What we do",
+    "servicesTitle": "Two pillars. One trusted partner.",
+    "servicesSubtitle": "We bring together the operational rigor of enterprise IT with the velocity of cloud-native engineering — so you don't have to choose.",
+    "partnersEyebrow": "Trusted technology partners",
+    "partnersTitle": "Built on enterprise-grade platforms",
+    "partnersSubtitle": "We architect with the technologies your IT, security, and compliance teams already trust.",
+    "ctaTitle": "Ready to modernise your IT?",
+    "ctaDescription": "Let's scope a roadmap that meets your timelines, your budget, and your compliance reality. No fluff — just a working plan.",
+    "ctaPrimary": "Start a Conversation",
+    "ctaSecondary": "See Our Capabilities",
+    "itSolutions": "IT Solutions",
+    "cloudServices": "Cloud Services"
+  },
+  "hero": {
+    "badge": "Enterprise IT & Cloud",
+    "title1": "Powering Our",
+    "title2": "Company",
+    "title3": "modern enterprises.",
+    "description": "From custom software and managed IT to cloud-native architectures, delivers secure, scalable infrastructure built for the way your business actually runs.",
+    "btnPrimary": "Start a Conversation",
+    "btnSecondary": "See Our Capabilities"
+  },
+  "footer": {
+    "solutions": "Solutions",
+    "company": "Company",
+    "legal": "Legal",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "rights": "All rights reserved."
+  }
+}

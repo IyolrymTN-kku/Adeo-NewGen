@@ -34,6 +34,7 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
 }
 
 const inputCls = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#0066ff] focus:outline-none focus:ring-2 focus:ring-[#0066ff]/20";
+const socialFields = ["facebook", "linkedin", "instagram", "tiktok"] as const;
 
 function validateImageSize(file: File, width: number, height: number): Promise<boolean> {
   return new Promise((resolve) => {
@@ -130,13 +131,13 @@ export function CorporationForm({ settings }: { settings: companySettings | null
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl space-y-8">
       <Section title="Company information">
-        <Field label="ชื่อบริษัท *">
+        <Field label="Company Name *">
           <input name="companyName" defaultValue={settings?.companyName ?? "ADEO Solution"} className={inputCls} required />
         </Field>
-        <Field label="คำอธิบายบริษัท" hint="Maximum 200 characters">
+        <Field label="Description" hint="Maximum 200 characters">
           <textarea name="description" defaultValue={settings?.description ?? ""} className={inputCls} rows={3} placeholder="Enterprise IT Solutions and Cloud Services..." maxLength={500} />
         </Field>
-        <Field label="เลขที่ผู้เสียภาษี">
+        <Field label="Tax ID">
           <input
             name="taxId"
             defaultValue={settings?.taxId ?? ""}
@@ -147,10 +148,10 @@ export function CorporationForm({ settings }: { settings: companySettings | null
           />
           {taxIdError && <p className="text-xs font-medium text-red-600">{taxIdError}</p>}
         </Field>
-        <Field label="อีเมล">
+        <Field label="Email">
           <input name="email" type="email" defaultValue={settings?.email ?? ""} className={inputCls} placeholder="contact@example.com" />
         </Field>
-        <Field label="เบอร์โทรศัพท์">
+        <Field label="Phone Number">
            <PhoneInput
               international
               defaultCountry="TH"
@@ -172,10 +173,10 @@ export function CorporationForm({ settings }: { settings: companySettings | null
               </p>
             )}
           </Field>
-        <Field label="ที่อยู่">
+        <Field label="Address">
           <input name="address" defaultValue={settings?.address ?? ""} className={inputCls} placeholder="Bangkok, Thailand" />
         </Field>
-        <Field label="เว็บไซต์">
+        <Field label="Website">
           <input
             name="website"
             defaultValue={settings?.website ?? ""}
@@ -188,7 +189,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
       </Section>
 
       <Section title="Logo & Favicon">
-        <Field label="โลโก้บริษัท" hint="PNG only, 32×32px recommended">
+        <Field label="Logo" hint="PNG only, 32×32px recommended">
           {logoPreview && (
             <div className="relative h-16 w-16 overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-2">
               <Image src={logoPreview} alt="logo preview" fill className="object-contain" />
@@ -231,11 +232,11 @@ export function CorporationForm({ settings }: { settings: companySettings | null
       </Section>
 
       <Section title="Social Media">
-        {["facebook", "linkedin", "instagram", "tiktok"].map((field) => (
+        {socialFields.map((field) => (
           <Field key={field} label={field.charAt(0).toUpperCase() + field.slice(1)}>
             <input
               name={field}
-              defaultValue={(settings as Record<string, string | null>)?.[field] ?? ""}
+              defaultValue={settings?.[field] ?? ""}
               className={`${inputCls} ${socialErrors[field] ? "border-red-400" : ""}`}
               placeholder={`https://${field}.com/yourhandle`}
               onChange={e => handleUrlChange(field, e.target.value)}

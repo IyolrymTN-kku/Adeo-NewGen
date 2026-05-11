@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "./ContactForm";
@@ -78,7 +77,7 @@ export default function ContactPage() {
               <div className="rounded-2xl bg-[#0a1628] p-8 text-white">
                 <h2 className="text-lg font-semibold">Get in touch directly</h2>
                 <p className="mt-2 text-sm text-slate-300">
-                  Prefer email or phone? Here's how to reach us.
+                  Prefer email or phone? Here&apos;s how to reach us.
                 </p>
 
                 <ul className="mt-8 space-y-6">

@@ -14,7 +14,7 @@ export default async function CorporationPage() {
     <>
       <PageHeader
         title="Corporation Settings"
-        description="จัดการชื่อบริษัท โลโก้ และข้อมูลองค์กร"
+        description="Manage Company Name, Logo, and Organization Information"
       />
       <PageBody>
         <CorporationForm settings={settings} />
