@@ -1,12 +1,14 @@
 import { prisma } from "@/lib/db";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Prompt } from "next/font/google";
 import "./globals.css";
 import "react-phone-number-input/style.css";
 
 export const dynamic = "force-dynamic";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+const prompt = Prompt({ subsets: ["thai", "latin"], variable: "--font-thai",weight: ["300", "400", "500", "600", "700"], display: "swap" });
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
@@ -30,7 +32,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const timestamp = settings?.updatedAt ? new Date(settings.updatedAt).getTime() : Date.now();
 
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${prompt.variable} h-full antialiased`}>
       <head>
         <link rel="icon" href={`${faviconUrl}?v=${timestamp}`} />
       </head>
