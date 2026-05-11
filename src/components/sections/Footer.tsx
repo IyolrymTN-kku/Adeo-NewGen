@@ -8,6 +8,7 @@ const FOOTER_NAV = {
   Solutions: [
     { href: "/solutions", label: "IT Solutions" },
     { href: "/cloud",     label: "Cloud Services" },
+    { href: "/sitemap",     label: "Sitemap" },
   ],
   Company: [
     { href: "/about", label: "About" },

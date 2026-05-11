@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: "/solutions", label: "IT Solutions" },
   { href: "/cloud", label: "Cloud Services" },
   { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About Us" },
 ];
 
 export function Header({ companyName = "ADEO Solution", logoUrl }: { companyName?: string; logoUrl?: string | null }) {
