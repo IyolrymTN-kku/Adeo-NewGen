@@ -1,16 +1,14 @@
-import { generateSEOMetadata } from "@/lib/seo/generate";
+import { prisma } from "@/lib/db";
+import { AboutClient } from "@/app/(public)/(marketing)/about/AboutClient";
 
-export async function generateMetadata() {
-  return generateSEOMetadata("/about");
-}
+export default async function AboutPage() {
+  const settings = await prisma.companySettings.findUnique({
+    where: { id: 1 },
+  });
 
-export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-2xl font-bold">About Us</h1>
-      <p className="mt-4 text-sm text-slate-600">
-        Overview of the company, mission, and vision.
-      </p>
-    </main>
+    <AboutClient
+      companyName={settings?.companyName ?? "ADEO Solution"}
+    />
   );
 }

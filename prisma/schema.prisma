@@ -172,6 +172,7 @@ model companySettings {
   line            String?
   taxId           String?
   updatedAt       DateTime @updatedAt
+  ogImageUrl      String?
 
   @@map("company_settings")
 }

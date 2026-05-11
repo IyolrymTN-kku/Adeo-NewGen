@@ -2,12 +2,10 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
-import {
-  initialContactState,
-  submitContactAction,
-  type ContactState,
-} from "./actions";
+import { submitContactAction } from "./actions";
+import { initialContactState, type ContactState } from "./types";
 import { cn } from "@/lib/utils";
+
 
 const baseInput =
   "block w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 shadow-sm transition focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400";

@@ -49,7 +49,7 @@ export default async function SitemapPage() {
           {/* PUBLIC */}
           <Section title="Public Pages">
             <CardLink href="/" title="Home" desc="Landing page overview" />
-            <CardLink href="/services" title="IT Solutions" desc="All IT services" />
+            <CardLink href="/solutions" title="IT Solutions" desc="All IT services" />
             <CardLink href="/cloud" title="Cloud Services" desc="Cloud offerings" />
             <CardLink href="/contact" title="Contact" desc="Get in touch" />
           </Section>
@@ -59,7 +59,7 @@ export default async function SitemapPage() {
             {services.map((s) => (
               <CardLink
                 key={s.slug}
-                href={`/services/${s.slug}`}
+                href={`/solutions#${s.slug}`}
                 title={s.title}
                 desc="Service detail page"
               />
@@ -71,7 +71,7 @@ export default async function SitemapPage() {
             {cloudServices.map((s) => (
               <CardLink
                 key={s.slug}
-                href={`/cloud/${s.slug}`}
+                href={`/cloud#${s.slug}`}
                 title={s.title}
                 desc="Cloud service"
               />
@@ -92,6 +92,7 @@ export default async function SitemapPage() {
                 <CardLink href="/admin/services" title="Manage Services" desc="CRUD services" />
                 <CardLink href="/admin/partners" title="Manage Partners" desc="Partner list" />
                 <CardLink href="/admin/inbox" title="Inbox" desc="Contact submissions" />
+                <CardLink href="/admin/Corporation" title="Corporation" desc="Corporation Settings" />
                 </>
             )}
           </Section>
