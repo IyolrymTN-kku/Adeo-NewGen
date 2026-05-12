@@ -5,6 +5,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { ServiceDetailList } from "@/components/sections/ServiceDetailList";
 import { CTASection } from "@/components/sections/CTASection";
 import { CLOUD_SERVICE_CATEGORIES } from "@/lib/services";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Cloud Services",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function CloudPage() {
+  const t = await getTranslations("cloud");
   const services = await prisma.service.findMany({
     where: { isActive: true, category: { in: CLOUD_SERVICE_CATEGORIES } },
     orderBy: { sortOrder: "asc" },
@@ -32,9 +34,9 @@ export default async function CloudPage() {
   return (
     <>
       <PageHero
-        eyebrow="Cloud Services"
-        title="Cloud done right — secure, optimised, and built to scale."
-        description="From cloud-native architecture to risk-managed migration and 24/7 disaster recovery. We bring engineering rigor to every cloud workload — across AWS, Azure, and GCP."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroDesc")}
       />
 
       <section className="py-20">
@@ -44,10 +46,10 @@ export default async function CloudPage() {
       </section>
 
       <CTASection
-        title="Plan your cloud journey with confidence."
-        description="Whether it's a full migration or a single workload modernisation, we'll help you scope it right the first time."
-        primaryCta={{ href: "/contact", label: "Book a Cloud Assessment" }}
-        secondaryCta={{ href: "/solutions", label: "View IT Solutions" }}
+        title={t("ctaTitle")}
+        description={t("ctaDesc")}
+        primaryCta={{ href: "/contact", label: t("ctaBtn1") }}
+        secondaryCta={{ href: "/solutions", label: t("ctaBtn2") }}
       />
     </>
   );

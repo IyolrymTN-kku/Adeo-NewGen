@@ -1,14 +1,17 @@
 import { Container } from "@/components/ui/Container";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
-
-const STATS = [
-  { value: "15+", label: "Years of expertise" },
-  { value: "200+", label: "Enterprise projects delivered" },
-  { value: "99.9%", label: "Uptime across managed services" },
-  { value: "24/7", label: "Support and monitoring" },
-];
+import { useTranslations } from "next-intl";
 
 export function StatsBar() {
+  const t = useTranslations("home");
+
+  const STATS = [
+    { value: t("stat1Value"), label: t("stat1Label") },
+    { value: t("stat2Value"), label: t("stat2Label") },
+    { value: t("stat3Value"), label: t("stat3Label") },
+    { value: t("stat4Value"), label: t("stat4Label") },
+  ];
+
   return (
     <section className="border-y border-slate-200 bg-slate-50">
       <Container>

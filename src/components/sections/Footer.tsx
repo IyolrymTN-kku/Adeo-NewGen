@@ -2,58 +2,59 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/sections/Logo";
+import { getTranslations } from "next-intl/server";
 
-
-const FOOTER_NAV = {
-  Solutions: [
-    { href: "/solutions", label: "IT Solutions" },
-    { href: "/cloud",     label: "Cloud Services" },
-    { href: "/sitemap",     label: "Sitemap" },
-  ],
-  Company: [
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-  ],
-  Legal: [
-    { href: "/privacy", label: "Privacy" },
-    { href: "/terms", label: "Terms" },
-  ],
-};
-
-export async function Footer() {
+export async function Footer({ companyName = "ADEO Solution" }: { companyName?: string }) {
   const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const t = await getTranslations("footer");
+
+  const FOOTER_NAV = {
+    [t("solutions")]: [
+      { href: "/solutions", label: t("itSolutions") },
+      { href: "/cloud",     label: t("cloudServices") },
+      { href: "/sitemap",     label: t("sitemap") },
+    ],
+    [t("company")]: [
+      { href: "/about", label: t("about") },
+      { href: "/contact", label: t("contact") },
+    ],
+    [t("legal")]: [
+      { href: "/privacy", label: t("privacy") },
+      { href: "/terms", label: t("terms") },
+    ],
+  };
 
   return (
-    <footer className="mt-t-sauto bg-[#0a1628] texlate-300">
+    <footer className="mt-auto bg-[#0a1628] text-slate-300">
       <Container>
         <div className="grid gap-12 py-16 lg:grid-cols-12">
           
           {/* Brand column */}
           <div className="lg:col-span-5">
-            <Logo invert companyName={settings?.companyName ?? "ADEO Solution"} logoUrl={settings?.logoUrl} />
+            <Logo invert companyName={settings?.companyName ?? companyName} logoUrl={settings?.logoUrl} />
            <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
-              {settings?.description ?? "Enterprise IT Solutions and Cloud Services — secure, scalable, and built for the future of your business."}
+              {settings?.description ?? t("desc")}
           </p>
 
             <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-2">
               {/* คอลัมน์ซ้าย — ข้อมูลบริษัท */}
               <div className="space-y-2 text-sm text-slate-400">
                 {settings?.taxId && (
-                  <p><span className="font-semibold text-slate-200">Tax ID:</span> {settings.taxId}</p>
+                  <p><span className="font-semibold text-slate-200">{t("taxId")}</span> {settings.taxId}</p>
                 )}
                 {settings?.email && (
-                  <p><span className="font-semibold text-slate-200">Email:</span>{" "}
+                  <p><span className="font-semibold text-slate-200">{t("email")}</span>{" "}
                     <a href={`mailto:${settings.email}`} className="hover:text-[#3385ff]">{settings.email}</a>
                   </p>
                 )}
                 {settings?.phone && (
-                  <p><span className="font-semibold text-slate-200">Phone:</span> {settings.phone}</p>
+                  <p><span className="font-semibold text-slate-200">{t("phone")}</span> {settings.phone}</p>
                 )}
                 {settings?.address && (
-                  <p><span className="font-semibold text-slate-200">Address:</span> {settings.address}</p>
+                  <p><span className="font-semibold text-slate-200">{t("address")}</span> {settings.address}</p>
                 )}
                 {settings?.website && (
-                  <p><span className="font-semibold text-slate-200">Website:</span>{" "}
+                  <p><span className="font-semibold text-slate-200">{t("website")}</span>{" "}
                     <a href={settings.website} target="_blank" rel="noopener noreferrer" className="hover:text-[#3385ff]">{settings.website.replace(/^https?:\/\//, "")}</a></p>
                 )}
               </div>
@@ -134,8 +135,8 @@ export async function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-3 border-t border-white/10 py-6 text-xs text-slate-500 sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} {settings?.companyName ?? "ADEO Solution"}. All rights reserved.</p>
-          <p>Bangkok, Thailand</p>
+          <p>© {new Date().getFullYear()} {settings?.companyName ?? companyName}. {t("rights")}</p>
+          <p>{t("location")}</p>
         </div>
       </Container>
     </footer>
