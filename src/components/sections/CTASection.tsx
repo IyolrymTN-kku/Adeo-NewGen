@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
+import { useTranslations } from "next-intl";
 
 type CTASectionProps = {
   eyebrow?: string;
@@ -10,12 +11,14 @@ type CTASectionProps = {
 };
 
 export function CTASection({
-  eyebrow = "Get started",
+  eyebrow,
   title,
   description,
   primaryCta = { href: "/contact", label: "Talk to an Expert" },
   secondaryCta,
 }: CTASectionProps) {
+  const t = useTranslations("common");
+
   return (
     <section className="relative overflow-hidden bg-[#0a1628] py-20 text-white">
       <div
@@ -29,7 +32,7 @@ export function CTASection({
       <Container className="relative">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#3385ff]">
-            {eyebrow}
+            {eyebrow || t("getStarted")}
           </p>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             {title}

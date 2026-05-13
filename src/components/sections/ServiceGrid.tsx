@@ -2,6 +2,7 @@ import type { Service, ServiceCategory } from "@prisma/client";
 import { Card } from "@/components/ui/Card";
 import { categoryLabel, isCloudCategory } from "@/lib/services";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
+import { getTranslations } from "next-intl/server";
 
 const CATEGORY_ICONS: Record<ServiceCategory, React.ReactNode> = {
   SOFTWARE_DEV: (
@@ -40,7 +41,7 @@ type ServiceGridProps = {
   columns?: 2 | 3;
 };
 
-export function ServiceGrid({ services, columns = 3 }: ServiceGridProps) {
+export async function ServiceGrid({ services, columns = 3 }: ServiceGridProps) {
   if (services.length === 0) {
     return (
       <p className="text-center text-sm text-slate-500">
@@ -66,7 +67,7 @@ export function ServiceGrid({ services, columns = 3 }: ServiceGridProps) {
   );
 }
 
-function ServiceCard({
+async function ServiceCard({
   service,
 }: {
   service: Pick<
@@ -75,6 +76,12 @@ function ServiceCard({
   >;
 }) {
   const cloud = isCloudCategory(service.category);
+  const t = await getTranslations("services");
+  const c = await getTranslations("categories");
+
+  const title = t.has(`${service.slug}.title`) ? t(`${service.slug}.title`) : service.title;
+  const shortDesc = t.has(`${service.slug}.shortDescription`) ? t(`${service.slug}.shortDescription`) : service.shortDescription;
+  const catLabel = c.has(service.category) ? c(service.category) : categoryLabel(service.category);
 
   return (
     <Card hover className="flex h-full flex-col">
@@ -94,12 +101,12 @@ function ServiceCard({
           </svg>
         </div>
         <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
-          {cloud ? "Cloud" : "IT"} · {categoryLabel(service.category)}
+          {cloud ? "Cloud" : "IT"} · {catLabel}
         </span>
       </div>
-      <h3 className="text-lg font-semibold text-slate-900">{service.title}</h3>
+      <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-        {service.shortDescription}
+        {shortDesc}
       </p>
     </Card>
   );

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { submitContactAction } from "./actions";
 import { initialContactState, type ContactState } from "./types";
 import { cn } from "@/lib/utils";
-
+import { useTranslations } from "next-intl";
 
 const baseInput =
   "block w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 shadow-sm transition focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400";
@@ -22,6 +22,7 @@ export function ContactForm() {
     initialContactState
   );
   const formRef = useRef<HTMLFormElement>(null);
+  const t = useTranslations("contact");
 
   useEffect(() => {
     if (state.status === "success") {
@@ -88,7 +89,7 @@ export function ContactForm() {
         aria-hidden="true"
         className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden"
       >
-        <label htmlFor="website">Website (leave blank)</label>
+        <label htmlFor="website">{t("formWebsiteBlank")}</label>
         <input
           id="website"
           name="website"
@@ -100,23 +101,23 @@ export function ContactForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
-          label="Name"
+          label={t("formLabelName")}
           name="name"
           type="text"
           required
           autoComplete="name"
-          placeholder="Jane Doe"
+          placeholder={t("formPhName")}
           disabled={isPending}
           error={state.fieldErrors?.name?.[0]}
           className={fieldClass("name")}
         />
         <Field
-          label="Work email"
+          label={t("formLabelEmail")}
           name="email"
           type="email"
           required
           autoComplete="email"
-          placeholder="jane@company.com"
+          placeholder={t("formPhEmail")}
           disabled={isPending}
           error={state.fieldErrors?.email?.[0]}
           className={fieldClass("email")}
@@ -125,21 +126,21 @@ export function ContactForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
-          label="Company"
+          label={t("formLabelCompany")}
           name="company"
           type="text"
           autoComplete="organization"
-          placeholder="Acme Corp."
+          placeholder={t("formPhCompany")}
           disabled={isPending}
           error={state.fieldErrors?.company?.[0]}
           className={fieldClass("company")}
         />
         <Field
-          label="Phone"
+          label={t("formLabelPhone")}
           name="phone"
           type="tel"
           autoComplete="tel"
-          placeholder="+66 81 234 5678"
+          placeholder={t("formPhPhone")}
           disabled={isPending}
           error={state.fieldErrors?.phone?.[0]}
           className={fieldClass("phone")}
@@ -151,7 +152,7 @@ export function ContactForm() {
           htmlFor="message"
           className="mb-1.5 block text-sm font-medium text-slate-700"
         >
-          How can we help? <span className="text-red-500">*</span>
+          {t("formLabelMessage")} <span className="text-red-500">*</span>
         </label>
         <textarea
           id="message"
@@ -165,7 +166,7 @@ export function ContactForm() {
           aria-describedby={
             state.fieldErrors?.message ? "message-error" : undefined
           }
-          placeholder="Tell us a bit about your project, timeline, or the challenge you're trying to solve."
+          placeholder={t("formPhMessage")}
           className={cn(fieldClass("message"), "resize-y")}
         />
         {state.fieldErrors?.message?.[0] && (
@@ -203,16 +204,15 @@ export function ContactForm() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
               />
             </svg>
-            Sending…
+            {t("formSending")}
           </>
         ) : (
-          "Send Message"
+          t("formSendBtn")
         )}
       </Button>
 
       <p className="text-xs text-slate-500">
-        By submitting this form you agree that ADEO Solution may contact you
-        regarding your enquiry.
+        {t("formDisclaimer")}
       </p>
     </form>
   );

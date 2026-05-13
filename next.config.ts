@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const cspHeader = [
   "default-src 'self'",
@@ -34,8 +37,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // ESLint is run separately in CI; suppress during `next build` to keep
-  // the build output clean of tooling false-positives.
   eslint: { ignoreDuringBuilds: true },
   async headers() {
     return [
@@ -50,4 +51,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
