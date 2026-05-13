@@ -2,11 +2,16 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/sections/Logo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export async function Footer({ companyName = "ADEO Solution" }: { companyName?: string }) {
   const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
   const t = await getTranslations("footer");
+  const locale = await getLocale();
+
+  const description = locale === "th"
+    ? (settings?.descriptionTh ?? settings?.descriptionEn ?? "")
+    : (settings?.descriptionEn ?? settings?.descriptionTh ?? "");
 
   const FOOTER_NAV = {
     [t("solutions")]: [
@@ -33,7 +38,7 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
           <div className="lg:col-span-5">
             <Logo invert companyName={settings?.companyName ?? companyName} logoUrl={settings?.logoUrl} />
            <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
-              {settings?.description ?? t("desc")}
+              {description || t("desc")}
           </p>
 
             <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-2">

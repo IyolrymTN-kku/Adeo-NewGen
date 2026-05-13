@@ -8,7 +8,8 @@ import { z } from "zod";
 
 const schema = z.object({
   companyName:     z.string().min(1, "กรุณากรอกชื่อบริษัท").max(100),
-  description:     z.string().max(500).optional().or(z.literal("")),
+  descriptionEn:   z.string().max(500).optional().or(z.literal("")),
+  descriptionTh:   z.string().max(500).optional().or(z.literal("")),
   email:           z.string().email("อีเมลไม่ถูกต้อง").optional().or(z.literal("")),
   phone:           z.string().max(30).optional().or(z.literal("")),
   address:         z.string().max(200).optional().or(z.literal("")),
@@ -26,7 +27,8 @@ export async function updateCorporation(formData: FormData) {
 
   const raw = {
     companyName:     formData.get("companyName"),
-    description:     formData.get("description"),
+    descriptionEn:   formData.get("descriptionEn"),
+    descriptionTh:   formData.get("descriptionTh"),
     email:           formData.get("email"),
     phone:           formData.get("phone"),
     address:         formData.get("address"),
@@ -66,7 +68,8 @@ export async function updateCorporation(formData: FormData) {
 
   const data = {
     companyName:     parsed.data.companyName,
-    description:     parsed.data.description || null,
+    descriptionEn:   parsed.data.descriptionEn || null,
+    descriptionTh:   parsed.data.descriptionTh || null,
     email:           parsed.data.email ? parsed.data.email.trim().toLowerCase() : null,
     phone:           parsed.data.phone           || null,
     address:         parsed.data.address         || null,
