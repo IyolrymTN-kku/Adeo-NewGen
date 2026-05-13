@@ -2,8 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { useLocale } from "next-intl";
 
-export function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
+export function LanguageSwitcher() {
+  const currentLocale = useLocale();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -31,7 +33,7 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
         className={`rounded-md px-2.5 py-1 text-xs font-semibold transition ${
           currentLocale === "th"
             ? "bg-[#0066ff] text-white"
-            : "text-slate-600 hover:bg-slate.100"
+            : "text-slate-600 hover:bg-slate-100"
         }`}
       >
         TH

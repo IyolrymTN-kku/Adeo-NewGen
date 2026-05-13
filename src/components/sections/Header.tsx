@@ -13,11 +13,9 @@ import { LanguageSwitcher } from "@/components/sections/LanguageSwitcher";
 export function Header({
   companyName = "ADEO Solution",
   logoUrl,
-  locale = "en"
 }: {
   companyName?: string;
   logoUrl?: string | null;
-  locale?: string;
 }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
@@ -80,7 +78,7 @@ export function Header({
           </nav>
 
           <div className="hidden lg:flex lg:items-center lg:gap-3">
-            <LanguageSwitcher currentLocale={locale} />
+            <LanguageSwitcher />
             <ButtonLink href="/contact" size="sm">
               {t("getQuote")}
             </ButtonLink>
@@ -132,7 +130,7 @@ export function Header({
                 </Link>
               ))}
               <div className="mt-3 px-1">
-                <LanguageSwitcher currentLocale={locale} />
+                <LanguageSwitcher />
               </div>
               <div className="mt-2 px-1">
                 <ButtonLink href="/contact" className="w-full">

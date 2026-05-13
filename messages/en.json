@@ -7,6 +7,9 @@
     "about": "About Us",
     "getQuote": "Get a Quote"
   },
+  "common": {
+    "getStarted": "Get started"
+  },
   "home": {
     "heroEyebrow": "Enterprise IT & Cloud",
     "heroTitle1": "Powering ",
@@ -15,6 +18,13 @@
     "heroDescription": "From custom software and managed IT to cloud-native architectures, ADEO Solution delivers secure, scalable infrastructure built for the way your business actually runs.",
     "heroBtn1": "Talk to an Expert",
     "heroBtn2": "Explore Solutions",
+    "serviceSoftwareDev": "Software Dev",
+    "serviceCloudNative": "Cloud Native",
+    "serviceNetwork": "Network",
+    "serviceBackupDr": "Backup & DR",
+    "serviceMigration": "Migration",
+    "serviceItSupport": "IT Support",
+    "enterpriseGrade": "Enterprise grade",
     "servicesEyebrow": "What we do",
     "servicesTitle": "Two pillars. One trusted partner.",
     "servicesSubtitle": "We bring together the operational rigor of enterprise IT with the velocity of cloud-native engineering — so you don't have to choose.",
@@ -23,6 +33,11 @@
     "partnersEyebrow": "Trusted technology partners",
     "partnersTitle": "Built on enterprise-grade platforms",
     "partnersSubtitle": "We architect with the technologies your IT, security, and compliance teams already trust.",
+    "partnerCatNETWORK": "Network",
+    "partnerCatCLOUD": "Cloud",
+    "partnerCatSECURITY": "Security",
+    "partnerCatHARDWARE": "Hardware",
+    "partnerCount": "{count} partners",
     "ctaTitle": "Ready to modernise your IT?",
     "ctaDesc": "Let's scope a roadmap that meets your timelines, your budget, and your compliance reality. No fluff — just a working plan.",
     "ctaBtn1": "Start a Conversation",
