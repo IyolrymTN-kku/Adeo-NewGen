@@ -3,26 +3,34 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { Logo } from "@/components/sections/Logo";
+import { LanguageSwitcher } from "@/components/sections/LanguageSwitcher";
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/solutions", label: "IT Solutions" },
-  { href: "/cloud", label: "Cloud Services" },
-  { href: "/contact", label: "Contact" },
-  { href: "/about", label: "About Us" },
-];
-
-export function Header({ companyName = "ADEO Solution", logoUrl }: { companyName?: string; logoUrl?: string | null }) {
+export function Header({
+  companyName = "ADEO Solution",
+  logoUrl,
+}: {
+  companyName?: string;
+  logoUrl?: string | null;
+}) {
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const NAV_LINKS = [
+    { href: "/", label: t("home") },
+    { href: "/solutions", label: t("solutions") },
+    { href: "/cloud", label: t("cloud") },
+    { href: "/contact", label: t("contact") },
+    { href: "/about", label: t("about") },
+  ];
+
   useEffect(() => {
-    
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -69,9 +77,10 @@ export function Header({ companyName = "ADEO Solution", logoUrl }: { companyName
             ))}
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex lg:items-center lg:gap-3">
+            <LanguageSwitcher />
             <ButtonLink href="/contact" size="sm">
-              Get a Quote
+              {t("getQuote")}
             </ButtonLink>
           </div>
 
@@ -121,8 +130,11 @@ export function Header({ companyName = "ADEO Solution", logoUrl }: { companyName
                 </Link>
               ))}
               <div className="mt-3 px-1">
+                <LanguageSwitcher />
+              </div>
+              <div className="mt-2 px-1">
                 <ButtonLink href="/contact" className="w-full">
-                  Get a Quote
+                  {t("getQuote")}
                 </ButtonLink>
               </div>
             </nav>

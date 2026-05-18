@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { FadeInOnLoad } from "@/components/animations";
+import { useTranslations } from "next-intl";
 
 type HeroProps = {
   eyebrow?: string;
@@ -19,6 +20,8 @@ export function Hero({
   primaryCta = { href: "/contact", label: "Talk to an Expert" },
   secondaryCta = { href: "/solutions", label: "Explore Solutions" },
 }: HeroProps) {
+  const t = useTranslations("home");
+
   return (
     <section className="relative overflow-hidden bg-[#0a1628] text-white">
       {/* Decorative gradients */}
@@ -106,15 +109,15 @@ export function Hero({
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { label: "Software Dev", icon: "code" },
-                    { label: "Cloud Native", icon: "cloud" },
-                    { label: "Network", icon: "network" },
-                    { label: "Backup & DR", icon: "shield" },
-                    { label: "Migration", icon: "swap" },
-                    { label: "IT Support", icon: "support" },
+                    { label: t("serviceSoftwareDev"), icon: "code" },
+                    { label: t("serviceCloudNative"), icon: "cloud" },
+                    { label: t("serviceNetwork"), icon: "network" },
+                    { label: t("serviceBackupDr"), icon: "shield" },
+                    { label: t("serviceMigration"), icon: "swap" },
+                    { label: t("serviceItSupport"), icon: "support" },
                   ].map((item) => (
                     <div
-                      key={item.label}
+                      key={item.icon}
                       className="rounded-xl border border-white/10 bg-[#0d2040]/60 p-4"
                     >
                       <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
@@ -123,7 +126,7 @@ export function Hero({
                       <p className="text-sm font-semibold text-white">
                         {item.label}
                       </p>
-                      <p className="text-xs text-slate-400">Enterprise grade</p>
+                      <p className="text-xs text-slate-400">{t("enterpriseGrade")}</p>
                     </div>
                   ))}
                 </div>

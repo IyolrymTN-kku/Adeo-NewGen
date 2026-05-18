@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CTASection } from "@/components/sections/CTASection";
+import { useTranslations } from "next-intl";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -23,6 +24,8 @@ export function AboutClient({
 }: {
   companyName: string;
 }) {
+  const t = useTranslations("about");
+
   return (
     <main className="bg-white text-slate-900 overflow-hidden">
 
@@ -50,7 +53,7 @@ export function AboutClient({
             animate="show"
             className="text-xs uppercase tracking-[0.25em] text-[#3385ff]"
           >
-            About {companyName}
+            {t("heroEyebrow")} {companyName}
           </motion.p>
 
           <motion.h1
@@ -60,9 +63,9 @@ export function AboutClient({
             animate="show"
             className="mt-4 text-6xl sm:text-6xl font-bold leading-tight tracking-tight leading-[1.05]"
           >
-            Building infrastructure
+            {t("heroTitle1")}
             <span className="block text-[#3385ff]">
-              that actually scales.
+              {t("heroTitle2")}
             </span>
           </motion.h1>
 
@@ -73,9 +76,7 @@ export function AboutClient({
             animate="show"
             className="mt-6 max-w-2xl mx-auto text-slate-300 text-lg leading-relaxed"
           >
-            We help modern organizations design reliable IT systems,
-            cloud-native platforms, and enterprise infrastructure built
-            for real production environments.
+            {t("heroDesc")}
           </motion.p>
 
         </Container>
@@ -93,25 +94,22 @@ export function AboutClient({
           >
             <SectionHeader
               align="left"
-              eyebrow="Our story"
-              title="From enterprise operations to cloud transformation"
-              subtitle="We build systems that balance scalability, security, and operational stability."
+              eyebrow={t("storyEyebrow")}
+              title={t("storyTitle")}
+              subtitle={t("storySubtitle")}
             />
 
             <div className="mt-7 space-y-5 text-slate-600 leading-relaxed text-[15px]">
               <p>
-                Our foundation started in enterprise infrastructure and
-                operational IT environments where reliability mattered most.
+                {t("storyP1")}
               </p>
 
               <p>
-                As technology evolved, we expanded into cloud-native systems,
-                migrations, platform modernization, and scalable architecture.
+                {t("storyP2")}
               </p>
 
               <p>
-                Today, we focus on helping businesses move faster without
-                sacrificing security, uptime, or maintainability.
+                {t("storyP3")}
               </p>
             </div>
           </motion.div>
@@ -130,16 +128,16 @@ export function AboutClient({
 
               {[
                 {
-                  title: "Enterprise-grade architecture",
-                  desc: "Built for stability, uptime, and scale.",
+                  title: t("feat1Title"),
+                  desc: t("feat1Desc"),
                 },
                 {
-                  title: "Cloud-native engineering",
-                  desc: "Modern infrastructure optimized for growth.",
+                  title: t("feat2Title"),
+                  desc: t("feat2Desc"),
                 },
                 {
-                  title: "Security-first systems",
-                  desc: "Protection designed into every layer.",
+                  title: t("feat3Title"),
+                  desc: t("feat3Desc"),
                 },
               ].map((item, i) => (
                 <motion.div
@@ -176,21 +174,21 @@ export function AboutClient({
         <Container>
 
           <SectionHeader
-            eyebrow="Direction"
-            title="Mission & Vision"
-            subtitle="The principles behind every platform and solution we deliver."
+            eyebrow={t("missionEyebrow")}
+            title={t("missionTitle")}
+            subtitle={t("missionSubtitle")}
           />
 
           <div className="mt-14 grid lg:grid-cols-2 gap-7">
 
             {[
               {
-                title: "Mission",
-                desc: "Deliver secure and scalable IT systems that eliminate operational friction and enable long-term growth.",
+                title: t("missionCard"),
+                desc: t("missionDesc"),
               },
               {
-                title: "Vision",
-                desc: "Become a trusted enterprise technology partner for organizations building modern digital infrastructure.",
+                title: t("visionCard"),
+                desc: t("visionDesc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -236,19 +234,19 @@ export function AboutClient({
         <Container className="relative">
 
           <SectionHeader
-            eyebrow="Core values"
-            title="Built around reliability"
-            subtitle="Every decision starts with performance, trust, and maintainability."
+            eyebrow={t("valuesEyebrow")}
+            title={t("valuesTitle")}
+            subtitle={t("valuesSubtitle")}
             invert
           />
 
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             {[
-              "Reliability",
-              "Security-first",
-              "Scalability",
-              "Clarity",
+              t("val1"),
+              t("val2"),
+              t("val3"),
+              t("val4"),
             ].map((value, i) => (
               <motion.div
                 key={value}
@@ -277,16 +275,16 @@ export function AboutClient({
 
       {/* CTA */}
       <CTASection
-        eyebrow="Let's build together"
-        title="Need a reliable IT partner?"
-        description="We create scalable infrastructure and cloud systems designed for long-term production use."
+        eyebrow={t("ctaEyebrow")}
+        title={t("ctaTitle")}
+        description={t("ctaDesc")}
         primaryCta={{
           href: "/contact",
-          label: "Contact Us",
+          label: t("ctaBtn1"),
         }}
         secondaryCta={{
           href: "/solutions",
-          label: "Explore Solutions",
+          label: t("ctaBtn2"),
         }}
       />
 

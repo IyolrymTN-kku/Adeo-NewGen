@@ -159,6 +159,8 @@ model companySettings {
   id              Int      @id @default(1)
   companyName     String   @default("ADEO Solution")
   description     String?
+  descriptionEn   String?
+  descriptionTh   String?
   logoUrl         String?
   faviconUrl      String?
   email           String?

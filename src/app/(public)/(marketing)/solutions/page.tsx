@@ -5,6 +5,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { ServiceDetailList } from "@/components/sections/ServiceDetailList";
 import { CTASection } from "@/components/sections/CTASection";
 import { IT_SOLUTION_CATEGORIES } from "@/lib/services";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "IT Solutions",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function SolutionsPage() {
+  const t = await getTranslations("solutions");
   const services = await prisma.service.findMany({
     where: { isActive: true, category: { in: IT_SOLUTION_CATEGORIES } },
     orderBy: { sortOrder: "asc" },
@@ -32,9 +34,9 @@ export default async function SolutionsPage() {
   return (
     <>
       <PageHero
-        eyebrow="IT Solutions"
-        title="Enterprise IT engineered to perform under load."
-        description="Custom software, managed IT operations, and high-availability network infrastructure — delivered by a senior team with two decades of enterprise experience."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroDesc")}
       />
 
       <section className="py-20">
@@ -44,10 +46,10 @@ export default async function SolutionsPage() {
       </section>
 
       <CTASection
-        title="Need something specific?"
-        description="Every IT environment is different. Tell us what you're trying to achieve and we'll scope a solution that fits."
-        primaryCta={{ href: "/contact", label: "Request a Consultation" }}
-        secondaryCta={{ href: "/cloud", label: "View Cloud Services" }}
+        title={t("ctaTitle")}
+        description={t("ctaDesc")}
+        primaryCta={{ href: "/contact", label: t("ctaBtn1") }}
+        secondaryCta={{ href: "/cloud", label: t("ctaBtn2") }}
       />
     </>
   );
