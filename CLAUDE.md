@@ -1,6 +1,11 @@
 @AGENTS.md
+@AI_HARNESS.md
 
 # ADEO Solution Corporate Website — AI Project Memory
+
+> **All AI agents must also read [`AI_HARNESS.md`](AI_HARNESS.md)** — it defines
+> the mandatory 6-step pipeline and architecture guardrails that govern every
+> change to this codebase.
 
 This file is the canonical context handoff between AI sessions. Read it before
 any non-trivial work. When you change something material here, update it in
@@ -250,6 +255,9 @@ Page (server) renders form component (client). Client uses
 ---
 
 ## 6. The 6-Step AI Pipeline
+
+> Canonical definition lives in [`AI_HARNESS.md`](AI_HARNESS.md). The table
+> below is kept for quick reference but the harness file is authoritative.
 
 Every non-trivial feature follows this cadence. Wait for user approval at each
 boundary — never skip ahead.

@@ -54,9 +54,9 @@ export function PageHeader({
   );
 }
 
-export function PageBody({ children }: { children: React.ReactNode }) {
+export function PageBody({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-8 lg:px-10">
+    <div className={`mx-auto w-full ${className ?? "max-w-6xl"} px-6 py-8 sm:px-8 lg:px-10`}>
       {children}
     </div>
   );

@@ -14,7 +14,7 @@ export default async function MarketingLayout({
     <>
       <Header companyName={companyName} logoUrl={settings?.logoUrl} />
       <main className="flex-1">{children}</main>
-      <Footer companyName={settings?.companyName} />
+      <Footer />
     </>
   );
 }

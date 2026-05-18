@@ -5,7 +5,7 @@ import { categoryLabel, parseFeatures } from "@/lib/services";
 type ServiceDetailListProps = {
   services: Pick<
     Service,
-    "id" | "title" | "shortDescription" | "description" | "category" | "features"
+    "id" | "title" | "slug" | "shortDescription" | "description" | "category" | "features"
   >[];
 };
 

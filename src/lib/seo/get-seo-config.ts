@@ -5,6 +5,7 @@ export async function getSEOConfig() {
     where: { id: 1 },
     select: {
       companyName: true,
+      ogImageUrl: true,
     },
   });
 
@@ -15,5 +16,6 @@ export async function getSEOConfig() {
     defaultDescription:
       `${settings?.companyName ?? "Site"} provides enterprise IT and cloud solutions.`,
     defaultImage: "/og-image.jpg",
+    ogImageUrl: settings?.ogImageUrl ?? null,
   };
 }

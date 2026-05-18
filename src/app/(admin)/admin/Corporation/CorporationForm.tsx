@@ -235,7 +235,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
           <Field key={field} label={field.charAt(0).toUpperCase() + field.slice(1)}>
             <input
               name={field}
-              defaultValue={(settings as Record<string, string | null>)?.[field] ?? ""}
+              defaultValue={(settings as unknown as Record<string, string | null>)?.[field] ?? ""}
               className={`${inputCls} ${socialErrors[field] ? "border-red-400" : ""}`}
               placeholder={`https://${field}.com/yourhandle`}
               onChange={e => handleUrlChange(field, e.target.value)}

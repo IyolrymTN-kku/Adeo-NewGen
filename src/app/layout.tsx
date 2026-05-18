@@ -2,16 +2,19 @@ import { prisma } from "@/lib/db";
 import type { Metadata } from "next";
 import { Inter, Prompt } from "next/font/google";
 import "./globals.css";
-import "react-phone-number-input/style.css";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
-const prompt = Prompt({ subsets: ["thai", "latin"], variable: "--font-thai",weight: ["300", "400", "500", "600", "700"], display: "swap" });
+const prompt = Prompt({ subsets: ["thai", "latin"], variable: "--font-thai", weight: ["300", "400", "500", "600", "700"], display: "swap" });
+
+async function getCompanySettings() {
+  return prisma.companySettings.findUnique({ where: { id: 1 } });
+}
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const settings = await getCompanySettings();
   const name = settings?.companyName ?? "ADEO Solution";
 
   return {
@@ -27,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const settings = await getCompanySettings();
   const faviconUrl = settings?.faviconUrl ?? "/favicon.svg";
   const timestamp = settings?.updatedAt ? new Date(settings.updatedAt).getTime() : Date.now();
 

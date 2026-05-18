@@ -19,7 +19,7 @@ export default async function SeoMediaPage() {
           initialData={{
             companyName: settings?.companyName ?? "",
             description: settings?.description ?? "",
-            ogImage: settings?.ogImage ?? "",
+            ogImage: settings?.ogImageUrl ?? "",
             website: settings?.website ?? "",
           }}
         />

@@ -115,7 +115,7 @@ export default async function SitemapPage() {
         <div className="mt-16 text-center text-xs text-slate-400">
           
         </div>
-      <Footer companyName={settings?.companyName} />
+      <Footer />
     </main>
   );
 }
