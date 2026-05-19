@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { FadeInOnLoad } from "@/components/animations";
+<<<<<<< HEAD
 import { ctaSectionStyle, mix, palette } from "@/lib/palette-helper";
+=======
+import { useTranslations } from "next-intl";
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 
 type HeroProps = {
   eyebrow?: string;
@@ -20,6 +24,8 @@ export function Hero({
   primaryCta = { href: "/contact", label: "Talk to an Expert" },
   secondaryCta = { href: "/solutions", label: "Explore Solutions" },
 }: HeroProps) {
+  const t = useTranslations("home");
+
   return (
     <section className="relative overflow-hidden" style={ctaSectionStyle()}>
       <div
@@ -143,6 +149,7 @@ export function Hero({
             </FadeInOnLoad>
           </div>
 
+<<<<<<< HEAD
           {/* 5. Right Column Services Grid (ครอบ div นอกสุดเพื่อไม่ให้โครงสร้าง Grid เลื่อน) */}
           <div className="hidden lg:col-span-5 lg:block">
             <FadeInOnLoad y={24} delay={0.4} duration={0.8}>
@@ -197,6 +204,39 @@ export function Hero({
                       </div>
                     ))}
                   </div>
+=======
+          {/* Visual panel */}
+          <FadeInOnLoad
+            y={24}
+            delay={0.4}
+            duration={0.8}
+            className="hidden lg:col-span-5 lg:block"
+          >
+            <div className="relative">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { label: t("serviceSoftwareDev"), icon: "code" },
+                    { label: t("serviceCloudNative"), icon: "cloud" },
+                    { label: t("serviceNetwork"), icon: "network" },
+                    { label: t("serviceBackupDr"), icon: "shield" },
+                    { label: t("serviceMigration"), icon: "swap" },
+                    { label: t("serviceItSupport"), icon: "support" },
+                  ].map((item) => (
+                    <div
+                      key={item.icon}
+                      className="rounded-xl border border-white/10 bg-[#0d2040]/60 p-4"
+                    >
+                      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
+                        <ServiceIcon name={item.icon} />
+                      </div>
+                      <p className="text-sm font-semibold text-white">
+                        {item.label}
+                      </p>
+                      <p className="text-xs text-slate-400">{t("enterpriseGrade")}</p>
+                    </div>
+                  ))}
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
                 </div>
 
                 <div

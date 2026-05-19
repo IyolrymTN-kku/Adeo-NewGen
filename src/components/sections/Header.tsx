@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
+<<<<<<< HEAD
 import { Logo } from "@/components/sections/Logo_on label";
 
 const NAV_LINKS = [
@@ -25,6 +27,20 @@ const headerCtaBg = "var(--site-header-cta-bg, var(--admin-primary, #2563EB))";
 const headerCtaText = "var(--site-header-cta-text, #FFFFFF)";
 
 export function Header() {
+=======
+import { ButtonLink } from "@/components/ui/Button";
+import { Logo } from "@/components/sections/Logo";
+import { LanguageSwitcher } from "@/components/sections/LanguageSwitcher";
+
+export function Header({
+  companyName = "ADEO Solution",
+  logoUrl,
+}: {
+  companyName?: string;
+  logoUrl?: string | null;
+}) {
+  const t = useTranslations("nav");
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -32,6 +48,14 @@ export function Header() {
 
   // กำหนดตัวแปร siteName เอาไว้ใช้ใน Component
   const siteName = "ADEO Solution";
+
+  const NAV_LINKS = [
+    { href: "/", label: t("home") },
+    { href: "/solutions", label: t("solutions") },
+    { href: "/cloud", label: t("cloud") },
+    { href: "/contact", label: t("contact") },
+    { href: "/about", label: t("about") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -88,10 +112,15 @@ export function Header() {
     >
       <Container>
         <div className="flex h-16 items-center justify-between">
+<<<<<<< HEAD
           
           {/* ✅ แก้ไขตรงนี้: หุ้ม <Logo /> ด้วยแท็ก <Link> และส่ง Props `siteName` ให้ถูกต้องตาม Type ใหม่ */}
           <Link href="/" className="text-current transition hover:opacity-90">
             <Logo siteName={siteName} />
+=======
+          <Link href="/" aria-label={`${companyName} home`}>
+            <Logo companyName={companyName} logoUrl={logoUrl} />
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
           </Link>
 
           {/* Desktop Navigation */}
@@ -129,6 +158,7 @@ export function Header() {
             })}
           </nav>
 
+<<<<<<< HEAD
           {/* Desktop CTA Button */}
           <div className="hidden lg:block">
             <Link
@@ -141,6 +171,13 @@ export function Header() {
             >
               Get a Quote
             </Link>
+=======
+          <div className="hidden lg:flex lg:items-center lg:gap-3">
+            <LanguageSwitcher />
+            <ButtonLink href="/contact" size="sm">
+              {t("getQuote")}
+            </ButtonLink>
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
           </div>
 
           {/* Mobile Menu Toggle Button */}
@@ -206,6 +243,7 @@ export function Header() {
               })}
 
               <div className="mt-3 px-1">
+<<<<<<< HEAD
                 <Link
                   href="/contact"
                   className="inline-flex h-11 w-full items-center justify-center rounded-xl px-4 text-sm font-bold shadow-sm transition hover:opacity-90"
@@ -216,6 +254,14 @@ export function Header() {
                 >
                   Get a Quote
                 </Link>
+=======
+                <LanguageSwitcher />
+              </div>
+              <div className="mt-2 px-1">
+                <ButtonLink href="/contact" className="w-full">
+                  {t("getQuote")}
+                </ButtonLink>
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
               </div>
             </nav>
           </div>

@@ -206,6 +206,16 @@ async function main() {
       status: "NEW",
     },
   });
+
+  await prisma.siteSettings.upsert({
+    where: { id: "singleton" },
+    update: {},
+    create: {
+      id: "singleton",
+      siteName: "ชื่อบริษัทใหม่",
+    },
+  });
+  
   console.log("✅ Sample contact submission created");
 
   console.log("\n🎉 Seed complete!");
@@ -224,3 +234,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+  

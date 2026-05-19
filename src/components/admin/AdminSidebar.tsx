@@ -60,6 +60,7 @@ const NAV: NavItem[] = [
       </>
     ),
   },
+<<<<<<< HEAD
   {
     href: "/admin/settings",
     label: "Settings",
@@ -83,6 +84,32 @@ const NAV: NavItem[] = [
       </>
     ),
   },
+=======
+    {
+      href: "/admin/Corporation",
+      label: "Corporation",
+      icon: (
+        <>
+          <path d="M3 21h18" />
+          <path d="M5 21V7l8-4 8 4v14" />
+          <path d="M9 21v-4h6v4" />
+          <rect x="9" y="10" width="2" height="2" />
+          <rect x="13" y="10" width="2" height="2" />
+        </>
+      ),
+    },
+    {
+      href: "/admin/seo-media",
+      label: "SEO Media",
+      icon: (
+        <>
+          <path d="M4 4h16v16H4z" />
+          <path d="M4 9h16" />
+          <path d="M9 13h6" />
+        </>
+      ),
+    },
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 ];
 
 type AdminSidebarProps = {
@@ -92,13 +119,23 @@ type AdminSidebarProps = {
     role: string;
   };
   newSubmissions: number;
+<<<<<<< HEAD
   siteName?: string;
+=======
+  companyName?: string;
+  logoUrl?: string | null;
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 };
 
 export function AdminSidebar({
   user,
   newSubmissions,
+<<<<<<< HEAD
   siteName,
+=======
+  companyName = "ADEO Solution",
+  logoUrl,
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 }: AdminSidebarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -165,11 +202,20 @@ export function AdminSidebar({
         <Logo
           invert
           href="/admin"
+<<<<<<< HEAD
           siteName={siteName}
           className="inline-flex text-[var(--admin-sidebar-foreground)]"
         />
 
         <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--admin-sidebar-foreground)] opacity-90">
+=======
+          className="inline-flex"
+          onClick={() => setMobileOpen(false)}
+        >
+          <Logo invert companyName={companyName} logoUrl={logoUrl} />
+        </Link>
+        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
           Admin Portal
         </p>
       </div>
@@ -207,8 +253,14 @@ export function AdminSidebar({
   return (
     <>
       <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
+<<<<<<< HEAD
         <Logo href="/admin" siteName={siteName} />
 
+=======
+        <Link href="/admin">
+          <Logo invert companyName={companyName} logoUrl={logoUrl} />
+        </Link>
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
         <button
           type="button"
           aria-label="Toggle admin menu"

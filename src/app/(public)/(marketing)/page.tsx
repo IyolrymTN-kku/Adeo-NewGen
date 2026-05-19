@@ -7,10 +7,15 @@ import { StatsBar } from "@/components/sections/StatsBar";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { PartnerGrid } from "@/components/sections/PartnerGrid";
 import { CTASection } from "@/components/sections/CTASection";
+import { getTranslations } from "next-intl/server";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
+  const t = await getTranslations("home");
+  const settings = await prisma.companySettings.findUnique({
+    where: { id: 1 },
+  });
   const [services, partners] = await Promise.all([
     prisma.service.findMany({
       where: { isActive: true },
@@ -39,12 +44,12 @@ export default async function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="Enterprise IT & Cloud"
-        title="Powering the digital backbone of"
-        highlight="modern enterprises."
-        description="From custom software and managed IT to cloud-native architectures, ADEO Solution delivers secure, scalable infrastructure built for the way your business actually runs."
-        primaryCta={{ href: "/contact", label: "Talk to an Expert" }}
-        secondaryCta={{ href: "/solutions", label: "Explore Solutions" }}
+        eyebrow={t("heroEyebrow")}
+        title={`${t("heroTitle1")}${settings?.companyName ?? t("heroTitle2")}`}
+        highlight={t("heroHighlight")}
+        description={t("heroDescription")}
+        primaryCta={{ href: "/contact", label: t("heroBtn1") }}
+        secondaryCta={{ href: "/solutions", label: t("heroBtn2") }}
       />
 
       <StatsBar />
@@ -53,19 +58,19 @@ export default async function HomePage() {
       <section className="py-24">
         <Container>
           <SectionHeader
-            eyebrow="What we do"
-            title="Two pillars. One trusted partner."
-            subtitle="We bring together the operational rigor of enterprise IT with the velocity of cloud-native engineering — so you don't have to choose."
+            eyebrow={t("servicesEyebrow")}
+            title={t("servicesTitle")}
+            subtitle={t("servicesSubtitle")}
           />
           <div className="mt-14">
             <ServiceGrid services={services} />
           </div>
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <ButtonLink href="/solutions" variant="outline">
-              IT Solutions
+              {t("btnIT")}
             </ButtonLink>
             <ButtonLink href="/cloud" variant="outline">
-              Cloud Services
+              {t("btnCloud")}
             </ButtonLink>
           </div>
         </Container>
@@ -75,9 +80,9 @@ export default async function HomePage() {
       <section className="border-t border-slate-200 bg-slate-50 py-24">
         <Container>
           <SectionHeader
-            eyebrow="Trusted technology partners"
-            title="Built on enterprise-grade platforms"
-            subtitle="We architect with the technologies your IT, security, and compliance teams already trust."
+            eyebrow={t("partnersEyebrow")}
+            title={t("partnersTitle")}
+            subtitle={t("partnersSubtitle")}
           />
           <div className="mt-14">
             <PartnerGrid partners={partners} />
@@ -86,10 +91,10 @@ export default async function HomePage() {
       </section>
 
       <CTASection
-        title="Ready to modernise your IT?"
-        description="Let's scope a roadmap that meets your timelines, your budget, and your compliance reality. No fluff — just a working plan."
-        primaryCta={{ href: "/contact", label: "Start a Conversation" }}
-        secondaryCta={{ href: "/solutions", label: "See Our Capabilities" }}
+        title={t("ctaTitle")}
+        description={t("ctaDesc")}
+        primaryCta={{ href: "/contact", label: t("ctaBtn1") }}
+        secondaryCta={{ href: "/solutions", label: t("ctaBtn2") }}
       />
     </>
   );

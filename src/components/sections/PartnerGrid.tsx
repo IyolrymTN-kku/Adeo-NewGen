@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Partner, PartnerCategory } from "@prisma/client";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
+import { useTranslations } from "next-intl";
 
 const CATEGORY_LABELS: Record<PartnerCategory, string> = {
   NETWORK: "Network",
@@ -24,6 +25,7 @@ type PartnerGridProps = {
 };
 
 export function PartnerGrid({ partners }: PartnerGridProps) {
+  const t = useTranslations("home");
   const grouped = new Map<
     PartnerCategory,
     typeof partners
@@ -50,11 +52,15 @@ export function PartnerGrid({ partners }: PartnerGridProps) {
           <div key={category}>
             <div className="mb-5 flex items-center gap-3">
               <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
-                {CATEGORY_LABELS[category]}
+                {category === "NETWORK" ? t("partnerCatNETWORK") :
+                 category === "CLOUD" ? t("partnerCatCLOUD") :
+                 category === "SECURITY" ? t("partnerCatSECURITY") :
+                 category === "HARDWARE" ? t("partnerCatHARDWARE") : 
+                 CATEGORY_LABELS[category]}
               </h3>
               <span className="h-px flex-1 bg-slate-200" />
               <span className="text-xs text-slate-400">
-                {list.length} partners
+                {t("partnerCount", { count: list.length })}
               </span>
             </div>
             <StaggerContainer

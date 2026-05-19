@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const cspHeader = [
   "default-src 'self'",
@@ -42,7 +45,10 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
   eslint: { ignoreDuringBuilds: true },
 
   async headers() {
@@ -59,4 +65,8 @@ const nextConfig: NextConfig = {
   },
 };
 
+<<<<<<< HEAD
 export default nextConfig;
+=======
+export default withNextIntl(nextConfig);
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6

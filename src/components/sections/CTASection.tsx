@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+<<<<<<< HEAD
 import { ctaSectionStyle, mix, palette } from "@/lib/palette-helper";
+=======
+import { ButtonLink } from "@/components/ui/Button";
+import { useTranslations } from "next-intl";
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 
 type CTASectionProps = {
   eyebrow?: string;
@@ -11,12 +16,14 @@ type CTASectionProps = {
 };
 
 export function CTASection({
-  eyebrow = "Get started",
+  eyebrow,
   title,
   description,
   primaryCta = { href: "/contact", label: "Talk to an Expert" },
   secondaryCta,
 }: CTASectionProps) {
+  const t = useTranslations("common");
+
   return (
     <section
       className="relative overflow-hidden py-20"
@@ -33,11 +40,16 @@ export function CTASection({
 
       <Container className="relative">
         <div className="mx-auto max-w-3xl text-center">
+<<<<<<< HEAD
           <p
             className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]"
             style={{ color: palette.admin.primary }}
           >
             {eyebrow}
+=======
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#3385ff]">
+            {eyebrow || t("getStarted")}
+>>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
           </p>
 
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
