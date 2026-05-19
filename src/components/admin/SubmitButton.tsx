@@ -4,6 +4,7 @@ import { useFormStatus } from "react-dom";
 import { buttonClasses } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
+
 type SubmitButtonProps = {
   children: React.ReactNode;
   pendingLabel?: string;
@@ -26,8 +27,9 @@ export function SubmitButton({
       type="submit"
       disabled={pending}
       className={cn(
-        buttonClasses(variant, size),
-        "transition-colors disabled:cursor-not-allowed disabled:opacity-60",
+        // ✅ แก้ไขตรงนี้: ครอบ variant และ size ให้อยู่ในรูปของ Object { variant, size }
+        buttonClasses({ variant, size }),
+        "inline-flex items-center justify-center gap-2 transition-colors disabled:cursor-not-allowed disabled:opacity-60",
         className
       )}
     >

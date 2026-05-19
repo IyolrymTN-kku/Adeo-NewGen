@@ -16,14 +16,12 @@ const NAV_LINKS = [
 
 const HEADER_RESET_KEY = "adeo-site-header-reset-white";
 
-// Header เปลี่ยนสีได้จาก palette
+// สีที่ดึงมาจาก CSS Variables ระดับ Global
 const paletteHeaderBg = "var(--site-header-bg, #FFFFFF)";
 const paletteHeaderText = "var(--site-header-text, #0F172A)";
 
-const headerActive =
-  "var(--site-header-active-nav, var(--admin-accent, #2563EB))";
-const headerCtaBg =
-  "var(--site-header-cta-bg, var(--admin-primary, #2563EB))";
+const headerActive = "var(--site-header-active-nav, var(--admin-accent, #2563EB))";
+const headerCtaBg = "var(--site-header-cta-bg, var(--admin-primary, #2563EB))";
 const headerCtaText = "var(--site-header-cta-text, #FFFFFF)";
 
 export function Header() {
@@ -31,6 +29,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [forceWhiteHeader, setForceWhiteHeader] = useState(false);
+
+  // กำหนดตัวแปร siteName เอาไว้ใช้ใน Component
+  const siteName = "ADEO Solution";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -60,14 +61,8 @@ export function Header() {
 
     return () => {
       window.removeEventListener("storage", syncHeaderResetState);
-      window.removeEventListener(
-        "ADEO_HEADER_RESET_WHITE",
-        syncHeaderResetState
-      );
-      window.removeEventListener(
-        "ADEO_ADMIN_THEME_CHANGED",
-        syncHeaderResetState
-      );
+      window.removeEventListener("ADEO_HEADER_RESET_WHITE", syncHeaderResetState);
+      window.removeEventListener("ADEO_ADMIN_THEME_CHANGED", syncHeaderResetState);
     };
   }, []);
 
@@ -93,8 +88,13 @@ export function Header() {
     >
       <Container>
         <div className="flex h-16 items-center justify-between">
-          <Logo href="/" className="text-current" />
+          
+          {/* ✅ แก้ไขตรงนี้: หุ้ม <Logo /> ด้วยแท็ก <Link> และส่ง Props `siteName` ให้ถูกต้องตาม Type ใหม่ */}
+          <Link href="/" className="text-current transition hover:opacity-90">
+            <Logo siteName={siteName} />
+          </Link>
 
+          {/* Desktop Navigation */}
           <nav
             className="hidden items-center gap-8 lg:flex"
             aria-label="Primary"
@@ -129,6 +129,7 @@ export function Header() {
             })}
           </nav>
 
+          {/* Desktop CTA Button */}
           <div className="hidden lg:block">
             <Link
               href="/contact"
@@ -142,6 +143,7 @@ export function Header() {
             </Link>
           </div>
 
+          {/* Mobile Menu Toggle Button */}
           <button
             type="button"
             aria-label="Toggle menu"
@@ -174,6 +176,7 @@ export function Header() {
           </button>
         </div>
 
+        {/* Mobile Navigation Panel */}
         {open && (
           <div
             className="py-4 lg:hidden"

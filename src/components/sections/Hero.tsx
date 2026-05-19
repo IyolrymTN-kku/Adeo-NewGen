@@ -31,6 +31,7 @@ export function Hero({
         }}
       />
 
+      {/* Background Glow 2 */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-48 -left-32 h-[520px] w-[520px] rounded-full opacity-20"
@@ -40,6 +41,7 @@ export function Hero({
         }}
       />
 
+      {/* Grid Overlay */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -53,162 +55,160 @@ export function Hero({
       <Container className="relative">
         <div className="grid items-center gap-16 py-24 lg:grid-cols-12 lg:py-32">
           <div className="lg:col-span-7">
+            
+            {/* 1. Eyebrow Component */}
             <FadeInOnLoad y={8} delay={0.05}>
               <p
                 className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"
                 style={{
-                  borderColor: mix(palette.cta.text, 10),
-                  backgroundColor: mix(palette.cta.text, 5),
-                  color: palette.admin.primary,
+                  borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 10%, transparent)",
+                  backgroundColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 5%, transparent)",
+                  color: "var(--admin-primary, #0066FF)",
                 }}
               >
                 <span
                   className="h-1.5 w-1.5 rounded-full"
-                  style={{ backgroundColor: palette.admin.primary }}
+                  style={{ backgroundColor: "var(--admin-primary, #0066FF)" }}
                 />
                 {eyebrow}
               </p>
             </FadeInOnLoad>
 
-            <FadeInOnLoad
-              as="h1"
-              y={16}
-              delay={0.15}
-              duration={0.7}
-              className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
-              style={{ color: palette.cta.text }}
-            >
-              {title}
-              {highlight && (
-                <>
-                  {" "}
-                  <span style={{ color: palette.admin.primary }}>
-                    {highlight}
-                  </span>
-                </>
-              )}
-            </FadeInOnLoad>
-
-            <FadeInOnLoad
-              as="p"
-              y={16}
-              delay={0.3}
-              className="mt-6 max-w-xl text-lg leading-relaxed"
-              style={{ color: mix(palette.cta.text, 76) }}
-            >
-              {description}
-            </FadeInOnLoad>
-
-            <FadeInOnLoad
-              y={16}
-              delay={0.45}
-              className="mt-10 flex flex-wrap gap-4"
-            >
-              <Link
-                href={primaryCta.href}
-                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-sm transition hover:opacity-90"
-                style={{
-                  backgroundColor: palette.admin.primary,
-                  color: palette.admin.primaryText,
-                }}
+            {/* 2. Title Component (แก้ไขย้ายแท็ก h1 มาไว้ด้านใน) */}
+            <FadeInOnLoad y={16} delay={0.15} duration={0.7}>
+              <h1 
+                className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
+                style={{ color: "var(--cta-text, #FFFFFF)" }}
               >
-                {primaryCta.label}
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-4 w-4"
-                  aria-hidden="true"
+                {title}
+                {highlight && (
+                  <>
+                    {" "}
+                    <span style={{ color: "var(--admin-primary, #0066FF)" }}>
+                      {highlight}
+                    </span>
+                  </>
+                )}
+              </h1>
+            </FadeInOnLoad>
+
+            {/* 3. Description Component (แก้ไขย้ายแท็ก p มาไว้ด้านใน) */}
+            <FadeInOnLoad y={16} delay={0.3}>
+              <p 
+                className="mt-6 max-w-xl text-lg leading-relaxed"
+                style={{ color: "color-mix(in srgb, var(--cta-text, #FFFFFF) 76%, transparent)" }}
+              >
+                {description}
+              </p>
+            </FadeInOnLoad>
+
+            {/* 4. CTA Buttons (แก้ไขหุ้มด้วย div ด้านในเพื่อความปลอดภัย) */}
+            <FadeInOnLoad y={16} delay={0.45}>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  href={primaryCta.href}
+                  className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-sm transition hover:opacity-90"
+                  style={{
+                    backgroundColor: "var(--admin-primary, #0066FF)",
+                    color: "var(--admin-primary-text, #FFFFFF)",
+                  }}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Link>
+                  {primaryCta.label}
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </Link>
 
-              <Link
-                href={secondaryCta.href}
-                className="inline-flex items-center justify-center rounded-xl border px-6 py-3 text-sm font-bold transition hover:opacity-90"
-                style={{
-                  borderColor: mix(palette.cta.text, 20),
-                  backgroundColor: "transparent",
-                  color: palette.cta.text,
-                }}
-              >
-                {secondaryCta.label}
-              </Link>
+                <Link
+                  href={secondaryCta.href}
+                  className="inline-flex items-center justify-center rounded-xl border px-6 py-3 text-sm font-bold transition hover:opacity-90"
+                  style={{
+                    borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 20%, transparent)",
+                    backgroundColor: "transparent",
+                    color: "var(--cta-text, #FFFFFF)",
+                  }}
+                >
+                  {secondaryCta.label}
+                </Link>
+              </div>
             </FadeInOnLoad>
           </div>
 
-          <FadeInOnLoad
-            y={24}
-            delay={0.4}
-            duration={0.8}
-            className="hidden lg:col-span-5 lg:block"
-          >
-            <div className="relative">
-              <div
-                className="rounded-2xl border p-6 backdrop-blur"
-                style={{
-                  borderColor: mix(palette.cta.text, 10),
-                  backgroundColor: mix(palette.cta.text, 3),
-                }}
-              >
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { label: "Software Dev", icon: "code" },
-                    { label: "Cloud Native", icon: "cloud" },
-                    { label: "Network", icon: "network" },
-                    { label: "Backup & DR", icon: "shield" },
-                    { label: "Migration", icon: "swap" },
-                    { label: "IT Support", icon: "support" },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="rounded-xl border p-4"
-                      style={{
-                        borderColor: mix(palette.cta.text, 10),
-                        backgroundColor: mix(palette.cta.text, 5),
-                      }}
-                    >
+          {/* 5. Right Column Services Grid (ครอบ div นอกสุดเพื่อไม่ให้โครงสร้าง Grid เลื่อน) */}
+          <div className="hidden lg:col-span-5 lg:block">
+            <FadeInOnLoad y={24} delay={0.4} duration={0.8}>
+              <div className="relative">
+                <div
+                  className="rounded-2xl border p-6 backdrop-blur"
+                  style={{
+                    borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 10%, transparent)",
+                    backgroundColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 3%, transparent)",
+                  }}
+                >
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { label: "Software Dev", icon: "code" },
+                      { label: "Cloud Native", icon: "cloud" },
+                      { label: "Network", icon: "network" },
+                      { label: "Backup & DR", icon: "shield" },
+                      { label: "Migration", icon: "swap" },
+                      { label: "IT Support", icon: "support" },
+                    ].map((item) => (
                       <div
-                        className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg"
+                        key={item.label}
+                        className="rounded-xl border p-4"
                         style={{
-                          backgroundColor: mix(palette.admin.primary, 15),
-                          color: palette.admin.primary,
+                          borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 10%, transparent)",
+                          backgroundColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 5%, transparent)",
                         }}
                       >
-                        <ServiceIcon name={item.icon} />
+                        <div
+                          className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg"
+                          style={{
+                            backgroundColor: "color-mix(in srgb, var(--admin-primary, #0066FF) 15%, transparent)",
+                            color: "var(--admin-primary, #0066FF)",
+                          }}
+                        >
+                          <ServiceIcon name={item.icon} />
+                        </div>
+
+                        <p
+                          className="text-sm font-semibold"
+                          style={{ color: "var(--cta-text, #FFFFFF)" }}
+                        >
+                          {item.label}
+                        </p>
+
+                        <p
+                          className="text-xs"
+                          style={{ color: "color-mix(in srgb, var(--cta-text, #FFFFFF) 70%, transparent)" }}
+                        >
+                          Enterprise grade
+                        </p>
                       </div>
-
-                      <p
-                        className="text-sm font-semibold"
-                        style={{ color: palette.cta.text }}
-                      >
-                        {item.label}
-                      </p>
-
-                      <p
-                        className="text-xs"
-                        style={{ color: mix(palette.cta.text, 70) }}
-                      >
-                        Enterprise grade
-                      </p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div
-                aria-hidden="true"
-                className="absolute -inset-x-8 -bottom-6 h-12 rounded-full blur-2xl"
-                style={{
-                  backgroundColor: mix(palette.admin.primary, 30),
-                }}
-              />
-            </div>
-          </FadeInOnLoad>
+                <div
+                  aria-hidden="true"
+                  className="absolute -inset-x-8 -bottom-6 h-12 rounded-full blur-2xl"
+                  style={{
+                    backgroundColor: "color-mix(in srgb, var(--admin-primary, #0066FF) 30%, transparent)",
+                  }}
+                />
+              </div>
+            </FadeInOnLoad>
+          </div>
         </div>
       </Container>
     </section>
