@@ -183,3 +183,34 @@ model SiteSettings {
   id       String @id @default("singleton")
   siteName String
 }
+
+// ─── Theme / Palette Settings ─────────────────────────────────────────────────
+
+model ThemeSettings {
+  id     String @id @default("singleton")
+
+  // ── Base palette (hex values) ─────────────────────────────────────────────
+  primary   String @default("#0066FF")
+  secondary String @default("#0A1628")
+  accent    String @default("#0066FF")
+  muted     String @default("#EFF6FF")
+  success   String @default("#22C55E")
+
+  // ── Component color mapping ───────────────────────────────────────────────
+  // Stored as JSON: { "header.background": "secondary", "footer.background": "secondary", ... }
+  // Values are token names (primary | secondary | accent | muted | success)
+  // matching the base palette keys above
+  componentColors Json @default("{}")
+
+  updatedAt DateTime @updatedAt
+
+  @@map("theme_settings")
+}
+model AdminTheme {
+  id        Int    @id @default(autoincrement())
+  primary   String @default("#0066FF")
+  secondary String @default("#0A1628")
+  accent    String @default("#3385FF")
+  muted     String @default("#EFF6FF")
+  success   String @default("#22C55E")
+}

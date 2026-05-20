@@ -3,7 +3,20 @@
 @theme inline {
   --font-sans: var(--font-inter);
 
-  /* ── Brand Palette ────────────────────────────────── */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-border: hsl(var(--border));
+
+  --color-theme-accent: hsl(var(--theme-accent));
+  --color-theme-muted: hsl(var(--theme-muted));
+
   --color-navy-950: #060d1f;
   --color-navy-900: #0a1628;
   --color-navy-800: #0d2040;
@@ -11,9 +24,9 @@
 
   --color-blue-brand: #0066ff;
   --color-blue-light: #3385ff;
-  --color-blue-dark:  #0052cc;
+  --color-blue-dark: #0052cc;
 
-  --color-slate-50:  #f8fafc;
+  --color-slate-50: #f8fafc;
   --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
   --color-slate-600: #475569;
@@ -21,7 +34,6 @@
   --color-slate-900: #0f172a;
 }
 
-/* ── Base resets ───────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -31,16 +43,88 @@ html {
 }
 
 body {
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family:
+    var(--font-inter),
+    var(--font-thai),
+    system-ui,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Focus ring (accessibility) ───────────────────── */
 :focus-visible {
-  outline: 2px solid var(--color-blue-brand);
+  outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+
+  --primary: 224 86% 56%;
+  --primary-foreground: 0 0% 100%;
+
+  --hero-bg: 222 47% 10%;
+  --theme-accent: 214 95% 70%;
+  --theme-muted: 215 25% 27%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+
+  --border: 214 32% 91%;
+}
+
+html.dark {
+  --background: 222 47% 8%;
+  --foreground: 210 40% 98%;
+
+  --hero-bg: 222 47% 8%;
+
+  --card: 222 47% 12%;
+  --card-foreground: 210 40% 98%;
+
+  --border: 217 33% 22%;
+}
+
+/* ADEO Blue */
+html[data-theme="adeo-blue"] {
+  --primary: 224 86% 56%;
+  --hero-bg: 222 47% 10%;
+  --theme-accent: 214 95% 70%;
+  --theme-muted: 215 25% 27%;
+}
+
+/* Ocean */
+html[data-theme="ocean"] {
+  --primary: 194 62% 45%;
+  --hero-bg: 197 70% 14%;
+  --theme-accent: 190 75% 70%;
+  --theme-muted: 200 20% 45%;
+}
+
+/* Forest */
+html[data-theme="forest"] {
+  --primary: 142 43% 42%;
+  --hero-bg: 143 45% 13%;
+  --theme-accent: 142 55% 70%;
+  --theme-muted: 130 18% 35%;
+}
+
+/* Sunset */
+html[data-theme="sunset"] {
+  --primary: 24 85% 55%;
+  --hero-bg: 18 55% 14%;
+  --theme-accent: 346 75% 70%;
+  --theme-muted: 270 35% 38%;
+}
+
+/* Slate */
+html[data-theme="slate"] {
+  --primary: 215 25% 27%;
+  --hero-bg: 222 47% 10%;
+  --theme-accent: 214 20% 70%;
+  --theme-muted: 215 18% 35%;
 }
 
 .PhoneInput {
@@ -67,13 +151,4 @@ body {
   border: none;
   background: transparent;
   cursor: pointer;
-}
-
-body {
-  font-family:
-    var(--font-inter),
-    var(--font-thai),
-    
-    system-ui,
-    sans-serif;
 }

@@ -87,7 +87,7 @@ function PartnerLogo({
   partner: Pick<Partner, "name" | "logoUrl" | "websiteUrl">;
 }) {
   const tile = (
-    <div className="group flex h-24 w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-4 transition hover:border-[#0066ff]/40 hover:shadow-sm">
+    <div className="group flex h-24 w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-4 transition hover:border-primary/40 hover:shadow-sm">
       {partner.logoUrl && partner.logoUrl !== "/uploads/placeholder-logo.svg" ? (
         <Image
           src={partner.logoUrl}
@@ -97,7 +97,7 @@ function PartnerLogo({
           className="max-h-12 w-auto object-contain opacity-80 transition group-hover:opacity-100"
         />
       ) : (
-        <span className="text-center text-sm font-semibold text-slate-700 transition group-hover:text-[#0066ff]">
+        <span className="text-center text-sm font-semibold text-slate-700 transition group-hover:text-primary">
           {partner.name}
         </span>
       )}

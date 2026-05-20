@@ -1,11 +1,13 @@
+import Link from "next/link";
+import { ThemeSettings } from "@/components/theme-settings";
+import { cn } from "@/lib/utils";
+
 type PageHeaderProps = {
   title: string;
   description?: string;
   actions?: React.ReactNode;
   breadcrumbs?: { href: string; label: string }[];
 };
-
-import Link from "next/link";
 
 export function PageHeader({
   title,
@@ -14,7 +16,7 @@ export function PageHeader({
   breadcrumbs,
 }: PageHeaderProps) {
   return (
-    <div className="border-b border-slate-200 bg-white">
+    <div className="relative border-b border-slate-200 bg-white text-slate-950">
       <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-8 lg:px-10">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
@@ -26,7 +28,7 @@ export function PageHeader({
                 {i > 0 && <span aria-hidden="true">/</span>}
                 <Link
                   href={bc.href}
-                  className="hover:text-[#0066ff] hover:underline"
+                  className="transition hover:text-[var(--admin-primary)] hover:underline"
                 >
                   {bc.label}
                 </Link>
@@ -34,9 +36,10 @@ export function PageHeader({
             ))}
           </nav>
         )}
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">
               {title}
             </h1>
             {description && (
@@ -45,18 +48,26 @@ export function PageHeader({
               </p>
             )}
           </div>
-          {actions && (
-            <div className="flex flex-wrap items-center gap-2">{actions}</div>
-          )}
+
+          <div className="flex shrink-0 items-center gap-3 pt-1">
+            {actions}
+            <ThemeSettings />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export function PageBody({ children, className }: { children: React.ReactNode; className?: string }) {
+export function PageBody({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={`mx-auto w-full ${className ?? "max-w-6xl"} px-6 py-8 sm:px-8 lg:px-10`}>
+    <div className={cn("mx-auto w-full px-6 py-8 sm:px-8 lg:px-10", className ?? "max-w-6xl")}>
       {children}
     </div>
   );

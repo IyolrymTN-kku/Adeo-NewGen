@@ -1,5 +1,13 @@
 import { Container } from "@/components/ui/Container";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
+import { mix, palette } from "@/lib/palette-helper";
+
+const STATS = [
+  { value: "15+", label: "Years of expertise" },
+  { value: "200+", label: "Enterprise projects delivered" },
+  { value: "99.9%", label: "Uptime across managed services" },
+  { value: "24/7", label: "Support and monitoring" },
+];
 import { useTranslations } from "next-intl";
 
 export function StatsBar() {
@@ -13,7 +21,13 @@ export function StatsBar() {
   ];
 
   return (
-    <section className="border-y border-slate-200 bg-slate-50">
+    <section
+      className="border-y"
+      style={{
+        borderColor: mix(palette.section.accent, 16, "#e2e8f0"),
+        backgroundColor: mix(palette.section.accent, 6, "white"),
+      }}
+    >
       <Container>
         <StaggerContainer
           as="dl"
@@ -26,9 +40,15 @@ export function StatsBar() {
               y={16}
               className="text-center lg:text-left"
             >
-              <dt className="text-3xl font-bold tracking-tight text-[#0a1628] sm:text-4xl">
+              <dt
+                className="text-3xl font-bold tracking-tight sm:text-4xl"
+                style={{
+                  color: palette.section.accent,
+                }}
+              >
                 {stat.value}
               </dt>
+
               <dd className="mt-1 text-sm text-slate-600">{stat.label}</dd>
             </StaggerItem>
           ))}

@@ -2,12 +2,11 @@ import type { Service, ServiceCategory } from "@prisma/client";
 import { Card } from "@/components/ui/Card";
 import { categoryLabel, isCloudCategory } from "@/lib/services";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
+import { mix, palette } from "@/lib/palette-helper";
 import { getTranslations } from "next-intl/server";
 
 const CATEGORY_ICONS: Record<ServiceCategory, React.ReactNode> = {
-  SOFTWARE_DEV: (
-    <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
-  ),
+  SOFTWARE_DEV: <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />,
   IT_SUPPORT: (
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   ),
@@ -79,14 +78,26 @@ async function ServiceCard({
   const t = await getTranslations("services");
   const c = await getTranslations("categories");
 
-  const title = t.has(`${service.slug}.title`) ? t(`${service.slug}.title`) : service.title;
-  const shortDesc = t.has(`${service.slug}.shortDescription`) ? t(`${service.slug}.shortDescription`) : service.shortDescription;
-  const catLabel = c.has(service.category) ? c(service.category) : categoryLabel(service.category);
+  const title = t.has(`${service.slug}.title`)
+    ? t(`${service.slug}.title`)
+    : service.title;
+  const shortDesc = t.has(`${service.slug}.shortDescription`)
+    ? t(`${service.slug}.shortDescription`)
+    : service.shortDescription;
+  const catLabel = c.has(service.category)
+    ? c(service.category)
+    : categoryLabel(service.category);
 
   return (
     <Card hover className="flex h-full flex-col">
       <div className="mb-5 flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-[#0066ff]">
+        <div
+          className="flex h-11 w-11 items-center justify-center rounded-xl"
+          style={{
+            backgroundColor: mix(palette.section.accent, 14),
+            color: palette.section.accent,
+          }}
+        >
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -100,10 +111,18 @@ async function ServiceCard({
             {CATEGORY_ICONS[service.category]}
           </svg>
         </div>
-        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
+
+        <span
+          className="rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider"
+          style={{
+            backgroundColor: mix(palette.section.accent, 10),
+            color: mix(palette.section.accent, 75, "#0f172a"),
+          }}
+        >
           {cloud ? "Cloud" : "IT"} · {catLabel}
         </span>
       </div>
+
       <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
         {shortDesc}

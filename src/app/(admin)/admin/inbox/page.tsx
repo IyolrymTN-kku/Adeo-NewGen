@@ -31,6 +31,7 @@ export default async function InboxPage({
     status === "NEW" || status === "READ" || status === "REPLIED"
       ? status
       : null;
+
   const where: Prisma.ContactSubmissionWhereInput = validStatus
     ? { status: validStatus }
     : {};
@@ -47,20 +48,22 @@ export default async function InboxPage({
         title="Inbox"
         description="Contact form submissions from the public site."
       />
+
       <PageBody>
         {/* Filter tabs */}
         <div className="mb-4 flex flex-wrap gap-2">
           {FILTERS.map((f) => {
             const active = (status ?? undefined) === f.key;
             const href = f.key ? `/admin/inbox?status=${f.key}` : "/admin/inbox";
+
             return (
               <Link
                 key={f.label}
                 href={href}
                 className={
                   active
-                    ? "rounded-lg bg-[#0066ff] px-3 py-1.5 text-xs font-semibold text-white shadow-sm"
-                    : "rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:border-[#0066ff] hover:text-[#0066ff]"
+                    ? "rounded-lg border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/30"
+                    : "rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-semibold text-card-foreground hover:border-primary hover:bg-primary/5 hover:text-primary"
                 }
               >
                 {f.label}
@@ -71,7 +74,9 @@ export default async function InboxPage({
 
         {submissions.length === 0 ? (
           <EmptyState
-            title={status ? `No ${status.toLowerCase()} submissions` : "Inbox empty"}
+            title={
+              status ? `No ${status.toLowerCase()} submissions` : "Inbox empty"
+            }
             description="New enquiries from the public contact form will appear here."
           />
         ) : (
@@ -85,6 +90,7 @@ export default async function InboxPage({
                 <TH className="text-right">View</TH>
               </TR>
             </THead>
+
             <TBody>
               {submissions.map((s) => (
                 <TR key={s.id}>
@@ -93,24 +99,26 @@ export default async function InboxPage({
                       <p
                         className={
                           s.status === "NEW"
-                            ? "font-bold text-slate-900"
-                            : "font-semibold text-slate-800"
+                            ? "font-bold text-foreground"
+                            : "font-semibold text-foreground/90"
                         }
                       >
                         {s.name}
                       </p>
-                      <p className="text-xs text-slate-500">{s.email}</p>
+                      <p className="text-xs text-foreground/60">{s.email}</p>
                     </div>
                   </TD>
+
                   <TD>
-                    <span className="text-xs text-slate-600">
+                    <span className="text-xs text-foreground/70">
                       {s.company ?? "—"}
                     </span>
                   </TD>
+
                   <TD>
                     <time
                       dateTime={s.createdAt.toISOString()}
-                      className="text-xs text-slate-500"
+                      className="text-xs text-foreground/60"
                     >
                       {s.createdAt.toLocaleString(undefined, {
                         dateStyle: "medium",
@@ -118,13 +126,15 @@ export default async function InboxPage({
                       })}
                     </time>
                   </TD>
+
                   <TD>
                     <ContactStatusBadge status={s.status} />
                   </TD>
+
                   <TD className="text-right">
                     <Link
                       href={`/admin/inbox/${s.id}`}
-                      className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#0066ff] hover:bg-blue-50"
+                      className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-primary hover:bg-primary/10"
                     >
                       Open →
                     </Link>

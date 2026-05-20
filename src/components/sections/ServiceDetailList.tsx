@@ -1,6 +1,7 @@
 import type { Service } from "@prisma/client";
 import { Card } from "@/components/ui/Card";
 import { categoryLabel, parseFeatures } from "@/lib/services";
+import { mix, palette } from "@/lib/palette-helper";
 import { getTranslations } from "next-intl/server";
 
 type ServiceDetailListProps = {
@@ -26,38 +27,54 @@ export async function ServiceDetailList({ services }: ServiceDetailListProps) {
     <div className="space-y-10">
       {services.map((service) => {
         const features = parseFeatures(service.features);
-        
-        // Dynamic translation logic
-        const title = t.has(`${service.slug}.title`) ? t(`${service.slug}.title`) : service.title;
-        const desc = t.has(`${service.slug}.description`) ? t(`${service.slug}.description`) : service.description;
-        const catLabel = c.has(service.category) ? c(service.category) : categoryLabel(service.category);
-        const whatsIncluded = t.has("whatsIncluded") ? t("whatsIncluded") : "What's included";
-        
-        const mappedFeatures = features.map((feat, idx) => {
-          return t.has(`${service.slug}.features_${idx}`) ? t(`${service.slug}.features_${idx}`) : feat;
-        });
+
+        const title = t.has(`${service.slug}.title`)
+          ? t(`${service.slug}.title`)
+          : service.title;
+        const desc = t.has(`${service.slug}.description`)
+          ? t(`${service.slug}.description`)
+          : service.description;
+        const catLabel = c.has(service.category)
+          ? c(service.category)
+          : categoryLabel(service.category);
+        const whatsIncluded = t.has("whatsIncluded")
+          ? t("whatsIncluded")
+          : "What's included";
+
+        const mappedFeatures = features.map((feat, idx) =>
+          t.has(`${service.slug}.features_${idx}`)
+            ? t(`${service.slug}.features_${idx}`)
+            : feat
+        );
 
         return (
           <Card key={service.id} className="p-8 sm:p-10">
-            <div
-              id={service.slug}
-              className="scroll-mt-28 rounded-2xl"
-            >
+            <div id={service.slug} className="scroll-mt-28">
               <div className="lg:col-span-5">
-                <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0066ff]">
+                <span
+                  className="inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider"
+                  style={{
+                    backgroundColor: mix(palette.section.accent, 10),
+                    color: palette.section.accent,
+                  }}
+                >
                   {catLabel}
                 </span>
+
                 <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900">
                   {title}
                 </h3>
+
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   {desc}
                 </p>
               </div>
+
               <div className="lg:col-span-7 mt-8">
                 <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                   {whatsIncluded}
                 </h4>
+
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {mappedFeatures.map((feature, idx) => (
                     <li
@@ -67,7 +84,8 @@ export async function ServiceDetailList({ services }: ServiceDetailListProps) {
                       <svg
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        className="mt-0.5 h-4 w-4 shrink-0 text-[#0066ff]"
+                        className="mt-0.5 h-4 w-4 shrink-0"
+                        style={{ color: palette.section.accent }}
                         aria-hidden="true"
                       >
                         <path

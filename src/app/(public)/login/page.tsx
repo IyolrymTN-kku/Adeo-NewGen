@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const brandAccent = "var(--admin-accent, #3385FF)";
+const brandMutedText = "var(--admin-sidebar-foreground, rgba(255,255,255,0.6))";
+
 export default async function LoginPage() {
   const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
   const companyName = settings?.companyName ?? "ADEO Solution";
@@ -16,11 +19,20 @@ export default async function LoginPage() {
   return (
     <div className="flex min-h-screen">
       {/* ── Brand panel (left) ── */}
-      <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-[#0a1628] p-12 lg:flex">
-        <div aria-hidden="true" className="pointer-events-none absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #0066ff 0%, transparent 70%)" }} />
-        <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -left-20 h-[360px] w-[360px] rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, #0066ff 0%, transparent 70%)" }} />
+      <div
+        className="relative hidden w-1/2 flex-col justify-between overflow-hidden p-12 lg:flex"
+        style={{ backgroundColor: "var(--admin-secondary, #0A1628)" }}
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full opacity-20"
+          style={{ background: "radial-gradient(circle, #0066ff 0%, transparent 70%)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-40 -left-20 h-[360px] w-[360px] rounded-full opacity-10"
+          style={{ background: "radial-gradient(circle, #0066ff 0%, transparent 70%)" }}
+        />
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
@@ -29,7 +41,7 @@ export default async function LoginPage() {
 
         {/* Tagline */}
         <div className="relative z-10 space-y-6">
-          <div className="h-px w-12 bg-[#0066ff]" />
+          <div className="h-px w-12" style={{ backgroundColor: brandAccent }} />
           <h1 className="text-4xl font-bold leading-tight tracking-tight text-white">
             Powering the<br />digital backbone<br />of your business.
           </h1>
@@ -42,8 +54,13 @@ export default async function LoginPage() {
         <div className="relative z-10 grid grid-cols-2 gap-4">
           {["Software Development", "IT Support", "Cloud Migration", "Network Infrastructure"].map((item) => (
             <div key={item} className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-[#0066ff]" />
-              <span className="text-xs text-slate-400">{item}</span>
+              <div
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ backgroundColor: brandAccent }}
+              />
+              <span className="text-xs" style={{ color: brandMutedText }}>
+                {item}
+              </span>
             </div>
           ))}
         </div>
@@ -60,7 +77,9 @@ export default async function LoginPage() {
           {/* Heading */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Admin Portal</h2>
-            <p className="mt-1.5 text-sm text-slate-500">Sign in to manage services, partners, and content.</p>
+            <p className="mt-1.5 text-sm text-slate-500">
+              Sign in to manage services, partners, and content.
+            </p>
           </div>
 
           {/* Card */}

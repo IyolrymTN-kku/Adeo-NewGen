@@ -11,7 +11,7 @@ export function FormFeedback({ status, message }: FormFeedbackProps) {
       <div
         role="status"
         aria-live="polite"
-        className="flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
+        className="flex items-start gap-3 rounded-lg border border-[color-mix(in_srgb,var(--admin-success)_25%,white)] bg-[color-mix(in_srgb,var(--admin-success)_12%,white)] px-4 py-3 text-sm text-[var(--admin-success)] transition-colors"
       >
         <svg
           viewBox="0 0 20 20"
@@ -25,6 +25,7 @@ export function FormFeedback({ status, message }: FormFeedbackProps) {
             clipRule="evenodd"
           />
         </svg>
+
         <span>{message}</span>
       </div>
     );
@@ -33,7 +34,7 @@ export function FormFeedback({ status, message }: FormFeedbackProps) {
   return (
     <div
       role="alert"
-      className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+      className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 transition-colors"
     >
       <svg
         viewBox="0 0 20 20"
@@ -47,6 +48,7 @@ export function FormFeedback({ status, message }: FormFeedbackProps) {
           clipRule="evenodd"
         />
       </svg>
+
       <span>{message}</span>
     </div>
   );

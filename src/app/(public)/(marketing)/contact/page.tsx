@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "./ContactForm";
@@ -6,6 +5,21 @@ import { generateSEOMetadata } from "@/lib/seo/generate";
 import { getTranslations } from "next-intl/server";
 
 export const metadata = generateSEOMetadata("/contact");
+
+const contactPanelBackground =
+  "var(--site-cta-bg, hsl(var(--hero-bg, 222 47% 10%)))";
+const contactPanelText =
+  "var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%)))";
+const contactPanelMutedText =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 68%, transparent)";
+const contactPanelSubtleText =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 56%, transparent)";
+const contactPanelBorder =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 14%, transparent)";
+const contactPanelSoftBackground =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 7%, transparent)";
+const contactIconBackground =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 12%, transparent)";
 
 export default async function ContactPage() {
   const t = await getTranslations("contact");
@@ -57,18 +71,18 @@ export default async function ContactPage() {
         description={t("heroDesc")}
       />
 
-      <section className="py-20">
+      <section className="bg-background py-20 text-foreground">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
             {/* Form */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-                <h2 className="text-xl font-semibold text-slate-900">
-                  {t("formTitle")}
+              <div className="rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm sm:p-8">
+                <h2 className="text-xl font-semibold text-foreground">
+                  {t("sendMessage")}
                 </h2>
-                <p className="mt-1 text-sm text-slate-500">
-                  {t("formSub1")} <span className="text-red-500">*</span>{" "}
-                  {t("formSub2")}
+                <p className="mt-1 text-sm text-foreground/60">
+                  Fields marked with <span className="text-red-500">*</span>{" "}
+                  are required.
                 </p>
                 <div className="mt-6">
                   <ContactForm />
@@ -78,16 +92,30 @@ export default async function ContactPage() {
 
             {/* Details */}
             <aside className="lg:col-span-5">
-              <div className="rounded-2xl bg-[#0a1628] p-8 text-white">
-                <h2 className="text-lg font-semibold">{t("asideTitle")}</h2>
-                <p className="mt-2 text-sm text-slate-300">
-                  {t("asideDesc")}
+              <div
+                className="rounded-2xl p-8 shadow-sm"
+                style={{
+                  backgroundColor: contactPanelBackground,
+                  color: contactPanelText,
+                }}
+              >
+                <h2 className="text-lg font-semibold" style={{ color: contactPanelText }}>
+                  {t("getInTouch")}
+                </h2>
+                <p className="mt-2 text-sm" style={{ color: contactPanelMutedText }}>
+                  {t("preferContact")}
                 </p>
 
                 <ul className="mt-8 space-y-6">
                   {CONTACT_DETAILS.map((item) => (
                     <li key={item.label} className="flex items-start gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
+                      <span
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                        style={{
+                          backgroundColor: contactIconBackground,
+                          color: contactPanelText,
+                        }}
+                      >
                         <svg
                           viewBox="0 0 24 24"
                           fill="none"
@@ -101,19 +129,24 @@ export default async function ContactPage() {
                           {item.icon}
                         </svg>
                       </span>
+
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                        <p
+                          className="text-xs font-semibold uppercase tracking-[0.18em]"
+                          style={{ color: contactPanelSubtleText }}
+                        >
                           {item.label}
                         </p>
-                        {item.href ? (
+                        {"href" in item && item.href ? (
                           <a
                             href={item.href}
-                            className="mt-1 block text-sm text-white hover:text-[#3385ff]"
+                            className="mt-1 block text-sm font-medium transition hover:opacity-80"
+                            style={{ color: contactPanelText }}
                           >
                             {item.value}
                           </a>
                         ) : (
-                          <p className="mt-1 text-sm text-white">
+                          <p className="mt-1 text-sm font-medium" style={{ color: contactPanelText }}>
                             {item.value}
                           </p>
                         )}
@@ -122,10 +155,15 @@ export default async function ContactPage() {
                   ))}
                 </ul>
 
-                <div className="mt-10 rounded-xl border border-white/10 bg-white/5 p-5 text-sm leading-relaxed text-slate-300">
-                  <p>
-                    {t("salesNote")}
-                  </p>
+                <div
+                  className="mt-10 rounded-xl border p-5 text-sm leading-relaxed"
+                  style={{
+                    borderColor: contactPanelBorder,
+                    backgroundColor: contactPanelSoftBackground,
+                    color: contactPanelMutedText,
+                  }}
+                >
+                  <p>{t("salesNote")}</p>
                 </div>
               </div>
             </aside>

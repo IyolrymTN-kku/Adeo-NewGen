@@ -9,10 +9,10 @@ type StatCardProps = {
 };
 
 const accents: Record<NonNullable<StatCardProps["accent"]>, string> = {
-  blue: "bg-blue-50 text-[#0066ff]",
-  navy: "bg-slate-100 text-[#0a1628]",
-  amber: "bg-amber-50 text-amber-600",
-  emerald: "bg-emerald-50 text-emerald-600",
+  blue: "bg-primary/10 text-primary",
+  navy: "bg-secondary/10 text-secondary",
+  amber: "bg-[color:var(--admin-accent)]/10 text-[var(--admin-accent)]",
+  emerald: "bg-[color:var(--admin-success)]/10 text-[var(--admin-success)]",
 };
 
 export function StatCard({
@@ -23,15 +23,16 @@ export function StatCard({
   accent = "blue",
 }: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm">
       <div className="flex items-center justify-between">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/60">
           {label}
         </p>
+
         {icon && (
           <span
             className={cn(
-              "flex h-10 w-10 items-center justify-center rounded-xl",
+              "flex h-10 w-10 items-center justify-center rounded-xl transition-colors",
               accents[accent]
             )}
           >
@@ -39,10 +40,12 @@ export function StatCard({
           </span>
         )}
       </div>
-      <p className="mt-4 text-3xl font-bold tracking-tight text-slate-900">
+
+      <p className="mt-4 text-3xl font-bold tracking-tight text-foreground">
         {value}
       </p>
-      {hint && <p className="mt-1 text-xs text-slate-500">{hint}</p>}
+
+      {hint && <p className="mt-1 text-xs text-foreground/60">{hint}</p>}
     </div>
   );
 }

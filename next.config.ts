@@ -11,8 +11,8 @@ const cspHeader = [
   "img-src 'self' data: blob: https:",
   "media-src 'none'",
   "connect-src 'self'",
-  "frame-src 'none'",
-  "frame-ancestors 'none'",
+  "frame-src 'self'",
+  "frame-ancestors 'self'",
   "form-action 'self'",
   "base-uri 'self'",
   "object-src 'none'",
@@ -21,7 +21,7 @@ const cspHeader = [
 
 const securityHeaders = [
   { key: "Content-Security-Policy", value: cspHeader },
-  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
@@ -38,6 +38,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   eslint: { ignoreDuringBuilds: true },
+
   async headers() {
     return [
       {
@@ -46,8 +47,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.adeo.co.th",
+      },
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 };
 

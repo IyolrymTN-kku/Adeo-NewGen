@@ -218,6 +218,32 @@ async function main() {
   
   console.log("✅ Sample contact submission created");
 
+  // ── Theme Settings ────────────────────────────────────────────────────────
+  await prisma.themeSettings.upsert({
+    where: { id: "singleton" },
+    update: {},
+    create: {
+      id: "singleton",
+      primary: "#0066FF",
+      secondary: "#0A1628",
+      accent: "#0066FF",
+      muted: "#EFF6FF",
+      success: "#22C55E",
+      componentColors: {
+        "header.background": "secondary",
+        "header.text": "muted",
+        "header.activeNav": "accent",
+        "header.ctaBackground": "primary",
+        "header.panelBackground": "secondary",
+        "footer.background": "secondary",
+        "cta.background": "secondary",
+        "sections.cardAccent": "primary",
+        "buttons.background": "primary",
+      },
+    },
+  });
+  console.log("✅ Theme settings seeded");
+
   console.log("\n🎉 Seed complete!");
   console.log("─────────────────────────────────────────");
   console.log("Admin login:");
@@ -234,4 +260,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-  

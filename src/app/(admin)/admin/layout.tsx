@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import { requireAdminPage } from "@/lib/auth/require-admin";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
+import { ThemeSettings } from "@/components/theme-settings";
 import "react-phone-number-input/style.css";
 
 export const dynamic = "force-dynamic";
@@ -17,7 +18,7 @@ export default async function AdminLayout({
   ]);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-white text-slate-950">
       <AdminSidebar
         user={{
           name: session.user.name,
@@ -28,11 +29,12 @@ export default async function AdminLayout({
         companyName={settings?.companyName ?? "ADEO Solution"}
         logoUrl={settings?.logoUrl}
       />
-      <div className="lg:pl-64">
-        <main className="min-h-[calc(100vh-3.5rem)] lg:min-h-screen">
-          {children}
-        </main>
+
+      <div className="min-h-screen bg-white lg:pl-64">
+        <main className="min-h-screen bg-white">{children}</main>
       </div>
+
+      <ThemeSettings />
     </div>
   );
 }

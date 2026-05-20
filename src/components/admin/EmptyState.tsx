@@ -6,8 +6,8 @@ type EmptyStateProps = {
 
 export function EmptyState({ title, description, action }: EmptyStateProps) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-[#0066ff]">
+    <div className="rounded-2xl border border-dashed border-border bg-card p-12 text-center">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -22,9 +22,9 @@ export function EmptyState({ title, description, action }: EmptyStateProps) {
           <path d="M14 2v6h6M12 18v-6M9 15h6" />
         </svg>
       </div>
-      <h3 className="mt-4 text-base font-semibold text-slate-900">{title}</h3>
+      <h3 className="mt-4 text-base font-semibold text-card-foreground">{title}</h3>
       {description && (
-        <p className="mx-auto mt-1 max-w-md text-sm text-slate-500">
+        <p className="mx-auto mt-1 max-w-md text-sm text-foreground/60">
           {description}
         </p>
       )}

@@ -7,9 +7,18 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
-import { Logo } from "@/components/sections/Logo";
+import { Logo } from "@/components/sections/logo-nobg";
 import { LanguageSwitcher } from "@/components/sections/LanguageSwitcher";
 
+const HEADER_RESET_KEY = "adeo-site-header-reset-white";
+
+// สีที่ดึงมาจาก CSS Variables ระดับ Global
+const paletteHeaderBg = "var(--site-header-bg, #FFFFFF)";
+const paletteHeaderText = "var(--site-header-text, #0F172A)";
+
+const headerActive = "var(--site-header-active-nav, var(--admin-accent, #2563EB))";
+const headerCtaBg = "var(--site-header-cta-bg, var(--admin-primary, #2563EB))";
+const headerCtaText = "var(--site-header-cta-text, #FFFFFF)";
 export function Header({
   companyName = "ADEO Solution",
   logoUrl,
@@ -21,6 +30,7 @@ export function Header({
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [forceWhiteHeader, setForceWhiteHeader] = useState(false);
 
   const NAV_LINKS = [
     { href: "/", label: t("home") },
@@ -41,6 +51,29 @@ export function Header({
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    function syncHeaderResetState() {
+      setForceWhiteHeader(
+        localStorage.getItem(HEADER_RESET_KEY) === "true"
+      );
+    }
+
+    syncHeaderResetState();
+
+    window.addEventListener("storage", syncHeaderResetState);
+    window.addEventListener("ADEO_HEADER_RESET_WHITE", syncHeaderResetState);
+    window.addEventListener("ADEO_ADMIN_THEME_CHANGED", syncHeaderResetState);
+
+    return () => {
+      window.removeEventListener("storage", syncHeaderResetState);
+      window.removeEventListener("ADEO_HEADER_RESET_WHITE", syncHeaderResetState);
+      window.removeEventListener("ADEO_ADMIN_THEME_CHANGED", syncHeaderResetState);
+    };
+  }, []);
+
+  const headerBg = forceWhiteHeader ? "#FFFFFF" : paletteHeaderBg;
+  const headerText = forceWhiteHeader ? "#0F172A" : paletteHeaderText;
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -48,35 +81,52 @@ export function Header({
     <header
       className={cn(
         "sticky top-0 z-50 w-full border-b transition-colors",
-        scrolled
-          ? "border-slate-200 bg-white/90 backdrop-blur"
-          : "border-transparent bg-white"
+        scrolled ? "backdrop-blur" : ""
       )}
+      style={{
+        backgroundColor: scrolled
+          ? `color-mix(in srgb, ${headerBg} 94%, transparent)`
+          : headerBg,
+        color: headerText,
+        borderColor: `color-mix(in srgb, ${headerText} 14%, transparent)`,
+      }}
     >
       <Container>
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" aria-label={`${companyName} home`}>
-            <Logo companyName={companyName} logoUrl={logoUrl} />
-          </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition",
-                  isActive(link.href)
-                    ? "text-[#0066ff]"
-                    : "text-slate-700 hover:text-slate-900"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Logo — Logo renders its own <Link href="/"> internally, so no wrapper <Link> needed here */}
+          <Logo companyName={companyName} logoUrl={logoUrl} />
+
+          {/* Desktop Navigation */}
+          <nav
+            className="hidden items-center gap-8 lg:flex"
+            aria-label="Primary"
+          >
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "relative text-sm font-semibold transition hover:opacity-100",
+                    active ? "opacity-100" : "opacity-75"
+                  )}
+                  style={{ color: headerText }}
+                >
+                  {link.label}
+                  {active && (
+                    <span
+                      className="absolute -bottom-2 left-0 h-0.5 w-full rounded-full"
+                      style={{ backgroundColor: headerActive }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
+          {/* Desktop CTA + Language Switcher */}
           <div className="hidden lg:flex lg:items-center lg:gap-3">
             <LanguageSwitcher />
             <ButtonLink href="/contact" size="sm">
@@ -84,13 +134,19 @@ export function Header({
             </ButtonLink>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Toggle Button */}
           <button
             type="button"
             aria-label="Toggle menu"
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100 lg:hidden"
+            onClick={() => setOpen((value) => !value)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg transition lg:hidden"
+            style={{
+              color: headerText,
+              backgroundColor: open
+                ? `color-mix(in srgb, ${headerText} 10%, transparent)`
+                : "transparent",
+            }}
           >
             <svg
               viewBox="0 0 24 24"
@@ -109,26 +165,37 @@ export function Header({
               )}
             </svg>
           </button>
+
         </div>
 
-        {/* Mobile drawer */}
+        {/* Mobile Navigation Panel */}
         {open && (
-          <div className="border-t border-slate-200 py-4 lg:hidden">
+          <div
+            className="py-4 lg:hidden"
+            style={{
+              borderTop: `1px solid color-mix(in srgb, ${headerText} 14%, transparent)`,
+            }}
+          >
             <nav className="flex flex-col gap-1" aria-label="Mobile">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "rounded-lg px-3 py-2 text-base font-medium transition",
-                    isActive(link.href)
-                      ? "bg-blue-50 text-[#0066ff]"
-                      : "text-slate-700 hover:bg-slate-100"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="rounded-lg px-3 py-2 text-base font-semibold transition"
+                    style={{
+                      color: headerText,
+                      backgroundColor: active
+                        ? `color-mix(in srgb, ${headerActive} 16%, transparent)`
+                        : "transparent",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+
               <div className="mt-3 px-1">
                 <LanguageSwitcher />
               </div>
