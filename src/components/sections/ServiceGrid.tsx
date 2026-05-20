@@ -2,11 +2,8 @@ import type { Service, ServiceCategory } from "@prisma/client";
 import { Card } from "@/components/ui/Card";
 import { categoryLabel, isCloudCategory } from "@/lib/services";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
-<<<<<<< HEAD
 import { mix, palette } from "@/lib/palette-helper";
-=======
 import { getTranslations } from "next-intl/server";
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 
 const CATEGORY_ICONS: Record<ServiceCategory, React.ReactNode> = {
   SOFTWARE_DEV: <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />,
@@ -81,9 +78,15 @@ async function ServiceCard({
   const t = await getTranslations("services");
   const c = await getTranslations("categories");
 
-  const title = t.has(`${service.slug}.title`) ? t(`${service.slug}.title`) : service.title;
-  const shortDesc = t.has(`${service.slug}.shortDescription`) ? t(`${service.slug}.shortDescription`) : service.shortDescription;
-  const catLabel = c.has(service.category) ? c(service.category) : categoryLabel(service.category);
+  const title = t.has(`${service.slug}.title`)
+    ? t(`${service.slug}.title`)
+    : service.title;
+  const shortDesc = t.has(`${service.slug}.shortDescription`)
+    ? t(`${service.slug}.shortDescription`)
+    : service.shortDescription;
+  const catLabel = c.has(service.category)
+    ? c(service.category)
+    : categoryLabel(service.category);
 
   return (
     <Card hover className="flex h-full flex-col">
@@ -108,7 +111,6 @@ async function ServiceCard({
             {CATEGORY_ICONS[service.category]}
           </svg>
         </div>
-<<<<<<< HEAD
 
         <span
           className="rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider"
@@ -117,19 +119,11 @@ async function ServiceCard({
             color: mix(palette.section.accent, 75, "#0f172a"),
           }}
         >
-          {cloud ? "Cloud" : "IT"} · {categoryLabel(service.category)}
-        </span>
-      </div>
-
-      <h3 className="text-lg font-semibold text-slate-900">{service.title}</h3>
-
-=======
-        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
           {cloud ? "Cloud" : "IT"} · {catLabel}
         </span>
       </div>
+
       <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
       <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
         {shortDesc}
       </p>

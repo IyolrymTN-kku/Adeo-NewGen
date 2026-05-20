@@ -1,6 +1,5 @@
 import { Container } from "@/components/ui/Container";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
-<<<<<<< HEAD
 import { mix, palette } from "@/lib/palette-helper";
 
 const STATS = [
@@ -9,9 +8,7 @@ const STATS = [
   { value: "99.9%", label: "Uptime across managed services" },
   { value: "24/7", label: "Support and monitoring" },
 ];
-=======
 import { useTranslations } from "next-intl";
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 
 export function StatsBar() {
   const t = useTranslations("home");

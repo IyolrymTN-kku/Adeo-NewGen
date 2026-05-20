@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ThemeSettings } from "@/components/theme-settings";
+import { cn } from "@/lib/utils";
 
 type PageHeaderProps = {
   title: string;
@@ -25,7 +26,6 @@ export function PageHeader({
             {breadcrumbs.map((bc, i) => (
               <span key={bc.href} className="flex items-center gap-2">
                 {i > 0 && <span aria-hidden="true">/</span>}
-
                 <Link
                   href={bc.href}
                   className="transition hover:text-[var(--admin-primary)] hover:underline"
@@ -42,7 +42,6 @@ export function PageHeader({
             <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">
               {title}
             </h1>
-
             {description && (
               <p className="mt-1.5 max-w-2xl text-sm text-slate-600">
                 {description}
@@ -60,13 +59,15 @@ export function PageHeader({
   );
 }
 
-export function PageBody({ children, className }: { children: React.ReactNode; className?: string }) {
+export function PageBody({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-<<<<<<< HEAD
-    <div className="mx-auto w-full max-w-6xl bg-white px-6 py-8 sm:px-8 lg:px-10">
-=======
-    <div className={`mx-auto w-full ${className ?? "max-w-6xl"} px-6 py-8 sm:px-8 lg:px-10`}>
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
+    <div className={cn("mx-auto w-full px-6 py-8 sm:px-8 lg:px-10", className ?? "max-w-6xl")}>
       {children}
     </div>
   );

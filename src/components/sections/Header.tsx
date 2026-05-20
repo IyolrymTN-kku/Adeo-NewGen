@@ -6,15 +6,9 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
-<<<<<<< HEAD
-import { Logo } from "@/components/sections/Logo_on label";
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/solutions", label: "IT Solutions" },
-  { href: "/cloud", label: "Cloud Services" },
-  { href: "/contact", label: "Contact" },
-];
+import { ButtonLink } from "@/components/ui/Button";
+import { Logo } from "@/components/sections/logo-nobg";
+import { LanguageSwitcher } from "@/components/sections/LanguageSwitcher";
 
 const HEADER_RESET_KEY = "adeo-site-header-reset-white";
 
@@ -25,13 +19,6 @@ const paletteHeaderText = "var(--site-header-text, #0F172A)";
 const headerActive = "var(--site-header-active-nav, var(--admin-accent, #2563EB))";
 const headerCtaBg = "var(--site-header-cta-bg, var(--admin-primary, #2563EB))";
 const headerCtaText = "var(--site-header-cta-text, #FFFFFF)";
-
-export function Header() {
-=======
-import { ButtonLink } from "@/components/ui/Button";
-import { Logo } from "@/components/sections/Logo";
-import { LanguageSwitcher } from "@/components/sections/LanguageSwitcher";
-
 export function Header({
   companyName = "ADEO Solution",
   logoUrl,
@@ -40,14 +27,10 @@ export function Header({
   logoUrl?: string | null;
 }) {
   const t = useTranslations("nav");
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [forceWhiteHeader, setForceWhiteHeader] = useState(false);
-
-  // กำหนดตัวแปร siteName เอาไว้ใช้ใน Component
-  const siteName = "ADEO Solution";
 
   const NAV_LINKS = [
     { href: "/", label: t("home") },
@@ -59,10 +42,8 @@ export function Header({
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -112,16 +93,9 @@ export function Header({
     >
       <Container>
         <div className="flex h-16 items-center justify-between">
-<<<<<<< HEAD
-          
-          {/* ✅ แก้ไขตรงนี้: หุ้ม <Logo /> ด้วยแท็ก <Link> และส่ง Props `siteName` ให้ถูกต้องตาม Type ใหม่ */}
-          <Link href="/" className="text-current transition hover:opacity-90">
-            <Logo siteName={siteName} />
-=======
-          <Link href="/" aria-label={`${companyName} home`}>
-            <Logo companyName={companyName} logoUrl={logoUrl} />
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
-          </Link>
+
+          {/* Logo — Logo renders its own <Link href="/"> internally, so no wrapper <Link> needed here */}
+          <Logo companyName={companyName} logoUrl={logoUrl} />
 
           {/* Desktop Navigation */}
           <nav
@@ -130,7 +104,6 @@ export function Header({
           >
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
-
               return (
                 <Link
                   key={link.href}
@@ -139,18 +112,13 @@ export function Header({
                     "relative text-sm font-semibold transition hover:opacity-100",
                     active ? "opacity-100" : "opacity-75"
                   )}
-                  style={{
-                    color: headerText,
-                  }}
+                  style={{ color: headerText }}
                 >
                   {link.label}
-
                   {active && (
                     <span
                       className="absolute -bottom-2 left-0 h-0.5 w-full rounded-full"
-                      style={{
-                        backgroundColor: headerActive,
-                      }}
+                      style={{ backgroundColor: headerActive }}
                     />
                   )}
                 </Link>
@@ -158,26 +126,12 @@ export function Header({
             })}
           </nav>
 
-<<<<<<< HEAD
-          {/* Desktop CTA Button */}
-          <div className="hidden lg:block">
-            <Link
-              href="/contact"
-              className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-bold shadow-sm transition hover:opacity-90"
-              style={{
-                backgroundColor: headerCtaBg,
-                color: headerCtaText,
-              }}
-            >
-              Get a Quote
-            </Link>
-=======
+          {/* Desktop CTA + Language Switcher */}
           <div className="hidden lg:flex lg:items-center lg:gap-3">
             <LanguageSwitcher />
             <ButtonLink href="/contact" size="sm">
               {t("getQuote")}
             </ButtonLink>
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
           </div>
 
           {/* Mobile Menu Toggle Button */}
@@ -211,6 +165,7 @@ export function Header({
               )}
             </svg>
           </button>
+
         </div>
 
         {/* Mobile Navigation Panel */}
@@ -224,7 +179,6 @@ export function Header({
             <nav className="flex flex-col gap-1" aria-label="Mobile">
               {NAV_LINKS.map((link) => {
                 const active = isActive(link.href);
-
                 return (
                   <Link
                     key={link.href}
@@ -243,25 +197,12 @@ export function Header({
               })}
 
               <div className="mt-3 px-1">
-<<<<<<< HEAD
-                <Link
-                  href="/contact"
-                  className="inline-flex h-11 w-full items-center justify-center rounded-xl px-4 text-sm font-bold shadow-sm transition hover:opacity-90"
-                  style={{
-                    backgroundColor: headerCtaBg,
-                    color: headerCtaText,
-                  }}
-                >
-                  Get a Quote
-                </Link>
-=======
                 <LanguageSwitcher />
               </div>
               <div className="mt-2 px-1">
                 <ButtonLink href="/contact" className="w-full">
                   {t("getQuote")}
                 </ButtonLink>
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
               </div>
             </nav>
           </div>

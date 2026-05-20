@@ -22,10 +22,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid color format" }, { status: 400 });
   }
 
-  await prisma.adminTheme.upsert({
-    where:  { id: 1 },
+  await prisma.themeSettings.upsert({
+    where:  { id: "singleton" },
     update: { primary, secondary, accent, muted, success },
-    create: { primary, secondary, accent, muted, success },
+    create: { id: "singleton", primary, secondary, accent, muted, success },
   });
 
   revalidatePath("/", "layout");
@@ -34,11 +34,11 @@ export async function POST(req: Request) {
 }
 
 // DELETE /api/admin/theme — Reset to default
-export async function DELETE() {
-  await prisma.adminTheme.upsert({
-    where:  { id: 1 },
+export async function DELETE(): Promise<NextResponse<{ ok: boolean }>> {
+  await prisma.themeSettings.upsert({
+    where:  { id: "singleton" },
     update: DEFAULT,
-    create: DEFAULT,
+    create: { id: "singleton", ...DEFAULT },
   });
 
   revalidatePath("/", "layout");
@@ -48,6 +48,6 @@ export async function DELETE() {
 
 // GET /api/admin/theme — อ่าน theme ปัจจุบัน
 export async function GET() {
-  const theme = await prisma.adminTheme.findUnique({ where: { id: 1 } });
+  const theme = await prisma.themeSettings.findUnique({ where: { id: "singleton" } });
   return NextResponse.json(theme ?? DEFAULT);
 }

@@ -1,11 +1,8 @@
 import { prisma } from "@/lib/db";
 import { requireAdminPage } from "@/lib/auth/require-admin";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
-<<<<<<< HEAD
 import { ThemeSettings } from "@/components/theme-settings";
-=======
 import "react-phone-number-input/style.css";
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 
 export const dynamic = "force-dynamic";
 

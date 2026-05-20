@@ -60,7 +60,6 @@ const NAV: NavItem[] = [
       </>
     ),
   },
-<<<<<<< HEAD
   {
     href: "/admin/settings",
     label: "Settings",
@@ -84,32 +83,30 @@ const NAV: NavItem[] = [
       </>
     ),
   },
-=======
-    {
-      href: "/admin/Corporation",
-      label: "Corporation",
-      icon: (
-        <>
-          <path d="M3 21h18" />
-          <path d="M5 21V7l8-4 8 4v14" />
-          <path d="M9 21v-4h6v4" />
-          <rect x="9" y="10" width="2" height="2" />
-          <rect x="13" y="10" width="2" height="2" />
-        </>
-      ),
-    },
-    {
-      href: "/admin/seo-media",
-      label: "SEO Media",
-      icon: (
-        <>
-          <path d="M4 4h16v16H4z" />
-          <path d="M4 9h16" />
-          <path d="M9 13h6" />
-        </>
-      ),
-    },
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
+  {
+    href: "/admin/Corporation",
+    label: "Corporation",
+    icon: (
+      <>
+        <path d="M3 21h18" />
+        <path d="M5 21V7l8-4 8 4v14" />
+        <path d="M9 21v-4h6v4" />
+        <rect x="9" y="10" width="2" height="2" />
+        <rect x="13" y="10" width="2" height="2" />
+      </>
+    ),
+  },
+  {
+    href: "/admin/seo-media",
+    label: "SEO Media",
+    icon: (
+      <>
+        <path d="M4 4h16v16H4z" />
+        <path d="M4 9h16" />
+        <path d="M9 13h6" />
+      </>
+    ),
+  },
 ];
 
 type AdminSidebarProps = {
@@ -119,23 +116,16 @@ type AdminSidebarProps = {
     role: string;
   };
   newSubmissions: number;
-<<<<<<< HEAD
   siteName?: string;
-=======
   companyName?: string;
   logoUrl?: string | null;
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 };
 
 export function AdminSidebar({
   user,
   newSubmissions,
-<<<<<<< HEAD
-  siteName,
-=======
   companyName = "ADEO Solution",
   logoUrl,
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 }: AdminSidebarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -198,30 +188,24 @@ export function AdminSidebar({
 
   const SidebarContent = (
     <div className="flex h-full min-h-0 flex-col">
+      {/* Logo — ใช้ href prop ของ Logo แทนการครอบด้วย <Link> */}
       <div className="shrink-0 px-5 pb-6 pt-5">
         <Logo
           invert
+          companyName={companyName}
+          logoUrl={logoUrl}
           href="/admin"
-<<<<<<< HEAD
-          siteName={siteName}
-          className="inline-flex text-[var(--admin-sidebar-foreground)]"
-        />
-
-        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--admin-sidebar-foreground)] opacity-90">
-=======
           className="inline-flex"
           onClick={() => setMobileOpen(false)}
-        >
-          <Logo invert companyName={companyName} logoUrl={logoUrl} />
-        </Link>
+        />
         <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
           Admin Portal
         </p>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3">{NavList}</div>
 
+      {/* User info + logout */}
       <div className="m-3 shrink-0 rounded-xl border border-[color-mix(in_srgb,var(--admin-sidebar-foreground)_18%,transparent)] bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_10%,transparent)] p-4 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--admin-sidebar-foreground)_14%,transparent)] text-sm font-semibold text-[var(--admin-sidebar-foreground)]">
@@ -232,7 +216,6 @@ export function AdminSidebar({
             <p className="truncate text-sm font-semibold text-[var(--admin-sidebar-foreground)]">
               {user.name ?? "Admin"}
             </p>
-
             <p className="truncate text-xs text-[var(--admin-sidebar-foreground)] opacity-70">
               {user.email}
             </p>
@@ -252,15 +235,15 @@ export function AdminSidebar({
 
   return (
     <>
+      {/* Mobile top bar — ใช้ href prop ของ Logo แทนการครอบด้วย <Link> */}
       <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
-<<<<<<< HEAD
-        <Logo href="/admin" siteName={siteName} />
+        <Logo
+          invert
+          companyName={companyName}
+          logoUrl={logoUrl}
+          href="/admin"
+        />
 
-=======
-        <Link href="/admin">
-          <Logo invert companyName={companyName} logoUrl={logoUrl} />
-        </Link>
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
         <button
           type="button"
           aria-label="Toggle admin menu"
@@ -287,6 +270,7 @@ export function AdminSidebar({
         </button>
       </div>
 
+      {/* Mobile drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
           <button
@@ -295,13 +279,13 @@ export function AdminSidebar({
             onClick={() => setMobileOpen(false)}
             className="absolute inset-0 bg-slate-900/50"
           />
-
           <aside className="absolute inset-y-0 left-0 w-72 [background:var(--admin-gradient-dark)] text-[var(--admin-sidebar-foreground)] shadow-xl">
             {SidebarContent}
           </aside>
         </div>
       )}
 
+      {/* Desktop sidebar */}
       <aside className="hidden lg:fixed lg:left-0 lg:top-0 lg:z-30 lg:flex lg:h-dvh lg:w-64 lg:flex-col lg:overflow-hidden lg:border-r lg:border-white/10 [background:var(--admin-gradient-dark)] text-[var(--admin-sidebar-foreground)]">
         {SidebarContent}
       </aside>

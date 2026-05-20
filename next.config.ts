@@ -11,13 +11,8 @@ const cspHeader = [
   "img-src 'self' data: blob: https:",
   "media-src 'none'",
   "connect-src 'self'",
-
-  // อนุญาตให้หน้า admin iframe ไฟล์ HTML จาก origin เดียวกันได้
   "frame-src 'self'",
-
-  // อนุญาตให้หน้าของเว็บเราเองถูกฝังใน iframe จากเว็บเดียวกันได้
   "frame-ancestors 'self'",
-
   "form-action 'self'",
   "base-uri 'self'",
   "object-src 'none'",
@@ -26,10 +21,7 @@ const cspHeader = [
 
 const securityHeaders = [
   { key: "Content-Security-Policy", value: cspHeader },
-
-  // เปลี่ยนจาก DENY เป็น SAMEORIGIN เพื่อให้ iframe ภายในเว็บเดียวกันทำงาน
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
-
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
@@ -45,10 +37,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-<<<<<<< HEAD
-
-=======
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
   eslint: { ignoreDuringBuilds: true },
 
   async headers() {
@@ -61,12 +49,17 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.adeo.co.th",
+      },
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 };
 
-<<<<<<< HEAD
-export default nextConfig;
-=======
 export default withNextIntl(nextConfig);
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6

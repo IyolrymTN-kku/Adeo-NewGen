@@ -1,11 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { FadeInOnLoad } from "@/components/animations";
-<<<<<<< HEAD
-import { ctaSectionStyle, mix, palette } from "@/lib/palette-helper";
-=======
+import { ctaSectionStyle } from "@/lib/palette-helper";
 import { useTranslations } from "next-intl";
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
 
 type HeroProps = {
   eyebrow?: string;
@@ -28,6 +27,7 @@ export function Hero({
 
   return (
     <section className="relative overflow-hidden" style={ctaSectionStyle()}>
+      {/* Background Glow 1 */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 -right-40 h-[640px] w-[640px] rounded-full opacity-30"
@@ -60,6 +60,7 @@ export function Hero({
 
       <Container className="relative">
         <div className="grid items-center gap-16 py-24 lg:grid-cols-12 lg:py-32">
+          {/* Left Column Content */}
           <div className="lg:col-span-7">
             
             {/* 1. Eyebrow Component */}
@@ -80,7 +81,7 @@ export function Hero({
               </p>
             </FadeInOnLoad>
 
-            {/* 2. Title Component (แก้ไขย้ายแท็ก h1 มาไว้ด้านใน) */}
+            {/* 2. Title Component */}
             <FadeInOnLoad y={16} delay={0.15} duration={0.7}>
               <h1 
                 className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
@@ -98,7 +99,7 @@ export function Hero({
               </h1>
             </FadeInOnLoad>
 
-            {/* 3. Description Component (แก้ไขย้ายแท็ก p มาไว้ด้านใน) */}
+            {/* 3. Description Component */}
             <FadeInOnLoad y={16} delay={0.3}>
               <p 
                 className="mt-6 max-w-xl text-lg leading-relaxed"
@@ -108,7 +109,7 @@ export function Hero({
               </p>
             </FadeInOnLoad>
 
-            {/* 4. CTA Buttons (แก้ไขหุ้มด้วย div ด้านในเพื่อความปลอดภัย) */}
+            {/* 4. CTA Buttons */}
             <FadeInOnLoad y={16} delay={0.45}>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
@@ -149,13 +150,12 @@ export function Hero({
             </FadeInOnLoad>
           </div>
 
-<<<<<<< HEAD
-          {/* 5. Right Column Services Grid (ครอบ div นอกสุดเพื่อไม่ให้โครงสร้าง Grid เลื่อน) */}
+          {/* 5. Right Column Services Grid (เวอร์ชันสมบูรณ์ของเพื่อนบวกกับสไตล์ธีมของคุณ) */}
           <div className="hidden lg:col-span-5 lg:block">
             <FadeInOnLoad y={24} delay={0.4} duration={0.8}>
               <div className="relative">
                 <div
-                  className="rounded-2xl border p-6 backdrop-blur"
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur"
                   style={{
                     borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 10%, transparent)",
                     backgroundColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 3%, transparent)",
@@ -163,89 +163,36 @@ export function Hero({
                 >
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { label: "Software Dev", icon: "code" },
-                      { label: "Cloud Native", icon: "cloud" },
-                      { label: "Network", icon: "network" },
-                      { label: "Backup & DR", icon: "shield" },
-                      { label: "Migration", icon: "swap" },
-                      { label: "IT Support", icon: "support" },
+                      { label: t("serviceSoftwareDev"), icon: "code" },
+                      { label: t("serviceCloudNative"), icon: "cloud" },
+                      { label: t("serviceNetwork"), icon: "network" },
+                      { label: t("serviceBackupDr"), icon: "shield" },
+                      { label: t("serviceMigration"), icon: "swap" },
+                      { label: t("serviceItSupport"), icon: "support" },
                     ].map((item) => (
                       <div
-                        key={item.label}
-                        className="rounded-xl border p-4"
-                        style={{
-                          borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 10%, transparent)",
-                          backgroundColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 5%, transparent)",
-                        }}
+                        key={item.icon}
+                        className="rounded-xl border border-white/10 bg-[#0d2040]/60 p-4"
                       >
-                        <div
-                          className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg"
-                          style={{
-                            backgroundColor: "color-mix(in srgb, var(--admin-primary, #0066FF) 15%, transparent)",
-                            color: "var(--admin-primary, #0066FF)",
-                          }}
-                        >
+                        <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
                           <ServiceIcon name={item.icon} />
                         </div>
-
-                        <p
-                          className="text-sm font-semibold"
-                          style={{ color: "var(--cta-text, #FFFFFF)" }}
-                        >
+                        <p className="text-sm font-semibold text-white">
                           {item.label}
                         </p>
-
-                        <p
-                          className="text-xs"
-                          style={{ color: "color-mix(in srgb, var(--cta-text, #FFFFFF) 70%, transparent)" }}
-                        >
-                          Enterprise grade
-                        </p>
+                        <p className="text-xs text-slate-400">{t("enterpriseGrade")}</p>
                       </div>
                     ))}
                   </div>
-=======
-          {/* Visual panel */}
-          <FadeInOnLoad
-            y={24}
-            delay={0.4}
-            duration={0.8}
-            className="hidden lg:col-span-5 lg:block"
-          >
-            <div className="relative">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { label: t("serviceSoftwareDev"), icon: "code" },
-                    { label: t("serviceCloudNative"), icon: "cloud" },
-                    { label: t("serviceNetwork"), icon: "network" },
-                    { label: t("serviceBackupDr"), icon: "shield" },
-                    { label: t("serviceMigration"), icon: "swap" },
-                    { label: t("serviceItSupport"), icon: "support" },
-                  ].map((item) => (
-                    <div
-                      key={item.icon}
-                      className="rounded-xl border border-white/10 bg-[#0d2040]/60 p-4"
-                    >
-                      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
-                        <ServiceIcon name={item.icon} />
-                      </div>
-                      <p className="text-sm font-semibold text-white">
-                        {item.label}
-                      </p>
-                      <p className="text-xs text-slate-400">{t("enterpriseGrade")}</p>
-                    </div>
-                  ))}
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
-                </div>
 
-                <div
-                  aria-hidden="true"
-                  className="absolute -inset-x-8 -bottom-6 h-12 rounded-full blur-2xl"
-                  style={{
-                    backgroundColor: "color-mix(in srgb, var(--admin-primary, #0066FF) 30%, transparent)",
-                  }}
-                />
+                  <div
+                    aria-hidden="true"
+                    className="absolute -inset-x-8 -bottom-6 h-12 rounded-full blur-2xl"
+                    style={{
+                      backgroundColor: "color-mix(in srgb, var(--admin-primary, #0066FF) 30%, transparent)",
+                    }}
+                  />
+                </div>
               </div>
             </FadeInOnLoad>
           </div>
@@ -255,6 +202,7 @@ export function Hero({
   );
 }
 
+// ซ่อมแซมฟังก์ชัน ServiceIcon ให้เปิด-ปิดวงเล็บและสัญลักษณ์อย่างถูกต้อง
 function ServiceIcon({ name }: { name: string }) {
   const common = {
     viewBox: "0 0 24 24",

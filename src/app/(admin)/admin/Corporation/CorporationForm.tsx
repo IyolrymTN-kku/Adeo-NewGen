@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { updateCorporation } from "./actions";
 import type { companySettings } from "@prisma/client";
@@ -11,6 +11,26 @@ const PhoneInput = dynamic(
   () => import("react-phone-number-input"),
   { ssr: false }
 );
+
+function useThemeColors() {
+  const [btnBg, setBtnBg] = useState("#0066ff");
+  const [btnText, setBtnText] = useState("#ffffff");
+
+  useEffect(() => {
+    function read() {
+      const style = getComputedStyle(document.documentElement);
+      const bg = style.getPropertyValue("--site-button-bg").trim() || "#0066ff";
+      const text = style.getPropertyValue("--site-button-text").trim() || "#ffffff";
+      setBtnBg(bg);
+      setBtnText(text);
+    }
+    read();
+    window.addEventListener("ADEO_ADMIN_THEME_CHANGED", read);
+    return () => window.removeEventListener("ADEO_ADMIN_THEME_CHANGED", read);
+  }, []);
+
+  return { btnBg, btnText };
+}
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -33,7 +53,7 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
   );
 }
 
-const inputCls = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#0066ff] focus:outline-none focus:ring-2 focus:ring-[#0066ff]/20";
+const inputCls = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 [--tw-ring-color:color-mix(in_srgb,var(--site-button-bg,#0066ff)_20%,transparent)] focus:[border-color:var(--site-button-bg,#0066ff)]";
 
 function validateImageSize(file: File, width: number, height: number): Promise<boolean> {
   return new Promise((resolve) => {
@@ -69,6 +89,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
   const [faviconError, setFaviconError]     = useState<string | null>(null);
   const [socialErrors, setSocialErrors]     = useState<Record<string, string>>({});
   const [phone, setPhone] = useState(settings?.phone ?? "");
+  const { btnBg, btnText } = useThemeColors();
 
     function validateTaxId(value: string) {
     if (!value) { setTaxIdError(null); return; }
@@ -207,8 +228,13 @@ export function CorporationForm({ settings }: { settings: companySettings | null
               if (!valid) { setLogoError("Image size must be 32×32px"); e.target.value = ""; return; }
               setLogoPreview(URL.createObjectURL(f));
             }}
-            className="block w-full text-sm text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-[#0066ff] file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-[#0052cc]"
+            className="corp-file-input block w-full text-sm text-slate-500"
+            style={{
+              "--file-btn-bg": btnBg,
+              "--file-btn-text": btnText,
+            } as React.CSSProperties}
           />
+          <style>{`.corp-file-input::file-selector-button { margin-right: 0.75rem; border-radius: 0.5rem; border: 0; background: ${btnBg}; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: ${btnText}; cursor: pointer; transition: opacity 0.15s; } .corp-file-input::file-selector-button:hover { opacity: 0.88; }`}</style>
           {logoError && <p className="text-xs font-medium text-red-600">{logoError}</p>}
         </Field>
         <Field label="Favicon" hint="PNG only, 32×32px recommended">
@@ -227,7 +253,7 @@ export function CorporationForm({ settings }: { settings: companySettings | null
               if (!valid) { setFaviconError("Image size must be 32×32px"); e.target.value = ""; return; }
               setFaviconPreview(URL.createObjectURL(f));
             }}
-            className="block w-full text-sm text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-[#0066ff] file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-[#0052cc]"
+            className="corp-file-input block w-full text-sm text-slate-500"
           />
           {faviconError && <p className="text-xs font-medium text-red-600">{faviconError}</p>}
         </Field>
@@ -260,7 +286,10 @@ export function CorporationForm({ settings }: { settings: companySettings | null
       <button
         type="submit"
         disabled={loading || Object.keys(socialErrors).length > 0 || !!taxIdError || !!phoneError || !!websiteError}
-        className="rounded-lg bg-[#0066ff] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0052cc] disabled:opacity-60">
+        className="rounded-lg px-6 py-2.5 text-sm font-semibold transition disabled:opacity-60"
+        style={{ backgroundColor: btnBg, color: btnText }}
+        onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+        onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
         {loading ? "Saving...." : "save"}
       </button>
     </form>

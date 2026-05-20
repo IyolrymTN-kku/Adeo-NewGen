@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "./ContactForm";
@@ -6,6 +5,21 @@ import { generateSEOMetadata } from "@/lib/seo/generate";
 import { getTranslations } from "next-intl/server";
 
 export const metadata = generateSEOMetadata("/contact");
+
+const contactPanelBackground =
+  "var(--site-cta-bg, hsl(var(--hero-bg, 222 47% 10%)))";
+const contactPanelText =
+  "var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%)))";
+const contactPanelMutedText =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 68%, transparent)";
+const contactPanelSubtleText =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 56%, transparent)";
+const contactPanelBorder =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 14%, transparent)";
+const contactPanelSoftBackground =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 7%, transparent)";
+const contactIconBackground =
+  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 12%, transparent)";
 
 export default async function ContactPage() {
   const t = await getTranslations("contact");
@@ -49,31 +63,6 @@ export default async function ContactPage() {
     },
   ];
 
-<<<<<<< HEAD
-const contactPanelBackground =
-  "var(--site-cta-bg, hsl(var(--hero-bg, 222 47% 10%)))";
-
-const contactPanelText =
-  "var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%)))";
-
-const contactPanelMutedText =
-  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 68%, transparent)";
-
-const contactPanelSubtleText =
-  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 56%, transparent)";
-
-const contactPanelBorder =
-  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 14%, transparent)";
-
-const contactPanelSoftBackground =
-  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 7%, transparent)";
-
-const contactIconBackground =
-  "color-mix(in srgb, var(--site-cta-text, hsl(var(--hero-foreground, 0 0% 100%))) 12%, transparent)";
-
-export default function ContactPage() {
-=======
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
   return (
     <>
       <PageHero
@@ -87,26 +76,14 @@ export default function ContactPage() {
           <div className="grid gap-12 lg:grid-cols-12">
             {/* Form */}
             <div className="lg:col-span-7">
-<<<<<<< HEAD
               <div className="rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm sm:p-8">
                 <h2 className="text-xl font-semibold text-foreground">
-                  Send us a message
+                  {t("sendMessage")}
                 </h2>
-
                 <p className="mt-1 text-sm text-foreground/60">
                   Fields marked with <span className="text-red-500">*</span>{" "}
                   are required.
-=======
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-                <h2 className="text-xl font-semibold text-slate-900">
-                  {t("formTitle")}
-                </h2>
-                <p className="mt-1 text-sm text-slate-500">
-                  {t("formSub1")} <span className="text-red-500">*</span>{" "}
-                  {t("formSub2")}
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
                 </p>
-
                 <div className="mt-6">
                   <ContactForm />
                 </div>
@@ -115,7 +92,6 @@ export default function ContactPage() {
 
             {/* Details */}
             <aside className="lg:col-span-5">
-<<<<<<< HEAD
               <div
                 className="rounded-2xl p-8 shadow-sm"
                 style={{
@@ -123,24 +99,11 @@ export default function ContactPage() {
                   color: contactPanelText,
                 }}
               >
-                <h2
-                  className="text-lg font-semibold"
-                  style={{ color: contactPanelText }}
-                >
-                  Get in touch directly
+                <h2 className="text-lg font-semibold" style={{ color: contactPanelText }}>
+                  {t("getInTouch")}
                 </h2>
-
-                <p
-                  className="mt-2 text-sm"
-                  style={{ color: contactPanelMutedText }}
-                >
-                  Prefer email or phone? Here's how to reach us.
-=======
-              <div className="rounded-2xl bg-[#0a1628] p-8 text-white">
-                <h2 className="text-lg font-semibold">{t("asideTitle")}</h2>
-                <p className="mt-2 text-sm text-slate-300">
-                  {t("asideDesc")}
->>>>>>> 1dd17df8279a93c927c9920523a51e34766cbcc6
+                <p className="mt-2 text-sm" style={{ color: contactPanelMutedText }}>
+                  {t("preferContact")}
                 </p>
 
                 <ul className="mt-8 space-y-6">
@@ -174,8 +137,7 @@ export default function ContactPage() {
                         >
                           {item.label}
                         </p>
-
-                        {item.href ? (
+                        {"href" in item && item.href ? (
                           <a
                             href={item.href}
                             className="mt-1 block text-sm font-medium transition hover:opacity-80"
@@ -184,10 +146,7 @@ export default function ContactPage() {
                             {item.value}
                           </a>
                         ) : (
-                          <p
-                            className="mt-1 text-sm font-medium"
-                            style={{ color: contactPanelText }}
-                          >
+                          <p className="mt-1 text-sm font-medium" style={{ color: contactPanelText }}>
                             {item.value}
                           </p>
                         )}
@@ -204,9 +163,7 @@ export default function ContactPage() {
                     color: contactPanelMutedText,
                   }}
                 >
-                  <p>
-                    {t("salesNote")}
-                  </p>
+                  <p>{t("salesNote")}</p>
                 </div>
               </div>
             </aside>

@@ -70,6 +70,9 @@
     "ctaBtn2": "View IT Solutions"
   },
   "contact": {
+    "sendMessage": "Send us a Message",
+    "getInTouch": "Get in Touch",
+    "preferContact": "Prefer to reach out directly? Here's how to find us.",
     "email": "Email",
     "phone": "Phone",
     "office": "Office",
