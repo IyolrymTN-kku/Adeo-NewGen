@@ -48,31 +48,49 @@ export async function ServiceDetailList({ services }: ServiceDetailListProps) {
         );
 
         return (
-          <Card key={service.id} className="p-8 sm:p-10">
+          <Card
+            key={service.id}
+            className="p-8 sm:p-10"
+            style={{
+              backgroundColor: "color-mix(in srgb, var(--site-section-accent) 10%, hsl(var(--card)))",
+              borderColor: "color-mix(in srgb, var(--site-section-accent) 25%, transparent)",
+              color: "hsl(var(--card-foreground))",
+            }}
+          >
             <div id={service.slug} className="scroll-mt-28">
               <div className="lg:col-span-5">
                 <span
                   className="inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider"
                   style={{
-                  backgroundColor: mix(palette.section.accent, 15),
-                  color: `color-mix(in srgb, ${palette.section.accent} 80%, black)`,
-                }}
+                    backgroundColor: `color-mix(in srgb, ${palette.section.accent} 20%, transparent)`,
+                    color: `color-mix(in srgb, ${palette.section.accent} 85%, hsl(var(--card-foreground)))`,
+                  }}
                 >
                   {catLabel}
                 </span>
 
-                <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900">
+                <h3
+                  className="mt-4 text-2xl font-bold tracking-tight"
+                  style={{ color: palette.section.accent }}
+                >
                   {title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                <p
+                  className="mt-3 text-sm leading-relaxed"
+                  style={{ color: "hsl(var(--card-foreground) / 0.72)" }}
+                >
                   {desc}
                 </p>
               </div>
 
               <div className="lg:col-span-7 mt-8">
-                <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em]"
-                style={{ color: `color-mix(in srgb, ${palette.section.accent} 80%, black)` }}>
+                <h4
+                  className="mb-4 text-xs font-semibold uppercase tracking-[0.18em]"
+                  style={{
+                    color: `color-mix(in srgb, ${palette.section.accent} 85%, hsl(var(--card-foreground)))`,
+                  }}
+                >
                   {whatsIncluded}
                 </h4>
 
@@ -80,13 +98,16 @@ export async function ServiceDetailList({ services }: ServiceDetailListProps) {
                   {mappedFeatures.map((feature, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-2.5 text-sm text-slate-700"
+                      className="flex items-start gap-2.5 text-sm"
+                      style={{ color: "hsl(var(--card-foreground) / 0.85)" }}
                     >
                       <svg
                         viewBox="0 0 20 20"
                         fill="currentColor"
                         className="mt-0.5 h-4 w-4 shrink-0"
-                        style={{ color: `color-mix(in srgb, ${palette.section.accent} 80%, black)` }}
+                        style={{
+                          color: `color-mix(in srgb, ${palette.section.accent} 85%, hsl(var(--card-foreground)))`,
+                        }}
                         aria-hidden="true"
                       >
                         <path
