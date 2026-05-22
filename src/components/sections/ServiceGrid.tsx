@@ -86,8 +86,9 @@ async function ServiceCard({
       hover
       className="flex h-full flex-col"
       style={{
-        backgroundColor: "color-mix(in srgb, var(--site-section-accent) 10%, white)",
+        backgroundColor: "color-mix(in srgb, var(--site-section-accent) 10%, hsl(var(--card)))",
         borderColor: "color-mix(in srgb, var(--site-section-accent) 25%, transparent)",
+        color: "hsl(var(--card-foreground))",
       }}
     >
       <div className="mb-5 flex items-center gap-3">
@@ -95,7 +96,7 @@ async function ServiceCard({
           className="flex h-11 w-11 items-center justify-center rounded-xl"
           style={{
             backgroundColor: "color-mix(in srgb, var(--site-section-accent) 25%, transparent)",
-            color: "color-mix(in srgb, var(--site-section-accent) 80%, black)",
+            color: "color-mix(in srgb, var(--site-section-accent) 85%, hsl(var(--card-foreground)))",
           }}
         >
           <svg
@@ -116,7 +117,7 @@ async function ServiceCard({
           className="rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider"
           style={{
             backgroundColor: "color-mix(in srgb, var(--site-section-accent) 20%, transparent)",
-            color: "color-mix(in srgb, var(--site-section-accent) 80%, black)",
+            color: "color-mix(in srgb, var(--site-section-accent) 85%, hsl(var(--card-foreground)))",
           }}
         >
           {cloud ? "Cloud" : "IT"} · {catLabel}
@@ -125,13 +126,13 @@ async function ServiceCard({
 
       <h3
         className="text-lg font-semibold"
-        style={{ color: "var(--site-button-text, #0f172a)" }}
+        style={{ color: "hsl(var(--card-foreground))" }}
       >
         {title}
       </h3>
       <p
         className="mt-2 flex-1 text-sm leading-relaxed"
-        style={{ color: "hsl(var(--secondary-foreground) / 0.72)" }}
+        style={{ color: "hsl(var(--card-foreground) / 0.72)" }}
       >
         {shortDesc}
       </p>
