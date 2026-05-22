@@ -11,35 +11,42 @@ import { getTranslations } from "next-intl/server";
 
 export const revalidate = 60;
 
+async function getPageData() {
+  try {
+    const [settings, services, partners] = await Promise.all([
+      prisma.companySettings.findUnique({ where: { id: 1 } }),
+      prisma.service.findMany({
+        where: { isActive: true },
+        orderBy: { sortOrder: "asc" },
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          shortDescription: true,
+          category: true,
+        },
+      }),
+      prisma.partner.findMany({
+        where: { isActive: true },
+        orderBy: [{ category: "asc" }, { sortOrder: "asc" }],
+        select: {
+          id: true,
+          name: true,
+          logoUrl: true,
+          websiteUrl: true,
+          category: true,
+        },
+      }),
+    ]);
+    return { settings, services, partners };
+  } catch {
+    return { settings: null, services: [], partners: [] };
+  }
+}
+
 export default async function HomePage() {
   const t = await getTranslations("home");
-  const settings = await prisma.companySettings.findUnique({
-    where: { id: 1 },
-  });
-  const [services, partners] = await Promise.all([
-    prisma.service.findMany({
-      where: { isActive: true },
-      orderBy: { sortOrder: "asc" },
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        shortDescription: true,
-        category: true,
-      },
-    }),
-    prisma.partner.findMany({
-      where: { isActive: true },
-      orderBy: [{ category: "asc" }, { sortOrder: "asc" }],
-      select: {
-        id: true,
-        name: true,
-        logoUrl: true,
-        websiteUrl: true,
-        category: true,
-      },
-    }),
-  ]);
+  const { settings, services, partners } = await getPageData();
 
   return (
     <>

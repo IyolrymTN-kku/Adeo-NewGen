@@ -67,15 +67,15 @@ export function Hero({
             <FadeInOnLoad y={8} delay={0.05}>
               <p
                 className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"
-                style={{
-                  borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 10%, transparent)",
-                  backgroundColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 5%, transparent)",
-                  color: "var(--admin-primary, #0066FF)",
-                }}
+               style={{
+                borderColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 10%, transparent)",
+                backgroundColor: "color-mix(in srgb, var(--cta-text, #FFFFFF) 5%, transparent)",
+                color: "color-mix(in srgb, var(--admin-primary, #0066FF) 80%, black)",
+              }}
               >
                 <span
                   className="h-1.5 w-1.5 rounded-full"
-                  style={{ backgroundColor: "var(--admin-primary, #0066FF)" }}
+                  style={{ backgroundColor: "color-mix(in srgb, var(--admin-primary, #0066FF) 80%, black)" }}
                 />
                 {eyebrow}
               </p>
@@ -171,17 +171,29 @@ export function Hero({
                       { label: t("serviceItSupport"), icon: "support" },
                     ].map((item) => (
                       <div
-                        key={item.icon}
-                        className="rounded-xl border border-white/10 bg-[#0d2040]/60 p-4"
+                      key={item.icon}
+                      className="rounded-xl p-4"
+                      style={{
+                        backgroundColor: "color-mix(in srgb, var(--site-button-bg) 20%, transparent)",
+                        border: "1px solid color-mix(in srgb, var(--site-button-bg) 30%, transparent)",
+                      }}
+                    >
+                      <div
+                        className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg"
+                        style={{
+                        backgroundColor: "color-mix(in srgb, var(--site-button-bg) 25%, transparent)",
+                        color: "color-mix(in srgb, var(--site-button-bg) 80%, black)",
+                      }}
                       >
-                        <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0066ff]/15 text-[#3385ff]">
-                          <ServiceIcon name={item.icon} />
-                        </div>
-                        <p className="text-sm font-semibold text-white">
-                          {item.label}
-                        </p>
-                        <p className="text-xs text-slate-400">{t("enterpriseGrade")}</p>
+                        <ServiceIcon name={item.icon} />
                       </div>
+                      <p className="text-sm font-semibold" style={{ color: "var(--site-button-text)" }}>
+                        {item.label}
+                      </p>
+                      <p className="text-xs" style={{ color: "color-mix(in srgb, var(--site-button-text) 60%, transparent)" }}>
+                        {t("enterpriseGrade")}
+                      </p>
+                    </div>
                     ))}
                   </div>
 

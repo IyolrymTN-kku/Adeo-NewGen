@@ -198,9 +198,12 @@ export function AdminSidebar({
           className="inline-flex"
           onClick={() => setMobileOpen(false)}
         />
-        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
-          Admin Portal
-        </p>
+       <p
+  className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em]"
+  style={{ color: "var(--admin-sidebar-foreground)" }}
+>
+  Admin Portal
+</p>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3">{NavList}</div>

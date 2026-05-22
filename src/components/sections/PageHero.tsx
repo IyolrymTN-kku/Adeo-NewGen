@@ -28,11 +28,11 @@ export function PageHero({ eyebrow, title, description }: PageHeroProps) {
       <Container className="relative">
         <div className="max-w-3xl">
           <p
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: palette.admin.primary }}
-          >
-            {eyebrow}
-          </p>
+          className="mb-3 text-xs font-semibold uppercase tracking-[0.2em]"
+          style={{ color: `color-mix(in srgb, ${palette.admin.primary} 80%, black)` }}
+        >
+          {eyebrow}
+        </p>
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
             {title}

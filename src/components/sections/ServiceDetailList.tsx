@@ -54,9 +54,9 @@ export async function ServiceDetailList({ services }: ServiceDetailListProps) {
                 <span
                   className="inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider"
                   style={{
-                    backgroundColor: mix(palette.section.accent, 10),
-                    color: palette.section.accent,
-                  }}
+                  backgroundColor: mix(palette.section.accent, 15),
+                  color: `color-mix(in srgb, ${palette.section.accent} 80%, black)`,
+                }}
                 >
                   {catLabel}
                 </span>
@@ -71,7 +71,8 @@ export async function ServiceDetailList({ services }: ServiceDetailListProps) {
               </div>
 
               <div className="lg:col-span-7 mt-8">
-                <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em]"
+                style={{ color: `color-mix(in srgb, ${palette.section.accent} 80%, black)` }}>
                   {whatsIncluded}
                 </h4>
 
@@ -85,7 +86,7 @@ export async function ServiceDetailList({ services }: ServiceDetailListProps) {
                         viewBox="0 0 20 20"
                         fill="currentColor"
                         className="mt-0.5 h-4 w-4 shrink-0"
-                        style={{ color: palette.section.accent }}
+                        style={{ color: `color-mix(in srgb, ${palette.section.accent} 80%, black)` }}
                         aria-hidden="true"
                       >
                         <path

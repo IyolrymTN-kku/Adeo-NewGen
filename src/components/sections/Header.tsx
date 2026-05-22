@@ -12,13 +12,18 @@ import { LanguageSwitcher } from "@/components/sections/LanguageSwitcher";
 
 const HEADER_RESET_KEY = "adeo-site-header-reset-white";
 
-// สีที่ดึงมาจาก CSS Variables ระดับ Global
-const paletteHeaderBg = "var(--site-header-bg, #FFFFFF)";
-const paletteHeaderText = "var(--site-header-text, #0F172A)";
+// Default สีขาวเป็น fallback เสมอ
+const DEFAULT_HEADER_BG = "#FFFFFF";
+const DEFAULT_HEADER_TEXT = "#0F172A";
+
+// CSS Variables (ถ้า Admin set ไว้จะใช้ค่านั้น, ถ้าไม่มีจะ fallback เป็นขาว)
+const paletteHeaderBg = `var(--site-header-bg, ${DEFAULT_HEADER_BG})`;
+const paletteHeaderText = `var(--site-header-text, ${DEFAULT_HEADER_TEXT})`;
 
 const headerActive = "var(--site-header-active-nav, var(--admin-accent, #2563EB))";
 const headerCtaBg = "var(--site-header-cta-bg, var(--admin-primary, #2563EB))";
 const headerCtaText = "var(--site-header-cta-text, #FFFFFF)";
+
 export function Header({
   companyName = "ADEO Solution",
   logoUrl,
@@ -40,6 +45,7 @@ export function Header({
     { href: "/about", label: t("about") },
   ];
 
+  // Scroll detection
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -47,15 +53,25 @@ export function Header({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // ปิด mobile menu เมื่อเปลี่ยนหน้า
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  // Sync สถานะ reset จาก localStorage และ events
   useEffect(() => {
     function syncHeaderResetState() {
-      setForceWhiteHeader(
-        localStorage.getItem(HEADER_RESET_KEY) === "true"
-      );
+      const isReset = localStorage.getItem(HEADER_RESET_KEY) === "true";
+      setForceWhiteHeader(isReset);
+
+      if (isReset) {
+        // ล้าง CSS variables ที่ Admin set ไว้ ให้กลับเป็น default (ขาว)
+        document.documentElement.style.removeProperty("--site-header-bg");
+        document.documentElement.style.removeProperty("--site-header-text");
+        document.documentElement.style.removeProperty("--site-header-active-nav");
+        document.documentElement.style.removeProperty("--site-header-cta-bg");
+        document.documentElement.style.removeProperty("--site-header-cta-text");
+      }
     }
 
     syncHeaderResetState();
@@ -71,8 +87,10 @@ export function Header({
     };
   }, []);
 
-  const headerBg = forceWhiteHeader ? "#FFFFFF" : paletteHeaderBg;
-  const headerText = forceWhiteHeader ? "#0F172A" : paletteHeaderText;
+  // เมื่อ forceWhiteHeader = true → ใช้ค่า default ขาว
+  // เมื่อ forceWhiteHeader = false → ใช้ CSS variable (ซึ่ง fallback เป็นขาวอยู่แล้ว)
+  const headerBg = forceWhiteHeader ? DEFAULT_HEADER_BG : paletteHeaderBg;
+  const headerText = forceWhiteHeader ? DEFAULT_HEADER_TEXT : paletteHeaderText;
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -94,8 +112,8 @@ export function Header({
       <Container>
         <div className="flex h-16 items-center justify-between">
 
-          {/* Logo — Logo renders its own <Link href="/"> internally, so no wrapper <Link> needed here */}
-          <Logo companyName={companyName} logoUrl={logoUrl} />
+          {/* Logo — Logo renders its own <Link href="/"> internally */}
+          <Logo companyName={companyName} logoUrl={logoUrl} textColor={headerText} />
 
           {/* Desktop Navigation */}
           <nav
