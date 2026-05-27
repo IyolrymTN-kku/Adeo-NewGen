@@ -43,8 +43,8 @@ const PALETTE_IFRAME_MIN_HEIGHT = 920;
 const PALETTE_IFRAME_MAX_WIDTH = 1120;
 
 const defaultComponentColors: ComponentColorMap = {
-  "header.background": "secondary",
-  "header.text": "muted",
+  "header.background": "muted",
+  "header.text": "secondary",
 
   "header.activeNav": "accent",
   "header.ctaBackground": "primary",

@@ -17,8 +17,8 @@ export function AdminThemeInitScript({ bootTimestamp = "" }: Props) {
     var paletteKeys = ["primary", "secondary", "accent", "muted", "success"];
 
     var defaultComponentColors = {
-      "header.background": "secondary",
-      "header.text": "muted",
+      "header.background": "muted",
+      "header.text": "secondary",
       "header.activeNav": "accent",
       "header.ctaBackground": "primary",
       "header.panelBackground": "secondary",

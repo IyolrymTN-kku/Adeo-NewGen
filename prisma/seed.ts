@@ -230,8 +230,8 @@ async function main() {
       muted: "#EFF6FF",
       success: "#22C55E",
       componentColors: {
-        "header.background": "secondary",
-        "header.text": "muted",
+        "header.background": "muted",
+        "header.text": "secondary",
         "header.activeNav": "accent",
         "header.ctaBackground": "primary",
         "header.panelBackground": "secondary",
