@@ -42,6 +42,7 @@ export function AdminThemeInitScript({ bootTimestamp = "" }: Props) {
       var savedBoot = localStorage.getItem(BOOT_KEY);
       if (savedBoot !== bootTimestamp) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultTheme));
+        localStorage.removeItem("adeo-theme");
         localStorage.setItem(BOOT_KEY, bootTimestamp);
       }
     }
