@@ -33,19 +33,10 @@ export function AdminThemeInitScript({ bootTimestamp = "" }: Props) {
       primary: "#0066FF",
       secondary: "#0A1628",
       accent: "#3385FF",
-      muted: "#EFF6FF",
+      muted: "#FFFFFF",
       success: "#22C55E",
       componentColors: defaultComponentColors
     };
-
-    if (bootTimestamp) {
-      var savedBoot = localStorage.getItem(BOOT_KEY);
-      if (savedBoot !== bootTimestamp) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultTheme));
-        localStorage.removeItem("adeo-theme");
-        localStorage.setItem(BOOT_KEY, bootTimestamp);
-      }
-    }
 
     function isValidHex(hex) {
       return typeof hex === "string" && /^#[0-9A-Fa-f]{6}$/.test(hex);
