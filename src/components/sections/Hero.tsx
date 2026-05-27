@@ -182,15 +182,15 @@ export function Hero({
                         className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg"
                         style={{
                         backgroundColor: "color-mix(in srgb, var(--site-button-bg) 25%, transparent)",
-                        color: "color-mix(in srgb, var(--site-button-bg) 80%, black)",
+                        color: "color-mix(in srgb, var(--site-button-bg) 85%, var(--site-cta-text, #FFFFFF))",
                       }}
                       >
                         <ServiceIcon name={item.icon} />
                       </div>
-                      <p className="text-sm font-semibold" style={{ color: "var(--site-button-text)" }}>
+                      <p className="text-sm font-semibold" style={{ color: "var(--site-cta-text, #FFFFFF)" }}>
                         {item.label}
                       </p>
-                      <p className="text-xs" style={{ color: "color-mix(in srgb, var(--site-button-text) 60%, transparent)" }}>
+                      <p className="text-xs" style={{ color: "color-mix(in srgb, var(--site-cta-text, #FFFFFF) 64%, transparent)" }}>
                         {t("enterpriseGrade")}
                       </p>
                     </div>
