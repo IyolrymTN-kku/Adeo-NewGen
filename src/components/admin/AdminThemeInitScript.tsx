@@ -2,11 +2,17 @@
 
 import { useServerInsertedHTML } from "next/navigation";
 
-export function AdminThemeInitScript() {
+type Props = {
+  bootTimestamp?: string;
+};
+
+export function AdminThemeInitScript({ bootTimestamp = "" }: Props) {
   const script = `
 (function () {
   try {
     var STORAGE_KEY = "adeo-admin-theme";
+    var BOOT_KEY = "adeo-admin-theme-boot";
+    var bootTimestamp = "${bootTimestamp}";
 
     var paletteKeys = ["primary", "secondary", "accent", "muted", "success"];
 
@@ -24,13 +30,21 @@ export function AdminThemeInitScript() {
     };
 
     var defaultTheme = {
-      primary: "#2563EB",
-      secondary: "#1E40AF",
-      accent: "#60A5FA",
+      primary: "#0066FF",
+      secondary: "#0A1628",
+      accent: "#3385FF",
       muted: "#EFF6FF",
       success: "#22C55E",
       componentColors: defaultComponentColors
     };
+
+    if (bootTimestamp) {
+      var savedBoot = localStorage.getItem(BOOT_KEY);
+      if (savedBoot !== bootTimestamp) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultTheme));
+        localStorage.setItem(BOOT_KEY, bootTimestamp);
+      }
+    }
 
     function isValidHex(hex) {
       return typeof hex === "string" && /^#[0-9A-Fa-f]{6}$/.test(hex);

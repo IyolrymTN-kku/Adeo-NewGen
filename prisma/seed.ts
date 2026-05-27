@@ -226,7 +226,7 @@ async function main() {
       id: "singleton",
       primary: "#0066FF",
       secondary: "#0A1628",
-      accent: "#0066FF",
+      accent: "#3385FF",
       muted: "#EFF6FF",
       success: "#22C55E",
       componentColors: {

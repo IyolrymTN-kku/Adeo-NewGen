@@ -13,15 +13,15 @@ export type AdeoTheme = {
 export const ADEO_THEME_STORAGE_KEY = "adeo-theme";
 
 export const DEFAULT_ADEO_THEME: AdeoTheme = {
-  primary: "226 83% 59%",
+  primary: "216 100% 50%",
   primaryForeground: "0 0% 100%",
-  heroBg: "222 47% 10%",
+  heroBg: "215 60% 10%",
   heroForeground: "0 0% 100%",
   heroMutedForeground: "215 20% 75%",
   background: "0 0% 100%",
   foreground: "222 47% 11%",
-  adminSidebar: "28 23% 70%",
-  adminSidebarActive: "336 22% 69%",
+  adminSidebar: "215 60% 10%",
+  adminSidebarActive: "216 100% 60%",
 };
 
 export function hexToHslTriple(hex: string) {
