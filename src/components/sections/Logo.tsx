@@ -6,6 +6,7 @@ import Image from "next/image";
 
 type LogoProps = {
   invert?: boolean;
+  textColor?: string;
   className?: string;
   siteName?: string;
   companyName?: string;
@@ -17,6 +18,7 @@ type LogoProps = {
 
 export function Logo({
   invert = false,
+  textColor,
   className,
   siteName = "ADEO Solution",
   companyName = "ADEO Solution",
@@ -51,8 +53,9 @@ export function Logo({
       <span
         className={cn(
           "text-lg font-bold tracking-tight",
-          invert ? "text-white" : "text-slate-900"
+          !textColor && (invert ? "text-white" : "text-slate-900")
         )}
+        style={textColor ? { color: textColor } : undefined}
       >
         {displayName}
       </span>

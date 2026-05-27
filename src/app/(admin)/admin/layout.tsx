@@ -6,16 +6,25 @@ import "react-phone-number-input/style.css";
 
 export const dynamic = "force-dynamic";
 
+async function getAdminData() {
+  try {
+    const [newSubmissions, settings] = await Promise.all([
+      prisma.contactSubmission.count({ where: { status: "NEW" } }),
+      prisma.companySettings.findUnique({ where: { id: 1 } }),
+    ]);
+    return { newSubmissions, settings };
+  } catch {
+    return { newSubmissions: 0, settings: null };
+  }
+}
+
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const session = await requireAdminPage("/admin");
-  const [newSubmissions, settings] = await Promise.all([
-    prisma.contactSubmission.count({ where: { status: "NEW" } }),
-    prisma.companySettings.findUnique({ where: { id: 1 } }),
-  ]);
+  const { newSubmissions, settings } = await getAdminData();
 
   return (
     <div className="min-h-screen bg-white text-slate-950">

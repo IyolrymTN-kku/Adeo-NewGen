@@ -24,8 +24,16 @@ const prompt = Prompt({
   display: "swap",
 });
 
+async function getSettings() {
+  try {
+    return await prisma.companySettings.findUnique({ where: { id: 1 } });
+  } catch {
+    return null;
+  }
+}
+
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const settings = await getSettings();
   const name = settings?.companyName ?? "ADEO Solution";
   return {
     title: {
@@ -51,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const settings = await getSettings();
   const faviconUrl = settings?.faviconUrl ?? "/favicon.svg";
   const timestamp = settings?.updatedAt
     ? new Date(settings.updatedAt).getTime()

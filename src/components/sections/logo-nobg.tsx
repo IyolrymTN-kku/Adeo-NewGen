@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 
 type LogoProps = {
   invert?: boolean;
+  textColor?: string;   // ← เพิ่ม
   className?: string;
   siteName?: string;
   companyName?: string;
@@ -14,6 +15,7 @@ type LogoProps = {
 
 export function Logo({
   invert = false,
+  textColor,            // ← เพิ่ม
   className,
   siteName = "ADEO Solution",
   companyName = "ADEO Solution",
@@ -37,8 +39,10 @@ export function Logo({
       <span
         className={cn(
           "text-lg font-bold tracking-tight",
-          invert ? "text-white" : "text-slate-900"
+          // ถ้าไม่มี textColor → fallback ใช้ invert เหมือนเดิม
+          !textColor && (invert ? "text-white" : "text-slate-900")
         )}
+        style={textColor ? { color: textColor } : undefined}  // ← ใช้สีจาก parent ตรงๆ
       >
         {displayName}
       </span>

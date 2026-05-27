@@ -8,10 +8,61 @@ import { ContactStatusBadge } from "@/components/admin/StatusBadge";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
+async function getDashboardData() {
+  try {
+    const [
+      totalServices,
+      activeServices,
+      totalPartners,
+      activePartners,
+      newSubmissions,
+      totalSubmissions,
+      recentSubmissions,
+    ] = await Promise.all([
+      prisma.service.count(),
+      prisma.service.count({ where: { isActive: true } }),
+      prisma.partner.count(),
+      prisma.partner.count({ where: { isActive: true } }),
+      prisma.contactSubmission.count({ where: { status: "NEW" } }),
+      prisma.contactSubmission.count(),
+      prisma.contactSubmission.findMany({
+        orderBy: { createdAt: "desc" },
+        take: 5,
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          company: true,
+          status: true,
+          createdAt: true,
+        },
+      }),
+    ]);
+    return {
+      totalServices,
+      activeServices,
+      totalPartners,
+      activePartners,
+      newSubmissions,
+      totalSubmissions,
+      recentSubmissions,
+    };
+  } catch {
+    return {
+      totalServices: 0,
+      activeServices: 0,
+      totalPartners: 0,
+      activePartners: 0,
+      newSubmissions: 0,
+      totalSubmissions: 0,
+      recentSubmissions: [],
+    };
+  }
+}
+
 export default async function AdminDashboardPage() {
   const session = await requireAdminPage("/admin");
-
-  const [
+  const {
     totalServices,
     activeServices,
     totalPartners,
@@ -19,26 +70,7 @@ export default async function AdminDashboardPage() {
     newSubmissions,
     totalSubmissions,
     recentSubmissions,
-  ] = await Promise.all([
-    prisma.service.count(),
-    prisma.service.count({ where: { isActive: true } }),
-    prisma.partner.count(),
-    prisma.partner.count({ where: { isActive: true } }),
-    prisma.contactSubmission.count({ where: { status: "NEW" } }),
-    prisma.contactSubmission.count(),
-    prisma.contactSubmission.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 5,
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        company: true,
-        status: true,
-        createdAt: true,
-      },
-    }),
-  ]);
+  } = await getDashboardData();
 
   return (
     <>

@@ -197,10 +197,14 @@ export function AdminSidebar({
           href="/admin"
           className="inline-flex"
           onClick={() => setMobileOpen(false)}
+          textColor="var(--admin-sidebar-foreground)"
         />
-        <p className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3385ff]">
-          Admin Portal
-        </p>
+       <p
+  className="mt-1 pl-12 text-[10px] font-semibold uppercase tracking-[0.18em]"
+  style={{ color: "var(--admin-sidebar-foreground)" }}
+>
+  Admin Portal
+</p>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3">{NavList}</div>
@@ -238,7 +242,6 @@ export function AdminSidebar({
       {/* Mobile top bar — ใช้ href prop ของ Logo แทนการครอบด้วย <Link> */}
       <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
         <Logo
-          invert
           companyName={companyName}
           logoUrl={logoUrl}
           href="/admin"

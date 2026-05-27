@@ -1,3 +1,7 @@
+"use client";
+
+import { useServerInsertedHTML } from "next/navigation";
+
 export function AdminThemeInitScript() {
   const script = `
 (function () {
@@ -13,6 +17,7 @@ export function AdminThemeInitScript() {
       "header.ctaBackground": "primary",
       "header.panelBackground": "secondary",
       "sections.cardAccent": "primary",
+      "sections.cardBackground": "secondary",
       "cta.background": "secondary",
       "footer.background": "secondary",
       "buttons.background": "primary"
@@ -62,6 +67,10 @@ export function AdminThemeInitScript() {
         "sections.cardAccent": isValidPaletteKey(raw["sections.cardAccent"])
           ? raw["sections.cardAccent"]
           : defaultComponentColors["sections.cardAccent"],
+
+        "sections.cardBackground": isValidPaletteKey(raw["sections.cardBackground"])
+          ? raw["sections.cardBackground"]
+          : defaultComponentColors["sections.cardBackground"],
 
         "cta.background": isValidPaletteKey(raw["cta.background"])
           ? raw["cta.background"]
@@ -192,6 +201,8 @@ export function AdminThemeInitScript() {
     var headerCtaBg = getComponentColor("header.ctaBackground");
     var headerPanelBg = getComponentColor("header.panelBackground");
     var sectionAccent = getComponentColor("sections.cardAccent");
+    var cardBg = getComponentColor("sections.cardBackground");
+    var cardText = getReadableTextColor(cardBg);
     var ctaBg = getComponentColor("cta.background");
     var footerBg = getComponentColor("footer.background");
     var buttonBg = getComponentColor("buttons.background");
@@ -239,6 +250,10 @@ export function AdminThemeInitScript() {
     root.style.setProperty("--site-section-accent", sectionAccent);
     root.style.setProperty("--site-section-accent-text", getReadableTextColor(sectionAccent));
 
+    root.style.setProperty("--site-card-bg", cardBg);
+    root.style.setProperty("--site-card-text", cardText);
+    root.style.setProperty("--site-card-border", "color-mix(in srgb, " + sectionAccent + " 30%, transparent)");
+
     root.style.setProperty("--site-cta-bg", ctaBg);
     root.style.setProperty("--site-cta-text", getReadableTextColor(ctaBg));
 
@@ -259,10 +274,14 @@ export function AdminThemeInitScript() {
 })();
 `;
 
-  return (
-    <script
-      id="admin-theme-init"
-      dangerouslySetInnerHTML={{ __html: script }}
-    />
-  );
+  useServerInsertedHTML(() => {
+    return (
+      <script
+        id="admin-theme-init"
+        dangerouslySetInnerHTML={{ __html: script }}
+      />
+    );
+  });
+
+  return null;
 }

@@ -126,12 +126,16 @@ function applyTheme(theme: ThemeData) {
   root.style.setProperty("--admin-primary", primary);
   root.style.setProperty("--admin-primary-text", primaryText);
 
-  // ─── Secondary / Accent ──────────────────────────────────────────────────
+  // ─── Secondary / Accent / Success ────────────────────────────────────────
   const secondary = pick(theme, ["admin", "secondary"], ["secondary"], ["colors", "secondary"]);
   if (secondary) root.style.setProperty("--admin-secondary", secondary);
 
   const accent = pick(theme, ["admin", "accent"], ["accent"], ["colors", "accent"]);
   if (accent) root.style.setProperty("--admin-accent", accent);
+
+  const success = pick(theme, ["admin", "success"], ["success"], ["colors", "success"]) ?? "#22C55E";
+  root.style.setProperty("--admin-success", success);
+  root.style.setProperty("--admin-success-foreground", getReadableTextColor(success));
 
   // ─── Header ──────────────────────────────────────────────────────────────
   const headerBg = pick(

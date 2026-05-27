@@ -55,7 +55,6 @@ export function PartnerForm({
   return (
     <form
       action={formAction}
-      encType="multipart/form-data"
       className="space-y-6"
     >
       <FormFeedback status={state.status} message={state.message} />

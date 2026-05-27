@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ctaSectionStyle, mix, palette } from "@/lib/palette-helper";
-import { ButtonLink } from "@/components/ui/Button";
 import { useTranslations } from "next-intl";
 
 type CTASectionProps = {
@@ -26,26 +25,25 @@ export function CTASection({
       className="relative overflow-hidden py-20"
       style={ctaSectionStyle()}
     >
+      {/* Radial glow — ใช้ --primary แทน --admin-primary */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
           background:
-            "radial-gradient(circle at 30% 50%, var(--admin-primary, #0066FF) 0%, transparent 55%)",
+            "radial-gradient(circle at 30% 50%, hsl(var(--primary)) 0%, transparent 55%)",
         }}
       />
 
       <Container className="relative">
         <div className="mx-auto max-w-3xl text-center">
+          {/* Eyebrow — ลบซ้ำ เหลืออันเดียว ใช้ --primary */}
           <p
-            className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: palette.admin.primary }}
-          >
-            {eyebrow}
-          </p>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#3385ff]">
-            {eyebrow || t("getStarted")}
-          </p>
+          className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]"
+          style={{ color: "color-mix(in srgb, hsl(var(--primary)) 80%, black)" }}
+        >
+          {eyebrow || t("getStarted")}
+        </p>
 
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             {title}
@@ -59,12 +57,13 @@ export function CTASection({
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
+            {/* Primary button — ใช้ --primary */}
             <Link
               href={primaryCta.href}
               className="inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-bold shadow-sm transition hover:opacity-90"
               style={{
-                backgroundColor: palette.admin.primary,
-                color: palette.admin.primaryText,
+                backgroundColor: "hsl(var(--primary))",
+                color: "hsl(var(--primary-foreground))",
               }}
             >
               {primaryCta.label}

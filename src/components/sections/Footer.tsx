@@ -2,11 +2,12 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/sections/Logo";
-import { footerStyle, mix, palette } from "@/lib/palette-helper";
+import { mix } from "@/lib/palette-helper";
 import { getTranslations, getLocale } from "next-intl/server";
 
-// ดึงสีจาก CSS Variables — text จะ contrast กับ bg อัตโนมัติ
-const footerBg      = "var(--site-footer-bg, var(--admin-primary, #0f172a))";
+// ดึงสีจาก --site-footer-text ที่ AdminThemeInitScript เซ็ตให้อัตโนมัติ
+// getReadableTextColor() จะคืน #0F172A (ดำ) หรือ #FFFFFF (ขาว) ตาม background
+const footerBg      = "var(--site-footer-bg, #0a1628)";
 const footerFg      = "var(--site-footer-text, #ffffff)";
 const footerMuted   = `color-mix(in srgb, var(--site-footer-text, #ffffff) 55%, transparent)`;
 const footerSubtle  = `color-mix(in srgb, var(--site-footer-text, #ffffff) 35%, transparent)`;
@@ -14,8 +15,16 @@ const footerAccent  = "var(--site-footer-accent, var(--admin-accent, #3385ff))";
 const footerBorder  = `color-mix(in srgb, var(--site-footer-text, #ffffff) 14%, transparent)`;
 const footerHeading = `color-mix(in srgb, var(--site-footer-text, #ffffff) 90%, transparent)`;
 
+async function getSettings() {
+  try {
+    return await prisma.companySettings.findUnique({ where: { id: 1 } });
+  } catch {
+    return null;
+  }
+}
+
 export async function Footer({ companyName = "ADEO Solution" }: { companyName?: string }) {
-  const settings = await prisma.companySettings.findUnique({ where: { id: 1 } });
+  const settings = await getSettings();
   const t = await getTranslations("footer");
   const locale = await getLocale();
 
@@ -42,15 +51,26 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
 
   return (
     <footer className="mt-auto" style={{ backgroundColor: footerBg, color: footerFg }}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .footer-hover-link {
+          color: ${footerMuted} !important;
+          transition: color 0.2s, opacity 0.2s;
+        }
+        .footer-hover-link:hover {
+          color: ${footerAccent} !important;
+          opacity: 1 !important;
+        }
+      `}} />
       <Container>
         <div className="grid gap-12 py-16 lg:grid-cols-12">
 
           {/* Brand column */}
           <div className="lg:col-span-5">
+            {/* ใช้ textColor จาก CSS Variable แทน invert ตายตัว */}
             <Logo
-              invert
               companyName={settings?.companyName ?? companyName}
               logoUrl={settings?.logoUrl}
+              textColor={footerFg}
             />
 
             <p className="mt-5 max-w-sm text-sm leading-relaxed" style={{ color: footerMuted }}>
@@ -69,7 +89,7 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
                 {settings?.email && (
                   <p>
                     <span className="font-semibold" style={{ color: footerHeading }}>{t("email")}</span>{" "}
-                    <a href={`mailto:${settings.email}`} className="transition hover:opacity-100" style={{ color: footerMuted }}>
+                    <a href={`mailto:${settings.email}`} className="footer-hover-link transition">
                       {settings.email}
                     </a>
                   </p>
@@ -93,8 +113,7 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
                       href={settings.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="transition hover:opacity-100"
-                      style={{ color: footerMuted }}
+                      className="footer-hover-link transition"
                     >
                       {settings.website.replace(/^https?:\/\//, "")}
                     </a>
@@ -108,13 +127,10 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
                 settings?.instagram ||
                 settings?.tiktok ||
                 settings?.line) && (
-                <div className="space-y-2 text-sm" style={{ color: footerMuted }}>
+                <div className="space-y-2 text-sm">
                   {settings.facebook && (
                     <a href={settings.facebook} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 transition"
-                      style={{ color: footerMuted }}
-                      onMouseEnter={e => (e.currentTarget.style.color = footerAccent)}
-                      onMouseLeave={e => (e.currentTarget.style.color = footerMuted)}
+                      className="footer-hover-link flex items-center gap-2 transition"
                     >
                       <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 shrink-0">
                         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -124,8 +140,7 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
                   )}
                   {settings.linkedin && (
                     <a href={settings.linkedin} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 transition min-w-0"
-                      style={{ color: footerMuted }}
+                      className="footer-hover-link flex items-center gap-2 transition min-w-0"
                     >
                       <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 shrink-0">
                         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
@@ -138,8 +153,7 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
                   )}
                   {settings.instagram && (
                     <a href={settings.instagram} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 transition"
-                      style={{ color: footerMuted }}
+                      className="footer-hover-link flex items-center gap-2 transition"
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 shrink-0">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -151,8 +165,7 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
                   )}
                   {settings.tiktok && (
                     <a href={settings.tiktok} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 transition"
-                      style={{ color: footerMuted }}
+                      className="footer-hover-link flex items-center gap-2 transition"
                     >
                       <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 shrink-0">
                         <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z" />
@@ -162,8 +175,7 @@ export async function Footer({ companyName = "ADEO Solution" }: { companyName?: 
                   )}
                   {settings.line && (
                     <a href={`https://line.me/R/ti/p/${settings.line}`} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 transition"
-                      style={{ color: footerMuted }}
+                      className="footer-hover-link flex items-center gap-2 transition"
                     >
                       <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 shrink-0">
                         <path d="M12 2C6.48 2 2 6.02 2 11c0 3.53 2.16 6.6 5.37 8.37-.19.7-.7 2.54-.8 2.94-.13.5.18.49.38.36.16-.1 2.5-1.65 3.51-2.32.5.07 1.01.11 1.54.11 5.52 0 10-4.02 10-9S17.52 2 12 2zm5.12 11.76H13.4a.37.37 0 0 1-.37-.37V9.12a.37.37 0 0 1 .74 0v3.9h3.35a.37.37 0 0 1 0 .74zm-8.28.37a.37.37 0 0 1-.74 0V9.12a.37.37 0 0 1 .74 0v4.63zm-1.96 0a.37.37 0 0 1-.74 0V9.12a.37.37 0 0 1 .37-.37c.1 0 .2.04.27.12l2.66 3.54V9.12a.37.37 0 0 1 .74 0v4.63a.37.37 0 0 1-.37.37c-.1 0-.2-.04-.27-.12L8.51 10.4v3.36z" />

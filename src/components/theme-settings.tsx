@@ -43,8 +43,9 @@ const PALETTE_IFRAME_MIN_HEIGHT = 920;
 const PALETTE_IFRAME_MAX_WIDTH = 1120;
 
 const defaultComponentColors: ComponentColorMap = {
-  "header.background": "secondary",
-  "header.text": "muted",
+   "header.background": "muted",
+  "header.text": "secondary",
+
   "header.activeNav": "accent",
   "header.ctaBackground": "primary",
   "header.panelBackground": "secondary",
@@ -446,9 +447,10 @@ function DashboardPreview({
     paletteKey: PaletteKey
   ) => void;
 }) {
-  const [activeTab, setActiveTab] = useState<
+   const [activeTab, setActiveTab] = useState<
     "header" | "sections" | "cta" | "footer"
-  >("footer");
+  >("header");
+
 
   const primaryText = getReadableTextColor(theme.primary);
 
@@ -513,10 +515,10 @@ const headerPanelText = publicHeaderColors.headerPanelText;
 
           return (
             <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id)}
-              className="rounded-2xl px-5 py-2.5 text-sm font-black transition hover:-translate-y-0.5 hover:bg-slate-50 sm:px-7"
+            key={tab.id}
+            type="button"
+            onClick={() => setActiveTab(tab.id)}
+            className="cursor-pointer rounded-2xl px-5 py-2.5 text-sm font-black transition hover:-translate-y-0.5 hover:bg-slate-50 sm:px-7"
               style={{
                 backgroundColor: isActive ? theme.primary : "transparent",
                 color: isActive ? primaryText : "#475569",
@@ -528,7 +530,8 @@ const headerPanelText = publicHeaderColors.headerPanelText;
         })}
       </div>
 
-      <div className="rounded-[1.5rem] border border-white/80 bg-white/75 p-4 shadow-sm backdrop-blur-xl sm:p-5">
+      <div className="rounded-[1.5rem] border border-white/80 bg-white p-4 shadow-sm sm:p-5">
+
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-400">
@@ -556,7 +559,7 @@ const headerPanelText = publicHeaderColors.headerPanelText;
                 key={paletteKey}
                 type="button"
                 onClick={() => onAssignTargetColor(selectedTarget, paletteKey)}
-                className="min-h-[74px] rounded-2xl p-4 text-left text-sm font-black shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="cursor-pointer min-h-[74px] rounded-2xl p-4 text-left text-sm font-black shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 style={{
                   backgroundColor: color,
                   color: getReadableTextColor(color),
@@ -576,7 +579,7 @@ const headerPanelText = publicHeaderColors.headerPanelText;
       <div className="mt-5">
         {activeTab === "header" && (
           <section
-            className="overflow-hidden rounded-[1.75rem] border border-white/70 shadow-sm transition hover:ring-2 hover:ring-primary/30"
+            className="cursor-pointer overflow-hidden rounded-[1.75rem] border border-white/70 shadow-sm transition hover:ring-2 hover:ring-primary/30"
             style={{
               backgroundColor: headerBackground,
               color: headerText,
@@ -621,7 +624,7 @@ const headerPanelText = publicHeaderColors.headerPanelText;
                     event.stopPropagation();
                     onSelectTarget("header.activeNav");
                   }}
-                  className="relative rounded-lg px-2 py-1"
+                  className="cursor-pointer relative rounded-lg px-2 py-1"
                   style={{ outline: selectedOutline("header.activeNav") }}
                 >
                   Home
@@ -642,7 +645,8 @@ const headerPanelText = publicHeaderColors.headerPanelText;
                   event.stopPropagation();
                   onSelectTarget("header.ctaBackground");
                 }}
-                className="rounded-2xl px-5 py-3 text-sm font-black shadow-sm"
+                className="cursor-pointer rounded-2xl px-5 py-3 text-sm font-black shadow-sm"
+
                 style={{
                   backgroundColor: headerCtaBackground,
                   color: headerCtaText,
@@ -655,7 +659,7 @@ const headerPanelText = publicHeaderColors.headerPanelText;
 
             <div className="px-6 py-6">
               <div
-                className="rounded-3xl border p-6"
+               className="cursor-pointer rounded-3xl border p-6"
                 onClick={(event) => {
                   event.stopPropagation();
                   onSelectTarget("header.panelBackground");
@@ -733,7 +737,7 @@ const headerPanelText = publicHeaderColors.headerPanelText;
                       key={title}
                       type="button"
                       onClick={() => onSelectTarget(target)}
-                      className="rounded-3xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:ring-2 hover:ring-primary/30"
+                      className="cursor-pointer rounded-3xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:ring-2 hover:ring-primary/30"
                       style={{ outline: selectedOutline(target) }}
                     >
                       <div
@@ -795,7 +799,8 @@ const headerPanelText = publicHeaderColors.headerPanelText;
                 event.stopPropagation();
                 onSelectTarget("buttons.background");
               }}
-              className="mt-8 rounded-2xl px-6 py-3 text-sm font-black shadow-sm"
+              className="cursor-pointer mt-8 rounded-2xl px-6 py-3 text-sm font-black shadow-sm"
+
               style={{
                 backgroundColor: buttonBackground,
                 color: buttonText,
@@ -856,7 +861,8 @@ const headerPanelText = publicHeaderColors.headerPanelText;
           return (
             <div
               key={key}
-              className="min-h-[104px] rounded-[1.35rem] p-5 shadow-sm"
+             className="cursor-pointer min-h-[104px] rounded-[1.35rem] p-5 shadow-sm"
+
               style={{
                 backgroundColor: value,
                 color: getReadableTextColor(value),
@@ -876,6 +882,7 @@ const headerPanelText = publicHeaderColors.headerPanelText;
 }
 
 export function ThemeSettingsPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const [draftTheme, setDraftTheme] = useState<AdminTheme>(defaultTheme);
   const [iframeVersion, setIframeVersion] = useState(0);
   const [iframeHeight, setIframeHeight] = useState(PALETTE_IFRAME_MIN_HEIGHT);
@@ -1177,6 +1184,7 @@ export function ThemeSettingsPage() {
   }, [resizeIframeToContent, scheduleIframeMeasurements]);
 
   useEffect(() => {
+    setIsMounted(true);
     const savedTheme = localStorage.getItem(STORAGE_KEY);
 
     if (!savedTheme) {
@@ -1328,6 +1336,23 @@ export function ThemeSettingsPage() {
     });
   }
 
+  if (!isMounted) {
+    return (
+      <div
+        className="min-h-screen overflow-x-hidden p-3 sm:p-4 lg:p-5 flex items-center justify-center"
+        style={{
+          background:
+            "linear-gradient(135deg, color-mix(in srgb, var(--admin-primary, #0066FF) 10%, white) 0%, color-mix(in srgb, var(--admin-accent, #3385FF) 8%, white) 45%, color-mix(in srgb, var(--admin-secondary, #0A1628) 10%, white) 100%)",
+        }}
+      >
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-300 border-t-slate-800" />
+          <p className="text-sm font-bold text-slate-500">Loading Theme Settings...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="min-h-screen overflow-x-hidden p-3 sm:p-4 lg:p-5"
@@ -1398,7 +1423,8 @@ export function ThemeSettingsPage() {
                 return (
                   <span
                     key={key}
-                    className="h-8 w-8 rounded-none border border-white/70 shadow-sm"
+                   className="cursor-pointer h-8 w-8 rounded-none border border-white/70 shadow-sm"
+
                     style={{ backgroundColor: color }}
                     title={`${key}: ${color}`}
                   />
@@ -1411,8 +1437,8 @@ export function ThemeSettingsPage() {
                 type="button"
                 onClick={resetTheme}
                 disabled={saveStatus === "saving"}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-3 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50"
-              >
+                className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-3 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+                        >
                 <RotateCcw className="h-4 w-4" />
                 Reset
               </button>
@@ -1422,8 +1448,8 @@ export function ThemeSettingsPage() {
                 onClick={saveTheme}
                 disabled={saveStatus === "saving"}
                 className={[
-                  "inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition duration-200",
-                  "hover:opacity-90 disabled:cursor-not-allowed",
+                  "cursor-pointer inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition duration-200",
+  "hover:opacity-90 disabled:cursor-not-allowed",
                   saveStatus === "saving" ? "scale-[0.98] opacity-80" : "",
                   saveStatus === "saved" ? "scale-[1.03]" : "",
                 ].join(" ")}

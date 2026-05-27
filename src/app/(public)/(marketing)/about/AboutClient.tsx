@@ -22,7 +22,7 @@ const fadeUp = {
 // ใช้ตัวแปรเดียวกับ CTASection — Hero และ Values จะเปลี่ยนสีตาม palette
 const ctaBg         = "var(--site-cta-bg, var(--admin-primary, #0a1628))";
 const ctaFg         = "var(--site-cta-text, #ffffff)";
-const ctaAccent     = "var(--site-cta-accent, var(--admin-accent, #3385ff))";
+const ctaAccent = "color-mix(in srgb, var(--site-cta-accent, var(--admin-accent, #3385ff)) 80%, black)";
 const ctaMuted      = "color-mix(in srgb, var(--site-cta-text, #ffffff) 65%, transparent)";
 const ctaBorder     = "color-mix(in srgb, var(--site-cta-text, #ffffff) 12%, transparent)";
 const ctaCard       = "color-mix(in srgb, var(--site-cta-text, #ffffff) 6%, transparent)";
@@ -201,16 +201,20 @@ export function AboutClient({ companyName }: { companyName: string }) {
               >
                 <div
                   className="mb-5 inline-flex rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em]"
-                  style={{
-                    backgroundColor: `color-mix(in srgb, ${ctaAccent} 12%, transparent)`,
-                    color: ctaAccent,
-                  }}
+                 style={{
+                  backgroundColor: "color-mix(in srgb, var(--site-button-bg) 12%, transparent)",
+                  color: "color-mix(in srgb, var(--site-button-bg) 80%, black)",
+                }}
+
                 >
                   {item.title}
                 </div>
-                <p className="leading-relaxed" style={{ color: sectionMuted }}>
-                  {item.desc}
-                </p>
+                <p
+                className="leading-relaxed"
+                style={{ color: "var(--site-button-text, #0f172a)" }}
+              >
+                {item.desc}
+              </p>
               </motion.div>
             ))}
           </div>
@@ -253,7 +257,12 @@ export function AboutClient({ companyName }: { companyName: string }) {
                   color: ctaFg,
                 }}
               >
-                <p className="text-lg font-semibold tracking-tight">{value}</p>
+               <p
+                className="text-lg font-semibold tracking-tight"
+                style={{ color: "color-mix(in srgb, var(--site-cta-text, #ffffff) 100%, black 0%)" }}
+              >
+                {value}
+              </p>
               </motion.div>
             ))}
           </div>

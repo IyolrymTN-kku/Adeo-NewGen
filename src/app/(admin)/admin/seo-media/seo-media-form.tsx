@@ -38,7 +38,7 @@ export function SeoMediaForm({ initialData }: Props) {
     "your-company.com";
 
   return (
-    <div className="space-y-8 pb-32">
+    <div className="space-y-8 pb-12">
 
       {/* GRID */}
       <div className="grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">
@@ -47,13 +47,21 @@ export function SeoMediaForm({ initialData }: Props) {
         <div className="space-y-8">
 
           {/* SEARCH */}
-          <Card className="rounded-3xl p-8 shadow-sm">
+          <Card
+            className="rounded-3xl p-8 shadow-sm"
+            style={{
+              backgroundColor: "var(--admin-secondary, #0a1628)",
+              borderColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 25%, transparent)",
+              color: "var(--admin-secondary-foreground, #ffffff)",
+              ["--site-card-text" as any]: "var(--admin-secondary-foreground, #ffffff)",
+            }}
+          >
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-slate-900">
+              <h2 className="text-xl font-semibold" style={{ color: "var(--site-card-text, currentColor)" }}>
                 Search Appearance
               </h2>
 
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm opacity-70" style={{ color: "var(--site-card-text, currentColor)" }}>
                 Control how your website appears on Google
                 and social media.
               </p>
@@ -63,7 +71,7 @@ export function SeoMediaForm({ initialData }: Props) {
 
               {/* TITLE */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">
+                <label className="mb-2 block text-sm font-medium opacity-85" style={{ color: "var(--site-card-text, currentColor)" }}>
                   SEO Title
                 </label>
 
@@ -79,6 +87,7 @@ export function SeoMediaForm({ initialData }: Props) {
                     bg-white
                     px-4
                     text-sm
+                    text-slate-900
                     outline-none
                     transition
                     focus:border-[#0066ff]
@@ -88,7 +97,7 @@ export function SeoMediaForm({ initialData }: Props) {
                 />
 
                 <div className="mt-2 flex items-center justify-between text-xs">
-                  <span className="text-slate-400">
+                  <span className="opacity-60" style={{ color: "var(--site-card-text, currentColor)" }}>
                     Recommended: 50–60 characters
                   </span>
 
@@ -97,8 +106,9 @@ export function SeoMediaForm({ initialData }: Props) {
                       "font-medium",
                       title.length > 60
                         ? "text-red-500"
-                        : "text-slate-400"
+                        : "opacity-60"
                     )}
+                    style={title.length > 60 ? {} : { color: "var(--site-card-text, currentColor)" }}
                   >
                     {title.length}/60
                   </span>
@@ -107,7 +117,7 @@ export function SeoMediaForm({ initialData }: Props) {
 
               {/* DESCRIPTION */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">
+                <label className="mb-2 block text-sm font-medium opacity-85" style={{ color: "var(--site-card-text, currentColor)" }}>
                   Meta Description
                 </label>
 
@@ -126,6 +136,7 @@ export function SeoMediaForm({ initialData }: Props) {
                     px-4
                     py-3
                     text-sm
+                    text-slate-900
                     outline-none
                     transition
                     focus:border-[#0066ff]
@@ -135,7 +146,7 @@ export function SeoMediaForm({ initialData }: Props) {
                 />
 
                 <div className="mt-2 flex items-center justify-between text-xs">
-                  <span className="text-slate-400">
+                  <span className="opacity-60" style={{ color: "var(--site-card-text, currentColor)" }}>
                     Recommended: 140–160 characters
                   </span>
 
@@ -144,8 +155,9 @@ export function SeoMediaForm({ initialData }: Props) {
                       "font-medium",
                       description.length > 160
                         ? "text-red-500"
-                        : "text-slate-400"
+                        : "opacity-60"
                     )}
+                    style={description.length > 160 ? {} : { color: "var(--site-card-text, currentColor)" }}
                   >
                     {description.length}/160
                   </span>
@@ -155,13 +167,21 @@ export function SeoMediaForm({ initialData }: Props) {
           </Card>
 
           {/* OG IMAGE */}
-          <Card className="rounded-3xl p-8 shadow-sm">
+          <Card
+            className="rounded-3xl p-8 shadow-sm"
+            style={{
+              backgroundColor: "var(--admin-secondary, #0a1628)",
+              borderColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 25%, transparent)",
+              color: "var(--admin-secondary-foreground, #ffffff)",
+              ["--site-card-text" as any]: "var(--admin-secondary-foreground, #ffffff)",
+            }}
+          >
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-slate-900">
+              <h2 className="text-xl font-semibold" style={{ color: "var(--site-card-text, currentColor)" }}>
                 Open Graph Image
               </h2>
 
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm opacity-70" style={{ color: "var(--site-card-text, currentColor)" }}>
                 Used for Facebook, Twitter/X, LinkedIn,
                 Discord and messaging previews.
               </p>
@@ -256,14 +276,22 @@ export function SeoMediaForm({ initialData }: Props) {
         <div className="space-y-6">
 
           {/* PREVIEW HEADER */}
-          <Card className="rounded-3xl p-5 shadow-sm">
+          <Card
+            className="rounded-3xl p-5 shadow-sm"
+            style={{
+              backgroundColor: "var(--admin-secondary, #0a1628)",
+              borderColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 25%, transparent)",
+              color: "var(--admin-secondary-foreground, #ffffff)",
+              ["--site-card-text" as any]: "var(--admin-secondary-foreground, #ffffff)",
+            }}
+          >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-semibold text-slate-900">
+                <h3 className="font-semibold" style={{ color: "var(--site-card-text, currentColor)" }}>
                   Live Preview
                 </h3>
 
-                <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1 text-xs opacity-70" style={{ color: "var(--site-card-text, currentColor)" }}>
                   See how your content appears online
                 </p>
               </div>
@@ -305,7 +333,15 @@ export function SeoMediaForm({ initialData }: Props) {
 
           {/* GOOGLE */}
           {activeTab === "google" && (
-            <Card className="rounded-3xl p-7 shadow-sm">
+            <Card
+              className="rounded-3xl p-7 shadow-sm"
+              style={{
+                backgroundColor: "var(--admin-secondary, #0a1628)",
+                borderColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 25%, transparent)",
+                color: "var(--admin-secondary-foreground, #ffffff)",
+                ["--site-card-text" as any]: "var(--admin-secondary-foreground, #ffffff)",
+              }}
+            >
               <div className="rounded-2xl border border-slate-200 bg-white p-5">
                 <div className="space-y-1">
                   <div className="text-sm text-green-700">
@@ -327,7 +363,15 @@ export function SeoMediaForm({ initialData }: Props) {
 
           {/* FACEBOOK */}
           {activeTab === "facebook" && (
-            <Card className="rounded-3xl p-6 shadow-sm">
+            <Card
+              className="rounded-3xl p-6 shadow-sm"
+              style={{
+                backgroundColor: "var(--admin-secondary, #0a1628)",
+                borderColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 25%, transparent)",
+                color: "var(--admin-secondary-foreground, #ffffff)",
+                ["--site-card-text" as any]: "var(--admin-secondary-foreground, #ffffff)",
+              }}
+            >
               <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                 <div className="aspect-[1.91/1] bg-slate-100">
                   {ogImage ? (
@@ -362,7 +406,15 @@ export function SeoMediaForm({ initialData }: Props) {
 
           {/* TWITTER */}
           {activeTab === "twitter" && (
-            <Card className="rounded-3xl p-6 shadow-sm">
+            <Card
+              className="rounded-3xl p-6 shadow-sm"
+              style={{
+                backgroundColor: "var(--admin-secondary, #0a1628)",
+                borderColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 25%, transparent)",
+                color: "var(--admin-secondary-foreground, #ffffff)",
+                ["--site-card-text" as any]: "var(--admin-secondary-foreground, #ffffff)",
+              }}
+            >
               <div className="overflow-hidden rounded-2xl border border-slate-300 bg-white">
                 <div className="aspect-[1.91/1] bg-slate-100">
                   {ogImage ? (
@@ -396,12 +448,20 @@ export function SeoMediaForm({ initialData }: Props) {
           )}
 
           {/* TIPS */}
-          <Card className="rounded-3xl border-blue-100 bg-blue-50/50 p-6 shadow-sm">
-            <h3 className="font-semibold text-slate-900">
+          <Card
+            className="rounded-3xl p-6 shadow-sm"
+            style={{
+              backgroundColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 12%, var(--admin-secondary, #0a1628))",
+              borderColor: "color-mix(in srgb, var(--admin-primary, #0066ff) 25%, transparent)",
+              color: "var(--admin-secondary-foreground, #ffffff)",
+              ["--site-card-text" as any]: "var(--admin-secondary-foreground, #ffffff)",
+            }}
+          >
+            <h3 className="font-semibold" style={{ color: "var(--site-card-text, currentColor)" }}>
               Optimization Tips
             </h3>
 
-            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed opacity-80" style={{ color: "var(--site-card-text, currentColor)" }}>
               <li>
                 • Use a clean, high contrast image
               </li>
@@ -420,34 +480,6 @@ export function SeoMediaForm({ initialData }: Props) {
               </li>
             </ul>
           </Card>
-        </div>
-      </div>
-
-      {/* STICKY ACTION BAR */}
-      <div
-        className="
-          fixed
-          bottom-0
-          left-[240px]
-          right-0
-          z-40
-          border-t
-          border-slate-200
-          bg-white/90
-          backdrop-blur
-        "
-      >
-        <div className="flex items-center justify-end gap-3 px-8 py-4">
-          <Button
-            variant="outline"
-            className="rounded-xl"
-          >
-            Reset
-          </Button>
-
-          <Button className="rounded-xl px-6">
-            Save Changes
-          </Button>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  eslint: { ignoreDuringBuilds: true },
+  ...({ eslint: { ignoreDuringBuilds: true } } as any),
 
   async headers() {
     return [
