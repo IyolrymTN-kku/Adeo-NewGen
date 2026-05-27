@@ -398,6 +398,8 @@ function applyAdminTheme(theme: AdminTheme) {
 
   root.style.setProperty("--site-cta-bg", ctaBg);
   root.style.setProperty("--site-cta-text", getReadableTextColor(ctaBg));
+  root.style.setProperty("--cta-bg", ctaBg);
+  root.style.setProperty("--cta-text", getReadableTextColor(ctaBg));
 
   root.style.setProperty("--site-footer-bg", footerBg);
   root.style.setProperty("--site-footer-text", getReadableTextColor(footerBg));
