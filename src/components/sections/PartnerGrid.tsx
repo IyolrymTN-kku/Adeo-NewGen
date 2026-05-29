@@ -1,35 +1,18 @@
+"use client";
 import Image from "next/image";
 import type { Partner, PartnerCategory } from "@prisma/client";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
-import { useTranslations } from "next-intl";
 
-const CATEGORY_LABELS: Record<PartnerCategory, string> = {
-  NETWORK: "Network",
-  CLOUD: "Cloud",
-  SECURITY: "Security",
-  HARDWARE: "Hardware",
-};
-
-const CATEGORY_ORDER: PartnerCategory[] = [
-  "CLOUD",
-  "NETWORK",
-  "SECURITY",
-  "HARDWARE",
-];
+const CATEGORY_ORDER: PartnerCategory[] = ["CLOUD", "NETWORK", "SECURITY", "HARDWARE"];
 
 type PartnerGridProps = {
-  partners: Pick<
-    Partner,
-    "id" | "name" | "logoUrl" | "websiteUrl" | "category"
-  >[];
+  partners: Pick<Partner, "id" | "name" | "logoUrl" | "websiteUrl" | "category">[];
+  categoryLabels: Record<string, string>;
+  partnerCountLabel: string; // เปลี่ยนจาก function เป็น string
 };
 
-export function PartnerGrid({ partners }: PartnerGridProps) {
-  const t = useTranslations("home");
-  const grouped = new Map<
-    PartnerCategory,
-    typeof partners
-  >();
+export function PartnerGrid({ partners, categoryLabels, partnerCountLabel }: PartnerGridProps) {
+  const grouped = new Map<PartnerCategory, typeof partners>();
   for (const p of partners) {
     const list = grouped.get(p.category) ?? [];
     list.push(p);
@@ -37,11 +20,7 @@ export function PartnerGrid({ partners }: PartnerGridProps) {
   }
 
   if (partners.length === 0) {
-    return (
-      <p className="text-center text-sm text-slate-500">
-        No partners listed.
-      </p>
-    );
+    return <p className="text-center text-sm text-slate-500">No partners listed.</p>;
   }
 
   return (
@@ -52,15 +31,11 @@ export function PartnerGrid({ partners }: PartnerGridProps) {
           <div key={category}>
             <div className="mb-5 flex items-center gap-3">
               <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
-                {category === "NETWORK" ? t("partnerCatNETWORK") :
-                 category === "CLOUD" ? t("partnerCatCLOUD") :
-                 category === "SECURITY" ? t("partnerCatSECURITY") :
-                 category === "HARDWARE" ? t("partnerCatHARDWARE") : 
-                 CATEGORY_LABELS[category]}
+                {categoryLabels[category] ?? category}
               </h3>
               <span className="h-px flex-1 bg-slate-200" />
               <span className="text-xs text-slate-400">
-                {t("partnerCount", { count: list.length })}
+                {partnerCountLabel.replace("{count}", String(list.length))}
               </span>
             </div>
             <StaggerContainer
@@ -81,11 +56,7 @@ export function PartnerGrid({ partners }: PartnerGridProps) {
   );
 }
 
-function PartnerLogo({
-  partner,
-}: {
-  partner: Pick<Partner, "name" | "logoUrl" | "websiteUrl">;
-}) {
+function PartnerLogo({ partner }: { partner: Pick<Partner, "name" | "logoUrl" | "websiteUrl"> }) {
   const tile = (
     <div className="group flex h-24 w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-4 transition hover:border-primary/40 hover:shadow-sm">
       {partner.logoUrl && partner.logoUrl !== "/uploads/placeholder-logo.svg" ? (
@@ -106,17 +77,11 @@ function PartnerLogo({
 
   if (partner.websiteUrl) {
     return (
-      <a
-        href={partner.websiteUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${partner.name} website`}
-        className="block"
-      >
+      <a href={partner.websiteUrl} target="_blank" rel="noopener noreferrer"
+        aria-label={`${partner.name} website`} className="block">
         {tile}
       </a>
     );
   }
-
   return tile;
 }

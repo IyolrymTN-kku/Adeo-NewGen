@@ -4,14 +4,10 @@ import { motion, type Variants } from "framer-motion";
 
 type FadeInProps = {
   children: React.ReactNode;
-  /** Vertical translation in px before the element enters. Default 24. */
   y?: number;
-  /** Animation duration in seconds. Default 0.6. */
   duration?: number;
-  /** Delay in seconds before the animation starts. Default 0. */
   delay?: number;
   className?: string;
-  /** Tag to render. Default "div". */
   as?: "div" | "section" | "article" | "span";
 };
 

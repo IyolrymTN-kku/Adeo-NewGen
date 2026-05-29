@@ -42,7 +42,7 @@ export function AboutClient({ companyName }: { companyName: string }) {
 
       {/* HERO */}
       <section
-        className="relative overflow-hidden py-28"
+        className="relative overflow-hidden py-16 lg:py-28"
         style={{ backgroundColor: ctaBg, color: ctaFg }}
       >
         <div
@@ -79,7 +79,7 @@ export function AboutClient({ companyName }: { companyName: string }) {
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="mt-4 text-6xl sm:text-6xl font-bold leading-[1.05] tracking-tight"
+            className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight"
             style={{ color: ctaFg }}
           >
             {t("heroTitle1")}
@@ -102,8 +102,8 @@ export function AboutClient({ companyName }: { companyName: string }) {
       </section>
 
       {/* STORY */}
-      <section className="py-28" style={{ backgroundColor: sectionBg }}>
-        <Container className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 lg:py-28" style={{ backgroundColor: sectionBg }}>
+        <Container className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -32 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -172,7 +172,7 @@ export function AboutClient({ companyName }: { companyName: string }) {
 
       {/* MISSION */}
       <section
-        className="border-y py-28"
+        className="border-y py-16 lg:py-28"
         style={{ backgroundColor: cardAltBg, borderColor: sectionBorder }}
       >
         <Container>
@@ -181,7 +181,7 @@ export function AboutClient({ companyName }: { companyName: string }) {
             title={t("missionTitle")}
             subtitle={t("missionSubtitle")}
           />
-          <div className="mt-14 grid lg:grid-cols-2 gap-7">
+          <div className="mt-10 grid lg:grid-cols-2 gap-6 lg:mt-14">
             {[
               { title: t("missionCard"), desc: t("missionDesc") },
               { title: t("visionCard"), desc: t("visionDesc") },
@@ -223,7 +223,7 @@ export function AboutClient({ companyName }: { companyName: string }) {
 
       {/* VALUES */}
       <section
-        className="relative overflow-hidden py-28"
+        className="relative overflow-hidden py-16 lg:py-28"
         style={{ backgroundColor: ctaBg, color: ctaFg }}
       >
         <div

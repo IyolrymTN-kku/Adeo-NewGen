@@ -212,50 +212,108 @@ export function CorporationForm({ settings }: { settings: companySettings | null
       </Section>
 
       <Section title="Logo & Favicon">
-        <Field label="Logo" hint="PNG only, 32×32px recommended">
+        <Field label="Logo" hint="SVG ≤ 50KB or PNG ≤ 200KB">
           {logoPreview && (
-            <div className="relative h-16 w-16 overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-2">
-              <Image src={logoPreview} alt="logo preview" fill className="object-contain" />
+            <div className="h-16 w-16 overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-2">
+              <img src={logoPreview} alt="logo preview" className="h-full w-full object-contain" />
             </div>
           )}
-          <input name="logo" type="file" accept="image/png"
+
+          <input
+            name="logo"
+            type="file"
+            accept="image/png,image/svg+xml"
             onChange={async e => {
               const f = e.target.files?.[0];
               if (!f) return;
+
               setLogoError(null);
-              if (f.type !== "image/png") { setLogoError("Please upload a PNG file only"); e.target.value = ""; return; }
-              const valid = await validateImageSize(f, 32, 32);
-              if (!valid) { setLogoError("Image size must be 32×32px"); e.target.value = ""; return; }
-              setLogoPreview(URL.createObjectURL(f));
+
+              if (f.type === "image/svg+xml") {
+                if (f.size > 50 * 1024) {
+                  setLogoError("SVG files must not exceed 50KB");
+                  e.target.value = "";
+                  return;
+                }
+
+                setLogoPreview(URL.createObjectURL(f));
+                return;
+              }
+
+              if (f.type === "image/png") {
+                if (f.size > 200 * 1024) {
+                  setLogoError("PNG files must not exceed 200KB");
+                  e.target.value = "";
+                  return;
+                }
+
+                setLogoPreview(URL.createObjectURL(f));
+                return;
+              }
+
+              setLogoError("Only SVG and PNG formats are supported");
+              e.target.value = "";
             }}
-            className="corp-file-input block w-full text-sm text-slate-500"
-            style={{
-              "--file-btn-bg": btnBg,
-              "--file-btn-text": btnText,
-            } as React.CSSProperties}
+            className="block w-full text-sm text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-[#0066ff] file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-[#0052cc]"
           />
-          <style>{`.corp-file-input::file-selector-button { margin-right: 0.75rem; border-radius: 0.5rem; border: 0; background: ${btnBg}; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: ${btnText}; cursor: pointer; transition: opacity 0.15s; } .corp-file-input::file-selector-button:hover { opacity: 0.88; }`}</style>
-          {logoError && <p className="text-xs font-medium text-red-600">{logoError}</p>}
+
+          {logoError && (
+            <p className="text-xs font-medium text-red-600">
+              ❌ {logoError}
+            </p>
+          )}
         </Field>
-        <Field label="Favicon" hint="PNG only, 32×32px recommended">
+
+        <Field label="Favicon" hint="SVG ≤ 50KB or PNG ≤ 100KB">
           {faviconPreview && (
-            <div className="relative h-10 w-10 overflow-hidden rounded border border-slate-200 bg-slate-50 p-1">
-              <Image src={faviconPreview} alt="favicon preview" fill className="object-contain" />
+            <div className="h-10 w-10 overflow-hidden rounded border border-slate-200 bg-slate-50 p-1">
+              <img src={faviconPreview} alt="favicon preview" className="h-full w-full object-contain" />
             </div>
           )}
-          <input name="favicon" type="file" accept="image/png"
+
+          <input
+            name="favicon"
+            type="file"
+            accept="image/png,image/svg+xml"
             onChange={async e => {
               const f = e.target.files?.[0];
               if (!f) return;
+
               setFaviconError(null);
-              if (f.type !== "image/png") { setFaviconError("Please upload a PNG file only"); e.target.value = ""; return; }
-              const valid = await validateImageSize(f, 32, 32);
-              if (!valid) { setFaviconError("Image size must be 32×32px"); e.target.value = ""; return; }
-              setFaviconPreview(URL.createObjectURL(f));
+
+              if (f.type === "image/svg+xml") {
+                if (f.size > 50 * 1024) {
+                  setFaviconError("SVG files must not exceed 50KB");
+                  e.target.value = "";
+                  return;
+                }
+
+                setFaviconPreview(URL.createObjectURL(f));
+                return;
+              }
+
+              if (f.type === "image/png") {
+                if (f.size > 100 * 1024) {
+                  setFaviconError("PNG files must not exceed 100KB");
+                  e.target.value = "";
+                  return;
+                }
+
+                setFaviconPreview(URL.createObjectURL(f));
+                return;
+              }
+
+              setFaviconError("Only SVG and PNG formats are supported");
+              e.target.value = "";
             }}
-            className="corp-file-input block w-full text-sm text-slate-500"
+            className="block w-full text-sm text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-[#0066ff] file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-[#0052cc]"
           />
-          {faviconError && <p className="text-xs font-medium text-red-600">{faviconError}</p>}
+
+          {faviconError && (
+            <p className="text-xs font-medium text-red-600">
+              ❌ {faviconError}
+            </p>
+          )}
         </Field>
       </Section>
 
