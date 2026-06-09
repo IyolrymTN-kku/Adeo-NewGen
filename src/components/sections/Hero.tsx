@@ -1,10 +1,8 @@
-"use client";
-
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { FadeInOnLoad } from "@/components/animations";
 import { ctaSectionStyle } from "@/lib/palette-helper";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { HeroAnimated } from "./HeroAnimated";
 
 type HeroProps = {
   eyebrow?: string;
@@ -15,7 +13,7 @@ type HeroProps = {
   secondaryCta?: { href: string; label: string };
 };
 
-export function Hero({
+export async function Hero({
   eyebrow = "Enterprise IT & Cloud",
   title,
   highlight,
@@ -23,40 +21,31 @@ export function Hero({
   primaryCta = { href: "/contact", label: "Talk to an Expert" },
   secondaryCta = { href: "/solutions", label: "Explore Solutions" },
 }: HeroProps) {
-  const t = useTranslations("home");
+  const t = await getTranslations("home");
+
+  const serviceCards = [
+    { label: t("serviceSoftwareDev"), icon: "code" },
+    { label: t("serviceCloudNative"), icon: "cloud" },
+    { label: t("serviceNetwork"), icon: "network" },
+    { label: t("serviceBackupDr"), icon: "shield" },
+    { label: t("serviceMigration"), icon: "swap" },
+    { label: t("serviceItSupport"), icon: "support" },
+  ];
 
   return (
     <section className="relative overflow-hidden" style={ctaSectionStyle()}>
-      {/* Background Glow 1 */}
-      <div
-        aria-hidden="true"
+      <div aria-hidden="true"
         className="pointer-events-none absolute -top-40 -right-40 h-[640px] w-[640px] rounded-full opacity-30"
-        style={{
-          background:
-            "radial-gradient(circle, var(--admin-primary, #0066FF) 0%, transparent 65%)",
-        }}
-      />
-
-      {/* Background Glow 2 */}
-      <div
-        aria-hidden="true"
+        style={{ background: "radial-gradient(circle, var(--admin-primary, #0066FF) 0%, transparent 65%)" }} />
+      <div aria-hidden="true"
         className="pointer-events-none absolute -bottom-48 -left-32 h-[520px] w-[520px] rounded-full opacity-20"
-        style={{
-          background:
-            "radial-gradient(circle, var(--admin-primary, #0066FF) 0%, transparent 65%)",
-        }}
-      />
-
-      {/* Grid Overlay */}
-      <div
-        aria-hidden="true"
+        style={{ background: "radial-gradient(circle, var(--admin-primary, #0066FF) 0%, transparent 65%)" }} />
+      <div aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage:
-            "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
           backgroundSize: "48px 48px",
-        }}
-      />
+        }} />
 
       <Container className="relative">
         <div className="grid items-center gap-16 py-24 lg:grid-cols-12 lg:py-32">
@@ -212,68 +201,4 @@ export function Hero({
       </Container>
     </section>
   );
-}
-
-// ซ่อมแซมฟังก์ชัน ServiceIcon ให้เปิด-ปิดวงเล็บและสัญลักษณ์อย่างถูกต้อง
-function ServiceIcon({ name }: { name: string }) {
-  const common = {
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 2,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    className: "h-5 w-5",
-    "aria-hidden": true,
-  };
-
-  switch (name) {
-    case "code":
-      return (
-        <svg {...common}>
-          <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
-        </svg>
-      );
-
-    case "cloud":
-      return (
-        <svg {...common}>
-          <path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.78A6 6 0 0 0 5 13a4 4 0 0 0 .5 8h12Z" />
-        </svg>
-      );
-
-    case "network":
-      return (
-        <svg {...common}>
-          <rect x="3" y="3" width="7" height="7" rx="1" />
-          <rect x="14" y="3" width="7" height="7" rx="1" />
-          <rect x="3" y="14" width="7" height="7" rx="1" />
-          <rect x="14" y="14" width="7" height="7" rx="1" />
-        </svg>
-      );
-
-    case "shield":
-      return (
-        <svg {...common}>
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-        </svg>
-      );
-
-    case "swap":
-      return (
-        <svg {...common}>
-          <path d="M7 16V4m0 0L3 8m4-4 4 4M17 8v12m0 0 4-4m-4 4-4-4" />
-        </svg>
-      );
-
-    case "support":
-      return (
-        <svg {...common}>
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      );
-
-    default:
-      return null;
-  }
 }

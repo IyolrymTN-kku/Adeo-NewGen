@@ -23,7 +23,7 @@ const inter = Inter({
 const prompt = Prompt({
   subsets: ["thai", "latin"],
   variable: "--font-thai",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   display: "swap",
 });
 
@@ -79,6 +79,10 @@ export default async function RootLayout({
     >
       <head>
         <link rel="icon" href={`${faviconUrl}?v=${timestamp}`} />
+        {/* เพิ่ม 3 บรรทัดนี้ */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.adeo.co.th" />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900">
         <AdminThemeInitScript bootTimestamp={SERVER_BOOT_TIMESTAMP} />

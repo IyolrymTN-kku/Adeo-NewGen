@@ -47,7 +47,12 @@ async function getPageData() {
 export default async function HomePage() {
   const t = await getTranslations("home");
   const { settings, services, partners } = await getPageData();
-
+  const partnerLabels = {
+    NETWORK: t("partnerCatNETWORK"),
+    CLOUD: t("partnerCatCLOUD"),
+    SECURITY: t("partnerCatSECURITY"),
+    HARDWARE: t("partnerCatHARDWARE"),
+  };
   return (
     <>
       <Hero
@@ -92,7 +97,11 @@ export default async function HomePage() {
             subtitle={t("partnersSubtitle")}
           />
           <div className="mt-14">
-            <PartnerGrid partners={partners} />
+            <PartnerGrid
+              partners={partners}
+              categoryLabels={partnerLabels}
+              partnerCountLabel={t("partnerCount", { count: 0 }).replace("0", "{count}")}
+            />
           </div>
         </Container>
       </section>

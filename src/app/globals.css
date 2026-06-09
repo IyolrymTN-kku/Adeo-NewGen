@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.65s ease-out forwards;
+}
+
 @theme inline {
   --font-sans: var(--font-inter);
 
@@ -152,3 +160,15 @@ html[data-theme="slate"] {
   background: transparent;
   cursor: pointer;
 }
+
+/* Hero staggered entrance — CSS-only, zero JS overhead */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-fade-1 { animation: hero-rise 0.65s ease-out 0.05s both; }
+.hero-fade-2 { animation: hero-rise 0.70s ease-out 0.15s both; }
+.hero-fade-3 { animation: hero-rise 0.65s ease-out 0.30s both; }
+.hero-fade-4 { animation: hero-rise 0.65s ease-out 0.45s both; }
+.hero-fade-5 { animation: hero-rise 0.80s ease-out 0.40s both; }

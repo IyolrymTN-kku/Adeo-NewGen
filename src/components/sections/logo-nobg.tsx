@@ -1,9 +1,10 @@
+import NextImage from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 type LogoProps = {
   invert?: boolean;
-  textColor?: string;   // ← เพิ่ม
+  textColor?: string;
   className?: string;
   siteName?: string;
   companyName?: string;
@@ -15,7 +16,7 @@ type LogoProps = {
 
 export function Logo({
   invert = false,
-  textColor,            // ← เพิ่ม
+  textColor,
   className,
   siteName = "ADEO Solution",
   companyName = "ADEO Solution",
@@ -31,18 +32,21 @@ export function Logo({
 
   const inner = (
     <>
-      <img
+      <NextImage
         src={finalLogoUrl}
         alt={displayName}
-        className="h-13 w-auto object-contain"
+        width={120}
+        height={52}
+        priority
+        className="h-13 object-contain"
+        style={{ width: "auto", height: "52px" }}
       />
       <span
         className={cn(
           "text-lg font-bold tracking-tight",
-          // ถ้าไม่มี textColor → fallback ใช้ invert เหมือนเดิม
           !textColor && (invert ? "text-white" : "text-slate-900")
         )}
-        style={textColor ? { color: textColor } : undefined}  // ← ใช้สีจาก parent ตรงๆ
+        style={textColor ? { color: textColor } : undefined}
       >
         {displayName}
       </span>

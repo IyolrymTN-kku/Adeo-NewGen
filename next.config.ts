@@ -37,6 +37,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  compress: true, // เพิ่มบรรทัดนี้
   ...({ eslint: { ignoreDuringBuilds: true } } as any),
 
   async headers() {
@@ -49,6 +50,8 @@ const nextConfig: NextConfig = {
   },
 
   images: {
+    formats: ["image/avif", "image/webp"], // เพิ่มบรรทัดนี้
+    minimumCacheTTL: 3600,                 // เพิ่มบรรทัดนี้
     remotePatterns: [
       {
         protocol: "https",

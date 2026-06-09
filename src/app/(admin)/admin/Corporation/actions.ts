@@ -52,19 +52,27 @@ export async function updateCorporation(formData: FormData) {
   let logoUrl:    string | undefined;
   let faviconUrl: string | undefined;
 
-  if (logoFile && logoFile.size > 0) {
-    if (logoFile.type !== "image/png") {
-      return { error: "โลโก้ต้องเป็นไฟล์ PNG เท่านั้น" };
-    }
-    logoUrl = await saveUploadedImage(logoFile);
+if (logoFile && logoFile.size > 0) {
+  if (!["image/png", "image/svg+xml"].includes(logoFile.type)) {
+    return { error: "โลโก้รองรับเฉพาะ SVG และ PNG เท่านั้น" };
   }
+  const maxSize = logoFile.type === "image/svg+xml" ? 50 * 1024 : 200 * 1024;
+  if (logoFile.size > maxSize) {
+    return { error: logoFile.type === "image/svg+xml" ? "SVG ต้องไม่เกิน 50KB" : "PNG ต้องไม่เกิน 200KB" };
+  }
+  logoUrl = await saveUploadedImage(logoFile);
+}
 
-  if (faviconFile && faviconFile.size > 0) {
-    if (faviconFile.type !== "image/png") {
-      return { error: "Favicon ต้องเป็นไฟล์ PNG เท่านั้น" };
-    }
-    faviconUrl = await saveUploadedImage(faviconFile);
+if (faviconFile && faviconFile.size > 0) {
+  if (!["image/png", "image/svg+xml"].includes(faviconFile.type)) {
+    return { error: "Favicon รองรับเฉพาะ SVG และ PNG เท่านั้น" };
   }
+  const maxSize = faviconFile.type === "image/svg+xml" ? 50 * 1024 : 100 * 1024;
+  if (faviconFile.size > maxSize) {
+    return { error: faviconFile.type === "image/svg+xml" ? "SVG ต้องไม่เกิน 50KB" : "PNG ต้องไม่เกิน 100KB" };
+  }
+  faviconUrl = await saveUploadedImage(faviconFile);
+}
 
   const data = {
     companyName:     parsed.data.companyName,
