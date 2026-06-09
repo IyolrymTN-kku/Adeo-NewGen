@@ -34,7 +34,7 @@ export const palette = {
     secondaryText: "var(--admin-secondary-foreground, #FFFFFF)",
     accent: "var(--admin-accent, #3385FF)",
     accentText: "var(--admin-accent-foreground, #FFFFFF)",
-    muted: "var(--admin-muted, #EFF6FF)",
+    muted: "var(--admin-muted, #FFFFFF)",
     mutedText: "var(--admin-muted-foreground, #0F172A)",
     success: "var(--admin-success, #22C55E)",
     successText: "var(--admin-success-foreground, #FFFFFF)",

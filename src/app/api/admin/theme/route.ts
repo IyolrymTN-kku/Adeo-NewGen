@@ -8,7 +8,7 @@ const DEFAULT = {
   primary:   "#0066FF",
   secondary: "#0A1628",
   accent:    "#3385FF",
-  muted:     "#EFF6FF",
+  muted:     "#FFFFFF",
   success:   "#22C55E",
 };
 
