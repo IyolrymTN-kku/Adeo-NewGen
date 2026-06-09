@@ -9,6 +9,9 @@ import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 import "react-phone-number-input/style.css";
 
+// Unique boot timestamp generated once when the Next.js server boots
+const SERVER_BOOT_TIMESTAMP = String(Date.now());
+
 export const revalidate = 60;
 
 const inter = Inter({
@@ -78,7 +81,7 @@ export default async function RootLayout({
         <link rel="icon" href={`${faviconUrl}?v=${timestamp}`} />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900">
-        <AdminThemeInitScript />
+        <AdminThemeInitScript bootTimestamp={SERVER_BOOT_TIMESTAMP} />
         <AdminThemeSync />
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>

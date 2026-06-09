@@ -43,7 +43,7 @@ const PALETTE_IFRAME_MIN_HEIGHT = 920;
 const PALETTE_IFRAME_MAX_WIDTH = 1120;
 
 const defaultComponentColors: ComponentColorMap = {
-   "header.background": "muted",
+  "header.background": "muted",
   "header.text": "secondary",
 
   "header.activeNav": "accent",
@@ -59,7 +59,7 @@ const defaultTheme: AdminTheme = {
   primary: "#0066FF",
   secondary: "#0A1628",
   accent: "#3385FF",
-  muted: "#EFF6FF",
+  muted: "#FFFFFF",
   success: "#22C55E",
   componentColors: defaultComponentColors,
 };
@@ -398,6 +398,8 @@ function applyAdminTheme(theme: AdminTheme) {
 
   root.style.setProperty("--site-cta-bg", ctaBg);
   root.style.setProperty("--site-cta-text", getReadableTextColor(ctaBg));
+  root.style.setProperty("--cta-bg", ctaBg);
+  root.style.setProperty("--cta-text", getReadableTextColor(ctaBg));
 
   root.style.setProperty("--site-footer-bg", footerBg);
   root.style.setProperty("--site-footer-text", getReadableTextColor(footerBg));

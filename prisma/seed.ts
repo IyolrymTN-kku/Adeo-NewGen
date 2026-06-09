@@ -221,17 +221,23 @@ async function main() {
   // ── Theme Settings ────────────────────────────────────────────────────────
   await prisma.themeSettings.upsert({
     where: { id: "singleton" },
-    update: {},
+    update: {
+      primary: "#0066FF",
+      secondary: "#0A1628",
+      accent: "#3385FF",
+      muted: "#FFFFFF",
+      success: "#22C55E",
+    },
     create: {
       id: "singleton",
       primary: "#0066FF",
       secondary: "#0A1628",
-      accent: "#0066FF",
-      muted: "#EFF6FF",
+      accent: "#3385FF",
+      muted: "#FFFFFF",
       success: "#22C55E",
       componentColors: {
-        "header.background": "secondary",
-        "header.text": "muted",
+        "header.background": "muted",
+        "header.text": "secondary",
         "header.activeNav": "accent",
         "header.ctaBackground": "primary",
         "header.panelBackground": "secondary",
